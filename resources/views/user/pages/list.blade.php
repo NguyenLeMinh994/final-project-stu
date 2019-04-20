@@ -49,12 +49,12 @@
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                         <select name="" id="" class="form-control">
                             <option value="">Type</option>
-                          <option value="">Commercial</option>
-                          <option value="">- Office</option>
-                          <option value="">Residential</option>
-                          <option value="">Villa</option>
-                          <option value="">Condominium</option>
-                          <option value="">Apartment</option>
+                            <option value="">Commercial</option>
+                            <option value="">- Office</option>
+                            <option value="">Residential</option>
+                            <option value="">Villa</option>
+                            <option value="">Condominium</option>
+                            <option value="">Apartment</option>
                         </select>
                                     </div>
                                 </div>
@@ -67,10 +67,10 @@
                                     <div class="select-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                         <select name="" id="" class="form-control">
-                            <option value="">Type</option>
-                          <option value="">Rent</option>
-                          <option value="">Sale</option>
-                        </select>
+                                            <option value="">Type</option>
+                                            <option value="">Rent</option>
+                                            <option value="">Sale</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -102,12 +102,12 @@
                                     <div class="select-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                         <select name="" id="" class="form-control">
-                            <option value="">1</option>
-                          <option value="">2</option>
-                          <option value="">3</option>
-                          <option value="">4</option>
-                          <option value="">5</option>
-                        </select>
+                                                                                        <option value="">1</option>
+                                                                                        <option value="">2</option>
+                                                                                        <option value="">3</option>
+                                                                                        <option value="">4</option>
+                                                                                        <option value="">5</option>
+                                                                                    </select>
                                     </div>
                                 </div>
                             </div>
@@ -119,12 +119,12 @@
                                     <div class="select-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                         <select name="" id="" class="form-control">
-                            <option value="">1</option>
-                          <option value="">2</option>
-                          <option value="">3</option>
-                          <option value="">4</option>
-                          <option value="">5</option>
-                        </select>
+                                                <option value="">1</option>
+                                                <option value="">2</option>
+                                                <option value="">3</option>
+                                                <option value="">4</option>
+                                                <option value="">5</option>
+                                            </select>
                                     </div>
                                 </div>
                             </div>
@@ -136,22 +136,22 @@
                                     <div class="select-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                         <select name="" id="" class="form-control">
-                            <option value="">Min Price</option>
-                          <option value="">$1,000</option>
-                          <option value="">$5,000</option>
-                          <option value="">$10,000</option>
-                          <option value="">$50,000</option>
-                          <option value="">$100,000</option>
-                          <option value="">$200,000</option>
-                          <option value="">$300,000</option>
-                          <option value="">$400,000</option>
-                          <option value="">$500,000</option>
-                          <option value="">$600,000</option>
-                          <option value="">$700,000</option>
-                          <option value="">$800,000</option>
-                          <option value="">$900,000</option>
-                          <option value="">$1,000,000</option>
-                        </select>
+                                                <option value="">Min Price</option>
+                                                <option value="">$1,000</option>
+                                                <option value="">$5,000</option>
+                                                <option value="">$10,000</option>
+                                                <option value="">$50,000</option>
+                                                <option value="">$100,000</option>
+                                                <option value="">$200,000</option>
+                                                <option value="">$300,000</option>
+                                                <option value="">$400,000</option>
+                                                <option value="">$500,000</option>
+                                                <option value="">$600,000</option>
+                                                <option value="">$700,000</option>
+                                                <option value="">$800,000</option>
+                                                <option value="">$900,000</option>
+                                                <option value="">$1,000,000</option>
+                                            </select>
                                     </div>
                                 </div>
                             </div>
@@ -163,22 +163,22 @@
                                     <div class="select-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                         <select name="" id="" class="form-control">
-                            <option value="">Min Price</option>
-                          <option value="">$5,000</option>
-                          <option value="">$10,000</option>
-                          <option value="">$50,000</option>
-                          <option value="">$100,000</option>
-                          <option value="">$200,000</option>
-                          <option value="">$300,000</option>
-                          <option value="">$400,000</option>
-                          <option value="">$500,000</option>
-                          <option value="">$600,000</option>
-                          <option value="">$700,000</option>
-                          <option value="">$800,000</option>
-                          <option value="">$900,000</option>
-                          <option value="">$1,000,000</option>
-                          <option value="">$2,000,000</option>
-                        </select>
+                                                <option value="">Min Price</option>
+                                                <option value="">$5,000</option>
+                                                <option value="">$10,000</option>
+                                                <option value="">$50,000</option>
+                                                <option value="">$100,000</option>
+                                                <option value="">$200,000</option>
+                                                <option value="">$300,000</option>
+                                                <option value="">$400,000</option>
+                                                <option value="">$500,000</option>
+                                                <option value="">$600,000</option>
+                                                <option value="">$700,000</option>
+                                                <option value="">$800,000</option>
+                                                <option value="">$900,000</option>
+                                                <option value="">$1,000,000</option>
+                                                <option value="">$2,000,000</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

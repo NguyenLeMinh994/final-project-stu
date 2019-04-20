@@ -2,7 +2,7 @@
 @section('title', 'Trang chủ') 
 @section('css')
 @endsection
- 
+
 @section('container')
 <section class="home-slider owl-carousel">
   <div class="slider-item" style="background-image:url(asset/user/images/images/bg_1.jpg);">
