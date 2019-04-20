@@ -1,10 +1,11 @@
 @extends('user.layouts.master') 
 @section('title', 'Chi tiết') 
 @section('css')
+
 @endsection
  
 @section('container')
-<div class="hero-wrap" style="background-image: url('images/bg_1.jpg');">
+<div class="hero-wrap" style="background-image: url('asset/user/images/bg_1.jpg');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -25,13 +26,13 @@
                     <div class="col-md-12 ftco-animate">
                         <div class="single-slider owl-carousel">
                             <div class="item">
-                                <div class="properties-img" style="background-image: url(images/properties-1.jpg);"></div>
+                                <div class="properties-img" style="background-image: url(asset/user/images/properties-1.jpg);"></div>
                             </div>
                             <div class="item">
-                                <div class="properties-img" style="background-image: url(images/properties-2.jpg);"></div>
+                                <div class="properties-img" style="background-image: url(asset/user/images/properties-2.jpg);"></div>
                             </div>
                             <div class="item">
-                                <div class="properties-img" style="background-image: url(images/properties-3.jpg);"></div>
+                                <div class="properties-img" style="background-image: url(asset/user/images/properties-3.jpg);"></div>
                             </div>
                         </div>
                     </div>
@@ -65,7 +66,7 @@
                         <h3 class="mb-4">Take A Tour</h3>
                         <div class="block-16">
                             <figure>
-                                <img src="images/properties-6.jpg" alt="Image placeholder" class="img-fluid">
+                                <img src="asset/user/images/properties-6.jpg" alt="Image placeholder" class="img-fluid">
                                 <a href="https://vimeo.com/45830194" class="play-button popup-vimeo"><span class="icon-play"></span></a>
                             </figure>
                         </div>
@@ -110,12 +111,22 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
+                            <h4 class="mb-4">xxxx</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="map" style="height:500px;width:700px"></div>
+                                </div>
+                            </div>
+                        </div>
+                   
                     <div class="col-md-12 properties-single ftco-animate mb-5 mt-5">
                         <h4 class="mb-4">Related Properties</h4>
                         <div class="row">
                             <div class="col-md-6 ftco-animate">
                                 <div class="properties">
-                                    <a href="property-single.html" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/properties-1.jpg);">
+                                    <a href="property-single.html" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(asset/user/images/properties-1.jpg);">
                                         <div class="icon d-flex justify-content-center align-items-center">
                                             <span class="icon-search2"></span>
                                         </div>
@@ -143,7 +154,7 @@
                             </div>
                             <div class="col-md-6 ftco-animate">
                                 <div class="properties">
-                                    <a href="property-single.html" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/properties-2.jpg);">
+                                    <a href="property-single.html" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(asset/user/images/properties-2.jpg);">
                                         <div class="icon d-flex justify-content-center align-items-center">
                                             <span class="icon-search2"></span>
                                         </div>
@@ -199,7 +210,7 @@
                 <div class="sidebar-box ftco-animate">
                     <h3>Recent Blog</h3>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                        <a class="blog-img mr-4" style="background-image: url(asset/user/images/image_1.jpg);"></a>
                         <div class="text">
                             <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
                             <div class="meta">
@@ -210,7 +221,7 @@
                         </div>
                     </div>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                        <a class="blog-img mr-4" style="background-image: url(asset/user/images/image_2.jpg);"></a>
                         <div class="text">
                             <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
                             <div class="meta">
@@ -221,7 +232,7 @@
                         </div>
                     </div>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
+                        <a class="blog-img mr-4" style="background-image: url(asset/user/images/image_3.jpg);"></a>
                         <div class="text">
                             <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
                             <div class="meta">
@@ -259,6 +270,8 @@
 </section>
 <!-- .section -->
 
+
+
 <section class="ftco-section-parallax">
     <div class="parallax-img d-flex align-items-center">
         <div class="container">
@@ -285,4 +298,17 @@
 @endsection
  
 @section('js')
+<script>
+    var map;
+        function initMap() {
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -34.397, lng: 150.644},
+            zoom: 8
+          });
+        }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKHzJKZMdYDokKiTxug3iuxfTgFf1w220&callback=initMap" async defer>
+
+</script>
+      
 @endsection
