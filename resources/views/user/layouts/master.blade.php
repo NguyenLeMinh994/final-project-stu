@@ -4,7 +4,7 @@
     <title>@yield('title')</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+    <base href="{{ asset('') }}" > 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
     <link rel="stylesheet" href="asset/user/css/open-iconic-bootstrap.min.css">
@@ -59,6 +59,8 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="asset/user/js/google-map.js"></script>
   <script src="asset/user/js/main.js"></script>
+
   @yield('js')
+
   </body>
 </html>

@@ -18,6 +18,8 @@ Auth::routes();
 
 Route::get('/chi-tiet', 'User\PagesController@getDetail')->name('detail');
 
-Route::get('/danh-sach', 'User\PagesController@getList')->name('list');
+Route::get('/danh-sach/{id}', 'User\PagesController@getList')->name('list');
+
+Route::get('/ajax/danh-sach-quan/{id}', 'User\PagesController@getQuansByAjax');
 
 
