@@ -9,7 +9,7 @@ class Loai extends Model
     //
     protected $table = 'loai';
 
-    public function getSubLoais()
+    public function getChildren()
     {
         return $this->hasMany('App\Loai','parent_id','id');
     }

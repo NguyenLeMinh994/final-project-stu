@@ -7822,8 +7822,12 @@ h1, h2, h3, h4, h5,
     width: 100%;
     font-size: 14px;
     border: 1px solid rgba(255, 255, 255, 0.6);
-    color: rgba(255, 255, 255, 0.7) !important;
-    background: transparent !important;
+    /* color: rgba(255, 255, 255, 0.7) !important;
+    background: transparent !important; */
+    /* Thay đổi  */
+    color: whitesmoke !important;
+    background: #26baee !important;
+    /* Thay đổi  */
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
