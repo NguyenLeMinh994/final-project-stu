@@ -85,9 +85,7 @@
                       <select name="" id="idThanhPho" class="form-control">
                             <option value="">Tỉnh/Thành Phố</option>
                             @foreach ($tinhThanhPhos as $thanhPho)
-                              
                               <option value={{ $thanhPho->id }}>{{$thanhPho->ten}}</option>
-                                
                             @endforeach
                       </select>
                   </div>
