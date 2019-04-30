@@ -42,8 +42,8 @@
             @endif
           
           
-          <li class="nav-item cta"><a href="contact.html" class="nav-link ml-lg-2"><span class="icon-user"></span> Sign-In</a></li>
-          <li class="nav-item cta cta-colored"><a href="contact.html" class="nav-link"><span class="icon-pencil"></span> Sign-Up</a></li>
+          <li class="nav-item cta"><a href={{ route('login') }} class="nav-link ml-lg-2"><span class="icon-user"></span> Đăng nhập</a></li>
+              <li class="nav-item cta cta-colored"><a href={{ route('signup') }} class="nav-link"><span class="icon-pencil"></span> Đăng ký</a></li>
 
         </ul>
       </div>
