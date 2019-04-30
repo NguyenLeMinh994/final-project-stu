@@ -25,7 +25,7 @@ Route::get('/dang-ky', 'User\PagesController@getSignUp')->name('signup');
 Route::post('/dang-ky', 'User\PagesController@postSignUp')->name('postSignup');
 
 
-Route::get('/dang-nhap', 'User\PagesController@getLogin')->name('login');
+Route::get('/dang-nhap', 'Admin\LoginController@getLogin')->name('login');
 
 
 //AJAX
