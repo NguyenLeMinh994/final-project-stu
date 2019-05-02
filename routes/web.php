@@ -26,8 +26,28 @@ Route::post('/dang-ky', 'User\PagesController@postSignUp')->name('postSignup');
 
 
 Route::get('/dang-nhap', 'Admin\LoginController@getLogin')->name('login');
+Route::post('/dang-nhap', 'Admin\LoginController@postLogin')->name('postLogin');
+Route::get('/dang-xuat', 'Admin\LoginController@getLogout')->name('logout');
 
 
+//Admin - User
+Route::prefix('user')->middleware('checkLogin')->group(function () {
+
+    Route::get('/', 'Admin\UserController@index')->name('user.home');
+
+    Route::get('/tao-bai-dang', 'Admin\ProductController@create')->name('user.post');
+    Route::post('/tao-bai-dang', 'Admin\ProductController@store')->name('user.createPost');
+
+
+});
+
+Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
+
+
+
+});
+
+//Admin - User end
 //AJAX
 Route::get('/ajax/danh-sach-quan/{id}', 'User\PagesController@getQuansByAjax');
 

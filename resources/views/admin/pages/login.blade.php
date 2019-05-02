@@ -16,7 +16,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Minovate - Admin Dashboard</title>
-    <link rel="icon" type="image/ico" href="assets/images/favicon.ico" />
+    <link rel="icon" type="image/ico" href="asset/admin/images/favicon.ico" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -76,22 +76,28 @@
             </div>
 
             <div class="container w-420 p-15 bg-white mt-40 text-center">
-
+                
 
                 <h2 class="text-light text-greensea">Đăng Nhập</h2>
-
-                <form name="form" class="form-validation mt-20" novalidate="">
-
+                @if (count($errors)>0)
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $err)
+                    {{ $err }} <br>
+                    @endforeach
+                </div>
+                @endif
+                <form  action={{ route("postLogin") }} name="form" class="form-validation mt-20" method="POST">
+                    @csrf
                     <div class="form-group">
-                        <input type="email" class="form-control underline-input" placeholder="Email">
+                        <input type="email" class="form-control underline-input" name="txtEmail" placeholder="Email">
                     </div>
 
                     <div class="form-group">
-                        <input type="password" placeholder="Mật khẩu" class="form-control underline-input">
+                        <input type="password" name="txtPassword" placeholder="Mật khẩu" class="form-control underline-input">
                     </div>
 
                     <div class="form-group text-left mt-20">
-                        <a href="index-2.html" class="btn btn-greensea b-0 br-2 mr-5">Đăng nhập</a>
+                        <input type="submit" value="Đăng nhập" class="btn btn-greensea b-0 br-2 mr-5">
                         <label class="checkbox checkbox-custom-alt checkbox-custom-sm inline-block">
                                 <input type="checkbox"><i></i> Remember me
                             </label>
@@ -125,7 +131,7 @@
 
                 <div class="bg-slategray lt wrap-reset mt-40">
                     <p class="m-0">
-                        <a href="signup.html" class="text-uppercase">Tạo tài khoản</a>
+                        <a href={{ route('signup') }} class="text-uppercase">Tạo tài khoản</a>
                     </p>
                 </div>
 
@@ -141,10 +147,8 @@
     <!-- ============================================
         ============== Vendor JavaScripts ===============
         ============================================= -->
-    <script src="../../ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>
-        window.jQuery || document.write('<script src="asset/admin/js/vendor/jquery/jquery-1.11.2.min.js"><\/script>')
-    </script>
+    <script src="asset/admin/js/vendor/jquery/jquery-1.11.2.min.js"></script>
+    
 
     <script src="asset/admin/js/vendor/bootstrap/bootstrap.min.js"></script>
 
@@ -176,11 +180,18 @@
     <!-- ===============================================
         ============== Page Specific Scripts ===============
         ================================================ -->
-    <script>
-        $(window).load(function(){
-
-
-            });
+ <script>
+        $(document).ready(function () {
+            alert();
+            function alert() { 
+                if($(".alert").length)
+                {
+                    $(".alert").fadeTo(3000, 500).slideUp(500, function(){
+                        $(".alert").slideUp(500);
+                    });
+                }
+            }
+        });
     </script>
     <!--/ Page Specific Scripts -->
 
