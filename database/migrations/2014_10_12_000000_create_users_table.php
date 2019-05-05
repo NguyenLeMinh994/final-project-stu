@@ -15,7 +15,6 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->charset = 'utf8';
             $table->bigIncrements('id');
             $table->string('hoten');
             $table->string('dienthoai')->nullable();
