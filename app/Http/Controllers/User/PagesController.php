@@ -23,6 +23,10 @@ class PagesController extends Controller
     {
 
         $tinhThanhPhos=TinhThanhPho::all();
+       /*  echo"<pre>";
+        print_r($tinhThanhPhos);
+
+        exit; */
         // dd($tinhThanhPhos);
 
         return view('user.pages.index',['tinhThanhPhos'=>$tinhThanhPhos]);

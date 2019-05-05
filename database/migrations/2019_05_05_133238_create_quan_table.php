@@ -14,13 +14,16 @@ class CreateQuanTable extends Migration
     public function up()
     {
         Schema::create('quan', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->string('ten');
-            $table->string('loai');
-            $table->string('vitri');
-            $table->string('id_tinh');
+            $table->engine = 'InnoDB';
+            $table->unsignedInteger('id')->primary();
+            $table->string('ten','100');
+            $table->string('loai','30');
+            $table->string('vitri','30');
+            $table->integer('id_tp')->unsigned();
+            $table->foreign('id_tp')->references('id')->on('thanhpho');
             $table->timestamps();
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

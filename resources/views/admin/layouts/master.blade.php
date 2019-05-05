@@ -33,11 +33,11 @@
     <link rel="stylesheet" href="asset/admin/css/vendor/font-awesome.min.css">
     <link rel="stylesheet" href="asset/admin/js/vendor/animsition/css/animsition.min.css">
     <link rel="stylesheet" href="asset/admin/js/vendor/magnific-popup/magnific-popup.css">
-
+    @yield('css')
     <!-- project main css files -->
     <link rel="stylesheet" href="asset/admin/css/main.css">
     <!--/ stylesheets -->
-    @yield('css')
+    
 
 
     <!-- ==========================================
@@ -118,20 +118,19 @@
     <!-- ============================================
         ============== Vendor JavaScripts ===============
         ============================================= -->
-    <script>
-        window.jQuery || document.write('<script src="asset/admin/js/vendor/jquery/jquery-1.11.2.min.js"><\/script>')
-    </script>
 
+    <script src="asset/admin/js/vendor/jquery/jquery-1.11.2.min.js"></script>
+    
     <script src="asset/admin/js/vendor/bootstrap/bootstrap.min.js"></script>
-
+    {{--  --}}
     <script src="asset/admin/js/vendor/jRespond/jRespond.min.js"></script>
-
+        {{--  --}}
     <script src="asset/admin/js/vendor/sparkline/jquery.sparkline.min.js"></script>
-
+        {{--  --}}
     <script src="asset/admin/js/vendor/slimscroll/jquery.slimscroll.min.js"></script>
-
+        {{--  --}}
     <script src="asset/admin/js/vendor/animsition/js/jquery.animsition.min.js"></script>
-
+        {{--  --}}
     <script src="asset/admin/js/vendor/screenfull/screenfull.min.js"></script>
     <!--/ vendor javascripts -->
 

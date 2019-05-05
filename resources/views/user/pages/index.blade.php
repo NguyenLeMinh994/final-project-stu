@@ -76,6 +76,7 @@
                 </div>
               </div>
             </div>
+            {{-- {{ print_r($tinhThanhPhos )  }} --}}
             <div class="col-md align-items-end">
               <div class="form-group">
                 <label for="#">Tỉnh/Thành Phố</label>
@@ -85,7 +86,8 @@
                       <select name="" id="idThanhPho" class="form-control">
                             <option value="">Tỉnh/Thành Phố</option>
                             @foreach ($tinhThanhPhos as $thanhPho)
-                              <option value={{ $thanhPho->id }}>{{$thanhPho->ten}}</option>
+                            
+                              <option value={!! $thanhPho->id !!}>{{$thanhPho->ten}}</option>
                             @endforeach
                       </select>
                   </div>

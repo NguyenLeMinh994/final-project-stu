@@ -134,52 +134,6 @@
 
 
         <!-- Right-side navigation -->
-        <ul class="nav-right pull-right list-inline">
-            
-
-            <li class="dropdown nav-profile">
-
-                <a href class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="assets/images/profile-photo.jpg" alt="" class="img-circle size-30x30">
-                    <span>John Douey <i class="fa fa-angle-down"></i></span>
-                </a>
-
-                <ul class="dropdown-menu animated littleFadeInRight" role="menu">
-
-                    <li>
-                        <a href="#">
-                            <span class="badge bg-greensea pull-right">86%</span>
-                            <i class="fa fa-user"></i>Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="label bg-lightred pull-right">new</span>
-                            <i class="fa fa-check"></i>Tasks
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-cog"></i>Settings
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-lock"></i>Lock
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-sign-out"></i>Logout
-                        </a>
-                    </li>
-
-                </ul>
-
-            </li>
-
-        </ul>
         <!-- Right-side navigation end -->
 
 

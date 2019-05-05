@@ -14,32 +14,36 @@ class CreateSanphamTable extends Migration
     public function up()
     {
         Schema::create('sanpham', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->integer('id_loai');
-            $table->integer('id_user');
-            $table->integer('id_tinhthanhpho');
-            $table->integer('id_quan');
+            $table->unsignedBigInteger('id_loai');
+            $table->unsignedBigInteger('id_user');
+
+            $table->integer('id_quan')->unsigned();
+            $table->integer('id_tp')->unsigned();
+
             $table->string('ten');
-            $table->string('tinhtrangphaply')->nullable();
             $table->float('dientich')->nullable();
-            $table->float('duongtruocnha')->nullable();
             $table->string('huong')->nullable();
             $table->string('thuocduan')->nullable();
             $table->integer('sotang')->nullable();
             $table->integer('phongngu')->nullable();
             $table->integer('phongtam')->nullable();
             $table->double('gia');
-            $table->text('tienich')->nullable();
-            $table->text('moitruongxungquanh')->nullable();
             $table->text('noidung')->nullable();
-            $table->string('hinhdaidien');
+            $table->string('hinhdaidien')->nullable();
             $table->string('diachi');
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->integer('views');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
+            $table->integer('views')->default('0');
             $table->integer('trangthai')->default('1');
             $table->timestamps();
+            $table->foreign('id_loai')->references('id')->on('loai');
+            $table->foreign('id_user')->references('id')->on('users');
+
         });
+        Schema::enableForeignKeyConstraints();
+
     }
 
     /**
