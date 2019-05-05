@@ -16,9 +16,14 @@ class CreateLoaiTable extends Migration
         Schema::create('loai', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('ten');
+            $table->unsignedBigInteger('parent_id')->default('0');
             $table->integer('trangthai')->default('1');
             $table->timestamps();
+            $table->foreign('parent_id')
+                    ->references('id')->on('loai')
+                    ->onDelete('cascade');
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

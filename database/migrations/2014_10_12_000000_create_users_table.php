@@ -14,6 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('hoten');
             $table->string('dienthoai')->nullable();
@@ -23,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->integer('quyen')->default('1');
             $table->integer('trangthai')->default('1');
+            $table->string('provider')->nullable();
+            $table->string('provider_id')->nullable(); 
             $table->rememberToken();
             $table->timestamps();
         });

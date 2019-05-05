@@ -14,12 +14,16 @@ class CreateDanhsachhinhTable extends Migration
     public function up()
     {
         Schema::create('danhsachhinh', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->integer('id_sanpham');
+            $table->unsignedBigInteger('id_sanpham');
             $table->string('link');
             $table->integer('trangthai')->default('1');
             $table->timestamps();
+            $table->foreign('id_sanpham')->references('id')->on('sanpham');
+
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
