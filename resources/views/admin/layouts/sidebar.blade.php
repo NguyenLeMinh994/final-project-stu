@@ -27,9 +27,15 @@
                                 <li><a href={{ route('user.home') }}><i class="fa fa-dashboard"></i>
                                         <span>Home</span></a>
                                 </li>
-                                <li><a href={{ route('user.post') }}><i class="fa fa-pencil"></i>
+                                <li><a href={{ route('user.createPost') }}><i class="fa fa-pencil"></i>
                                     <span>Bài đăng</span></a>
-                            </li>
+                                </li>
+
+                                {{-- Admin begin --}}
+                                <li><a href={{ route('admin.category') }}><i class="fa fa-pencil"></i>
+                                    <span>Tạo danh mục</span></a>
+                                </li>
+                                {{-- Admin end --}}
                                 
                                 
                             </ul>

@@ -11,10 +11,11 @@ use App\Quan;
 
 class PagesController extends Controller
 {
+    // Nguyễn Lê Minh Begin
     public function __construct ()
     {
         // danh cho menu
-        $loaiOfMenus=Loai::where('parent_id', 0)->get();
+        $loaiOfMenus=Loai::where('parent_id', null)->get();
         view()->share('loaiOfMenus',$loaiOfMenus);
     }
 
@@ -100,18 +101,11 @@ class PagesController extends Controller
 
         }
     }
+
+    // Nguyễn Lê Minh End
+
     
-    // Ajax
-    public function getQuansByAjax($idThanhPho)
-    {
-        if($idThanhPho<10)
-        {
-            $idThanhPho="0".$idThanhPho;
-        }
-        $quansOfThanhPho=Quan::where('id_tinh',$idThanhPho)->get();
-        
-        return response()->json($quansOfThanhPho);
-    }
+    
 
     
 }

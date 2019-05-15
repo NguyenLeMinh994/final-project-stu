@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TinhThanhPho extends Model
 {
     //
-    protected $table = 'tinhthanhpho';
+    protected $table = 'thanhpho';
 
     public function getSanPhams()
     {
