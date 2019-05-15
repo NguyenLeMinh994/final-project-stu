@@ -33,11 +33,11 @@
     <link rel="stylesheet" href="asset/admin/css/vendor/font-awesome.min.css">
     <link rel="stylesheet" href="asset/admin/js/vendor/animsition/css/animsition.min.css">
     <link rel="stylesheet" href="asset/admin/js/vendor/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="asset/admin/css/vendor/weather-icons.min.css">
     @yield('css')
     <!-- project main css files -->
     <link rel="stylesheet" href="asset/admin/css/main.css">
     <!--/ stylesheets -->
-    
 
 
     <!-- ==========================================
@@ -136,13 +136,12 @@
 
 
 
-
     <!-- ============================================
         ============== Custom JavaScripts ===============
         ============================================= -->
     <script src="asset/admin/js/main.js"></script>
     <!--/ custom javascripts -->
-    
+    @yield('js')
 
 
 
@@ -151,7 +150,6 @@
     <!-- ===============================================
         ============== Page Specific Scripts ===============
         ================================================ -->
-    @yield('js')
     
     <!--/ Page Specific Scripts -->
 
@@ -161,12 +159,12 @@
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
-        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='../../www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        // (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        //     function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        //     e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        //     e.src='../../www.google-analytics.com/analytics.js';
+        //     r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+        //     ga('create','UA-XXXXX-X','auto');ga('send','pageview');
     </script>
 
 </body>

@@ -76,7 +76,6 @@
                 </div>
               </div>
             </div>
-            {{-- {{ print_r($tinhThanhPhos )  }} --}}
             <div class="col-md align-items-end">
               <div class="form-group">
                 <label for="#">Tỉnh/Thành Phố</label>
