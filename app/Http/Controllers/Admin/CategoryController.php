@@ -123,20 +123,25 @@ class CategoryController extends Controller
                 $danhMucCha = Loai::findOrfail($request->sltParent);
             }
 
-            if ($danhMucCha == null || $danhMucCha->parent_id == null) {
+            if ($danhMucCha == null || $danhMucCha->parent_id == null ) {
                 $category = Loai::findOrfail($id);
-                $category->ten = $request->txtTen;
+                if(count($category->getChildren)<=0)
+                {
+                    $category->ten = $request->txtTen;
 
-                if (!empty($request->sltParent)) {
-                    $category->parent_id = $request->sltParent;
-                } else {
-                    $category->parent_id = null;
+                    if (!empty($request->sltParent)) {
+                        $category->parent_id = $request->sltParent;
+                    } else {
+                        $category->parent_id = null;
+                    }
+
+                    if ($category->save()) {
+                        return redirect()->back()->with(['success' => 'Cập nhật thành công']);
+                    } else {
+                        return redirect()->back()->withErrors(['errMenu' => 'Lưu dữ liệu thất bại']);
+                    }
                 }
-
-                if ($category->save()) {
-                    return redirect()->back()->with(['success' => 'Cập nhật thành công']);
-                } else
-                    return redirect()->back()->withErrors(['errMenu' => 'Lưu dữ liệu thất bại']);
+                return redirect()->back()->withErrors(['errMenu' => 'Chỉ có 1 cấp']);
             } else {
                 return redirect()->back()->withErrors(['errMenu' => 'Chỉ có 1 cấp']);
             }
