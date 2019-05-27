@@ -28,13 +28,16 @@ Route::post('/dang-ky', 'User\PagesController@postSignUp')->name('postSignup');
 Route::get('/dang-nhap', 'Admin\LoginController@getLogin')->name('login');
 Route::post('/dang-nhap', 'Admin\LoginController@postLogin')->name('postLogin');
 Route::get('/dang-xuat', 'Admin\LoginController@getLogout')->name('logout');
-
+Route::get('/admin-temp', function(){
+    return view('admin.layouts.master');
+});
 //Đăng ký End
 // Nguyễn Lê Minh End
 
 //Admin - User Begin
 // Nguyễn Lê Minh Begin
-Route::prefix('user')->middleware('checkLogin')->group(function () {
+// middleware('checkLogin')->
+Route::prefix('user')->group(function () {
 
     Route::get('/', 'Admin\UserController@index')->name('user.home');
 
