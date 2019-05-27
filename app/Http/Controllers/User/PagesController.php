@@ -33,13 +33,13 @@ class PagesController extends Controller
         return view('user.pages.index',['tinhThanhPhos'=>$tinhThanhPhos]);
     }
 
-    //get trang chi tiết    
+    //get trang chi tiết
     public function getDetail()
     {
         return view('user.pages.detail');
     }
-    
-    //get danh sách   
+
+    //get danh sách
     public function getList()
     {
         return view('user.pages.list');
@@ -83,6 +83,7 @@ class PagesController extends Controller
 
         $request->validate($rules,$messages);
         try {
+
             $user=new User;
             $user->hoten=$request->txtFullName;
             $user->dienthoai=$request->txtPhone;
@@ -92,7 +93,7 @@ class PagesController extends Controller
             $user->remember_token=bcrypt(str_random(10));
             if($user->save())
             {
-                redirect()->route('home');
+                return redirect()->route('home');
             }
             else
             return redirect()->back()->withErrors(['errUser'=>'Đăng ký thất bại']);
@@ -104,8 +105,8 @@ class PagesController extends Controller
 
     // Nguyễn Lê Minh End
 
-    
-    
 
-    
+
+
+
 }

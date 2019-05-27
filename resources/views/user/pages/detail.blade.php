@@ -296,19 +296,15 @@
     </div>
 </section>
 @endsection
- 
+
 @section('js')
 <script>
-    var map;
+    
         function initMap() {
-          map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -34.397, lng: 150.644},
-            zoom: 8
-          });
-        }
+            var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 10.769087, lng: 106.700876},
+            zoom: 25,
+        });}
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKHzJKZMdYDokKiTxug3iuxfTgFf1w220&callback=initMap" async defer>
-
-</script>
-      
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKHzJKZMdYDokKiTxug3iuxfTgFf1w220&callback=initMap" async defer></script>
 @endsection

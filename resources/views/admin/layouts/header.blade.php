@@ -1,143 +1,140 @@
-<section id="header">
-    <header class="clearfix">
+<header id="topnav">
 
-        <!-- Branding -->
-        <div class="branding">
-            <a class="brand" href="index-2.html">
-                <span><strong>MIN</strong>OVATE</span>
-            </a>
-            <a href="#" class="offcanvas-toggle visible-xs-inline"><i class="fa fa-bars"></i></a>
+    <!-- Topbar Start -->
+    <div class="navbar-custom">
+        <div class="container-fluid">
+            <ul class="list-unstyled topnav-menu float-right mb-0">
+
+                <li class="dropdown notification-list">
+                    <!-- Mobile menu toggle-->
+                    <a class="navbar-toggle nav-link">
+                        <div class="lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </a>
+                    <!-- End mobile menu toggle-->
+                </li>
+
+
+                <li class="dropdown notification-list">
+
+                    <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+                        <!-- All-->
+                        <a href="javascript:void(0);"
+                            class="dropdown-item text-center text-primary notify-item notify-all">
+                            View all
+                            <i class="fi-arrow-right"></i>
+                        </a>
+
+                    </div>
+                </li>
+
+                <li class="dropdown notification-list">
+                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
+                        href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <span class="pro-user-name ml-1">
+                            Marcia J. <i class="mdi mdi-chevron-down"></i>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                        <!-- item-->
+                        <div class="dropdown-item noti-title">
+                            <h5 class="m-0">
+                                Welcome !
+                            </h5>
+                        </div>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fe-user"></i>
+                            <span>My Account</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fe-settings"></i>
+                            <span>Settings</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fe-lock"></i>
+                            <span>Lock Screen</span>
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fe-log-out"></i>
+                            <span>Logout</span>
+                        </a>
+
+                    </div>
+                </li>
+
+            </ul>
+
+            <!-- LOGO -->
+            <div class="logo-box">
+                <a href="index.html" class="logo text-center">
+                    <span class="logo-lg">
+                        <img src="asset/admin/images/logo-light.png" alt="" height="16">
+                        <!-- <span class="logo-lg-text-dark">Xeria</span> -->
+                    </span>
+                    <span class="logo-sm">
+                        <!-- <span class="logo-sm-text-dark">X</span> -->
+                        <img src="asset/admin/images/logo-sm.png" alt="" height="18">
+                    </span>
+                </a>
+            </div>
+
+            <div class="clearfix"></div>
         </div>
-        <!-- Branding end -->
+    </div>
+    <!-- end Topbar -->
 
-        <!-- Left-side navigation -->
-        <ul class="nav-left pull-left list-unstyled list-inline">
-            <li class="sidebar-collapse divided-right">
-                <a href="#" class="collapse-sidebar">
-                    <i class="fa fa-outdent"></i>
-                </a>
-            </li>
-            <li class="dropdown divided-right settings">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-cog"></i>
-                </a>
-                <ul class="dropdown-menu with-arrow animated littleFadeInUp" role="menu">
-                    <li>
+    <div class="topbar-menu">
+        <div class="container-fluid">
+            <div id="navigation">
+                <!-- Navigation Menu-->
+                <ul class="navigation-menu">
 
-                        <ul class="color-schemes list-inline">
-                            <li class="title">Header Color:</li>
-                            <li><a href="#" class="scheme-drank header-scheme" data-scheme="scheme-default"></a>
-                            </li>
-                            <li><a href="#" class="scheme-black header-scheme" data-scheme="scheme-black"></a>
-                            </li>
-                            <li><a href="#" class="scheme-greensea header-scheme"
-                                    data-scheme="scheme-greensea"></a></li>
-                            <li><a href="#" class="scheme-cyan header-scheme" data-scheme="scheme-cyan"></a>
-                            </li>
-                            <li><a href="#" class="scheme-lightred header-scheme"
-                                    data-scheme="scheme-lightred"></a></li>
-                            <li><a href="#" class="scheme-light header-scheme" data-scheme="scheme-light"></a>
-                            </li>
-                            <li class="title">Branding Color:</li>
-                            <li><a href="#" class="scheme-drank branding-scheme"
-                                    data-scheme="scheme-default"></a></li>
-                            <li><a href="#" class="scheme-black branding-scheme" data-scheme="scheme-black"></a>
-                            </li>
-                            <li><a href="#" class="scheme-greensea branding-scheme"
-                                    data-scheme="scheme-greensea"></a></li>
-                            <li><a href="#" class="scheme-cyan branding-scheme" data-scheme="scheme-cyan"></a>
-                            </li>
-                            <li><a href="#" class="scheme-lightred branding-scheme"
-                                    data-scheme="scheme-lightred"></a></li>
-                            <li><a href="#" class="scheme-light branding-scheme" data-scheme="scheme-light"></a>
-                            </li>
-                            <li class="title">Sidebar Color:</li>
-                            <li><a href="#" class="scheme-drank sidebar-scheme"
-                                    data-scheme="scheme-default"></a></li>
-                            <li><a href="#" class="scheme-black sidebar-scheme" data-scheme="scheme-black"></a>
-                            </li>
-                            <li><a href="#" class="scheme-greensea sidebar-scheme"
-                                    data-scheme="scheme-greensea"></a></li>
-                            <li><a href="#" class="scheme-cyan sidebar-scheme" data-scheme="scheme-cyan"></a>
-                            </li>
-                            <li><a href="#" class="scheme-lightred sidebar-scheme"
-                                    data-scheme="scheme-lightred"></a></li>
-                            <li><a href="#" class="scheme-light sidebar-scheme" data-scheme="scheme-light"></a>
-                            </li>
-                            <li class="title">Active Color:</li>
-                            <li><a href="#" class="scheme-drank color-scheme"
-                                    data-scheme="drank-scheme-color"></a></li>
-                            <li><a href="#" class="scheme-black color-scheme"
-                                    data-scheme="black-scheme-color"></a></li>
-                            <li><a href="#" class="scheme-greensea color-scheme"
-                                    data-scheme="greensea-scheme-color"></a></li>
-                            <li><a href="#" class="scheme-cyan color-scheme"
-                                    data-scheme="cyan-scheme-color"></a></li>
-                            <li><a href="#" class="scheme-lightred color-scheme"
-                                    data-scheme="lightred-scheme-color"></a></li>
-                            <li><a href="#" class="scheme-light color-scheme"
-                                    data-scheme="light-scheme-color"></a></li>
-                        </ul>
-
+                    <li class="has-submenu">
+                        <a href={{ route('user.home') }}>
+                            <i class="la la-dashboard"></i>Dashboard
+                        </a>
                     </li>
 
-                    <li>
-                        <div class="form-group">
-                            <div class="row">
-                                <label class="col-xs-8 control-label">Fixed header</label>
-                                <div class="col-xs-4 control-label">
-                                    <div class="onoffswitch lightred small">
-                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
-                                            id="fixed-header" checked="">
-                                        <label class="onoffswitch-label" for="fixed-header">
-                                            <span class="onoffswitch-inner"></span>
-                                            <span class="onoffswitch-switch"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <li class="has-submenu">
+                        <a href="#">
+                            <i class="la la-clone"></i>Bài đăng
+                        </a>
                     </li>
 
-                    <li>
-                        <div class="form-group">
-                            <div class="row">
-                                <label class="col-xs-8 control-label">Fixed aside</label>
-                                <div class="col-xs-4 control-label">
-                                    <div class="onoffswitch lightred small">
-                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
-                                            id="fixed-aside" checked="">
-                                        <label class="onoffswitch-label" for="fixed-aside">
-                                            <span class="onoffswitch-inner"></span>
-                                            <span class="onoffswitch-switch"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <li class="has-submenu">
+                        <a href={{ route('admin.category') }}>
+                            <i class="la la-cube"></i>Danh mục
+                        </a>
                     </li>
+
+                    <li class="has-submenu">
+                        <a href="#">
+                            <i class="la la-ship"></i>Danh sách thành viên
+                        </a>
+                    </li>
+
                 </ul>
-            </li>
-        </ul>
-        <!-- Left-side navigation end -->
+                <!-- End navigation menu -->
 
-
-
-
-        <!-- Search -->
-        <div class="search" id="main-search">
-            <input type="text" class="form-control underline-input" placeholder="Search...">
+                <div class="clearfix"></div>
+            </div>
+            <!-- end #navigation -->
         </div>
-        <!-- Search end -->
+        <!-- end container -->
+    </div>
+    <!-- end navbar-custom -->
 
-
-
-
-        <!-- Right-side navigation -->
-        <!-- Right-side navigation end -->
-
-
-
-    </header>
-
-</section>
+</header>

@@ -52,7 +52,7 @@
                         <div class="tile-body">
                             @if (session('success'))
                                 <div class="alert alert-success">
-                                    <strong>Success!</strong> Indicates a successful or positive action.
+                                    <strong>Cập nhật thành công</strong>
                                 </div>
                             @elseif(count($errors)>0)
                                 <div class="alert alert-danger">
