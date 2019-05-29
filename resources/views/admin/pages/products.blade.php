@@ -1,197 +1,114 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Home')
+@section('title', 'Bài đăng')
 
 @section('css')
-<link rel="stylesheet" href="asset/admin/js/vendor/colorpicker/css/bootstrap-colorpicker.min.css">
-<link rel="stylesheet" href="asset/admin/js/vendor/touchspin/jquery.bootstrap-touchspin.min.css">
-<link rel="stylesheet" href="asset/admin/js/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css">
-<link rel="stylesheet" href="asset/admin/js/vendor/chosen/chosen.css">
-<link rel="stylesheet" href="asset/admin/js/vendor/summernote/summernote.css">
+<link href="asset/admin/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/jquery-toast/jquery.toast.min.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/jquery-nice-select/nice-select.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/switchery/switchery.min.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css" />
+
 @endsection
 
 @section('container')
-<section id="content">
+<div class="wrapper">
+    <div class="container-fluid">
 
-    <div class="page page-forms-common">
-
-        <div class="pageheader">
-
-            <h2>Common Elements <span>// You can place subtitle here</span></h2>
-
-            <div class="page-bar">
-
-                <ul class="page-breadcrumb">
-                    <li>
-                        <a href={{ route('user.home') }}><i class="fa fa-home"></i> Minovate</a>
-                    </li>
-                    <li>
-                        <a href="#">Form Stuff</a>
-                    </li>
-                </ul>
-
-            </div>
-
-        </div>
-
-        <!-- row -->
+        <!-- start page title -->
         <div class="row">
-            <!-- col -->
-            <div class="col-md-12">
-
-                <!-- tile -->
-                <section class="tile">
-
-                    <!-- tile header -->
-                    <div class="tile-header dvd dvd-btm">
-                        <h1 class="custom-font"><strong>Form</strong> Elements</h1>
-                        <ul class="controls">
-                            <li class="dropdown">
-
-                                <a role="button" tabindex="0" class="dropdown-toggle settings" data-toggle="dropdown">
-                                    <i class="fa fa-cog"></i>
-                                    <i class="fa fa-spinner fa-spin"></i>
-                                </a>
-                            </li>
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Xeria</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                            <li class="breadcrumb-item active">Datatables</li>
+                        </ol>
                     </div>
-                    <!-- /tile header -->
-
-                    <!-- tile body -->
-                    <div class="tile-body">
-
-                        <form class="form-horizontal" role="form">
-
-                            <div class="form-group">
-                                <label for="input01" class="col-sm-2 control-label">Normal</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="input01">
-                                </div>
-                            </div>
-
-                            <hr class="line-dashed line-full" />
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Chosen</label>
-                                <div class="col-sm-10">
-                                    <select tabindex="3" class="chosen-select" style="width: 240px;">
-                                        <optgroup label="Alaskan/Hawaiian Time Zone">
-                                            <option value="AK">Alaska</option>
-                                            <option value="HI">Hawaii</option>
-                                        </optgroup>
-                                        <optgroup label="Pacific Time Zone">
-                                            <option value="CA">California</option>
-                                            <option value="NV">Nevada</option>
-                                            <option value="OR">Oregon</option>
-                                            <option value="WA">Washington</option>
-                                        </optgroup>
-                                        <optgroup label="Mountain Time Zone">
-                                            <option value="AZ">Arizona</option>
-                                            <option value="CO">Colorado</option>
-                                            <option value="ID">Idaho</option>
-                                            <option value="MT">Montana</option>
-                                            <option value="NE">Nebraska</option>
-                                            <option value="NM">New Mexico</option>
-                                            <option value="ND">North Dakota</option>
-                                            <option value="UT">Utah</option>
-                                            <option value="WY">Wyoming</option>
-                                        </optgroup>
-                                        <optgroup label="Central Time Zone">
-                                            <option value="AL">Alabama</option>
-                                            <option value="AR">Arkansas</option>
-                                            <option value="IL">Illinois</option>
-                                            <option value="IA">Iowa</option>
-                                            <option value="KS">Kansas</option>
-                                            <option value="KY">Kentucky</option>
-                                            <option value="LA">Louisiana</option>
-                                            <option value="MN">Minnesota</option>
-                                            <option value="MS">Mississippi</option>
-                                            <option value="MO">Missouri</option>
-                                            <option value="OK">Oklahoma</option>
-                                            <option value="SD">South Dakota</option>
-                                            <option value="TX">Texas</option>
-                                            <option value="TN">Tennessee</option>
-                                            <option value="WI">Wisconsin</option>
-                                        </optgroup>
-                                        <optgroup label="Eastern Time Zone">
-                                            <option value="CT">Connecticut</option>
-                                            <option value="DE">Delaware</option>
-                                            <option value="FL">Florida</option>
-                                            <option value="GA">Georgia</option>
-                                            <option value="IN">Indiana</option>
-                                            <option value="ME">Maine</option>
-                                            <option value="MD">Maryland</option>
-                                            <option value="MA">Massachusetts</option>
-                                            <option value="MI">Michigan</option>
-                                            <option value="NH">New Hampshire</option>
-                                            <option value="NJ">New Jersey</option>
-                                            <option value="NY">New York</option>
-                                            <option value="NC">North Carolina</option>
-                                            <option value="OH">Ohio</option>
-                                            <option value="PA">Pennsylvania</option>
-                                            <option value="RI">Rhode Island</option>
-                                            <option value="SC">South Carolina</option>
-                                            <option value="VT">Vermont</option>
-                                            <option value="VA">Virginia</option>
-                                            <option value="WV">West Virginia</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <hr class="line-dashed line-full" />
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">File Input</label>
-                                <div class="col-sm-10">
-                                    <input type="file" class="filestyle" data-buttonText="Find file"
-                                        data-iconName="fa fa-inbox">
-                                </div>
-                            </div>
-
-
-
-                            <div class="form-group">
-                                <div class="col-sm-4 col-sm-offset-2">
-                                    <button type="reset" class="btn btn-lightred">Cancel</button>
-                                    <button type="submit" class="btn btn-default">Save changes</button>
-                                </div>
-                            </div>
-
-                        </form>
-
-                    </div>
-                    <!-- /tile body -->
-
-                </section>
-                <!-- /tile -->
-
-
-
+                    <h4 class="page-title">Datatables</h4>
+                </div>
             </div>
-            <!-- /col -->
         </div>
-        <!-- /row -->
+        <!-- end page title -->
 
-    </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title">Bảng bài đăng</h4>
+                        <a href={{ route('user.createPost') }} class="mb-4 btn btn-primary btn-rounded waves-effect waves-light">Thêm</a>
 
-</section>
+                        <table id="basic-datatable" class="table dt-responsive nowrap">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Hình</th>
+                                    <th>Tên</th>
+                                    <th>Ngày đăng</th>
+                                    <th>Trạng thái</th>
+                                    <th>Chức năng</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                               <tr>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
+                               </tr>
+                            </tbody>
+                        </table>
+
+                    </div> <!-- end card body-->
+                </div> <!-- end card -->
+            </div><!-- end col-->
+        </div>
+        <!-- end row-->
+
+
+    </div> <!-- end container -->
+</div>
+
 @endsection
 
 
 @section('js')
-<script src="asset/admin/js/vendor/slider/bootstrap-slider.min.js"></script>
+<script src="asset/admin/libs/datatables/jquery.dataTables.min.js"></script>
+<script src="asset/admin/libs/datatables/dataTables.bootstrap4.js"></script>
+<script src="asset/admin/libs/datatables/dataTables.responsive.min.js"></script>
+<script src="asset/admin/libs/datatables/responsive.bootstrap4.min.js"></script>
+<script src="asset/admin/libs/datatables/dataTables.buttons.min.js"></script>
+<script src="asset/admin/libs/datatables/buttons.bootstrap4.min.js"></script>
+<script src="asset/admin/libs/datatables/buttons.html5.min.js"></script>
+<script src="asset/admin/libs/datatables/buttons.flash.min.js"></script>
+<script src="asset/admin/libs/datatables/buttons.print.min.js"></script>
+<script src="asset/admin/libs/datatables/dataTables.keyTable.min.js"></script>
+<script src="asset/admin/libs/datatables/dataTables.select.min.js"></script>
+<script src="asset/admin/libs/pdfmake/pdfmake.min.js"></script>
+<script src="asset/admin/libs/pdfmake/vfs_fonts.js"></script>
+<script src="asset/admin/libs/jquery-toast/jquery.toast.min.js"></script>
+<script src="asset/admin/js/pages/toastr.init.js"></script>
 
-<script src="asset/admin/js/vendor/colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script src="asset/admin/libs/jquery-nice-select/jquery.nice-select.min.js"></script>
+<script src="asset/admin/libs/switchery/switchery.min.js"></script>
+<script src="asset/admin/libs/select2/select2.min.js"></script>
+<script src="asset/admin/libs/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="asset/admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+<script src="asset/admin/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+<script src="asset/admin/js/pages/form-advanced.init.js"></script>
 
-<script src="asset/admin/js/vendor/touchspin/jquery.bootstrap-touchspin.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
 
-<script src="asset/admin/js/vendor/daterangepicker/moment.min.js"></script>
-
-<script src="asset/admin/js/vendor/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-
-<script src="asset/admin/js/vendor/chosen/chosen.jquery.min.js"></script>
-
-<script src="asset/admin/js/vendor/filestyle/bootstrap-filestyle.min.js"></script>
-
-<script src="asset/admin/js/vendor/summernote/summernote.min.js"></script>
+      
+    });
+</script>
 @endsection

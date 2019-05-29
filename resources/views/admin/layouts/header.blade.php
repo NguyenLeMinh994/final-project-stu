@@ -109,7 +109,7 @@
                     </li>
 
                     <li class="has-submenu">
-                        <a href="#">
+                        <a href={{ route('user.post') }}>
                             <i class="la la-clone"></i>Bài đăng
                         </a>
                     </li>

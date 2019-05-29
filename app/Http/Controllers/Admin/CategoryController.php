@@ -26,8 +26,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Loai::where('parent_id', null)->get();
-        return view('admin.pages.createcategory', ['categories' => $categories]);
+        $danhMucChas = Loai::where('parent_id', null)->get();
+        return view('admin.pages.createcategory', ['danhMucChas' => $danhMucChas]);
     }
 
     /**
@@ -88,15 +88,16 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $categories = Loai::where('parent_id', null)->get();
-        foreach ($categories as $key => $category) {
+        $danhMucChas = Loai::where('parent_id', null)->get();
+        foreach ($danhMucChas as $key => $category) {
             if ($category->id == $id) {
-                unset($categories[$key]);
+                unset($danhMucChas[$key]);
             }
         }
 
-        $danhmuc = Loai::findOrfail($id);
-        return view('admin.pages.updatecategory', ['danhmuc' => $danhmuc, 'categories' => $categories]);
+        $danhMuc = Loai::findOrfail($id);
+        
+        return view('admin.pages.updatecategory', ['danhMuc' => $danhMuc, 'danhMucChas' => $danhMucChas]);
     }
 
     /**

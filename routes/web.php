@@ -41,6 +41,8 @@ Route::prefix('user')->group(function () {
 
     Route::get('/', 'Admin\UserController@index')->name('user.home');
 
+    Route::get('/bai-dang', 'Admin\ProductController@index')->name('user.post');
+
     Route::get('/tao-bai-dang', 'Admin\ProductController@create')->name('user.createPost');
     Route::post('/tao-bai-dang', 'Admin\ProductController@store')->name('user.postCreatePost');
 
