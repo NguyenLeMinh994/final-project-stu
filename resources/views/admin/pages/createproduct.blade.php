@@ -1,243 +1,195 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Home')
+@section('title', 'Tạo bài đăng')
 
 @section('css')
-<link rel="stylesheet" href="asset/admin/js/vendor/colorpicker/css/bootstrap-colorpicker.min.css">
-<link rel="stylesheet" href="asset/admin/js/vendor/touchspin/jquery.bootstrap-touchspin.min.css">
-<link rel="stylesheet" href="asset/admin/js/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css">
-<link rel="stylesheet" href="asset/admin/js/vendor/chosen/chosen.css">
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+<link href="asset/admin/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
+
+<link href="asset/admin/libs/jquery-nice-select/nice-select.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/switchery/switchery.min.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css" />
+<link href="asset/admin/libs/summernote/summernote-bs4.css" rel="stylesheet" type="text/css" />
+
 @endsection
 
 @section('container')
-<section id="content">
+<div class="wrapper">
+    <div class="container-fluid">
 
-    <div class="page page-forms-common">
-
-        <div class="pageheader">
-
-            <h2>Common Elements <span>// You can place subtitle here</span></h2>
-
-            <div class="page-bar">
-
-                <ul class="page-breadcrumb">
-                    <li>
-                        <a href={{ route('user.home') }}><i class="fa fa-home"></i> Minovate</a>
-                    </li>
-                    <li>
-                        <a href="#">Form Stuff</a>
-                    </li>
-                </ul>
-
-            </div>
-
-        </div>
-
-        <!-- row -->
+        <!-- start page title -->
         <div class="row">
-            <!-- col -->
-            <div class="col-md-12">
-
-                <!-- tile -->
-                <section class="tile">
-
-                    <!-- tile header -->
-                    <div class="tile-header dvd dvd-btm">
-                        <h1 class="custom-font"><strong>Form</strong> Elements</h1>
-                        <ul class="controls">
-                            <li class="dropdown">
-
-                                <a role="button" tabindex="0" class="dropdown-toggle settings" data-toggle="dropdown">
-                                    <i class="fa fa-cog"></i>
-                                    <i class="fa fa-spinner fa-spin"></i>
-                                </a>
-                            </li>
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Xeria</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
+                            <li class="breadcrumb-item active">Basic Elements</li>
+                        </ol>
                     </div>
-                    <!-- /tile header -->
+                    <h4 class="page-title">Basic Elements</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
 
-                    <!-- tile body -->
-                    <div class="tile-body">
 
-                        <form class="form-horizontal" role="form">
-
-                            <div class="form-group">
-                                <label for="input01" class="col-sm-2 control-label">Tên</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="input01">
-                                </div>
-                            </div>
-
-                            <hr class="line-dashed line-full" />
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Loại</label>
-                                <div class="col-sm-10">
-                                    <select tabindex="3" class="chosen-select" style="width: 240px;">
-                                        <optgroup label="Alaskan/Hawaiian Time Zone">
-                                            <option value="AK">Alaska</option>
-                                            <option value="HI">Hawaii</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <hr class="line-dashed line-full" />
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Thành phố</label>
-                                <div class="col-sm-10">
-                                    <select tabindex="3" class="chosen-select" style="width: 240px;">
-                                        <optgroup label="Alaskan/Hawaiian Time Zone">
-                                            <option value="AK">Alaska</option>
-                                            <option value="HI">Hawaii</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
-                            </div>
-                            <hr class="line-dashed line-full" />
+        <!-- Form row -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title">Form row</h4>
+                        @if (count($errors)>0)
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            @foreach ($errors->all() as $err)
+                            {{ $err}} <br>
+                            @endforeach
+                        </div>
+                        @elseif(session()->has('success'))
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            Thêm thành công
+                        </div>
+                        @endif
+                        <form action={{ route('admin.createCategory') }} method="POST">
+                            @csrf
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Quận</label>
-                                <div class="col-sm-10">
-                                    <select tabindex="3" class="chosen-select" style="width: 240px;">
-                                        <optgroup label="Alaskan/Hawaiian Time Zone">
-                                            <option value="AK">Alaska</option>
-                                            <option value="HI">Hawaii</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
+                                <label for="inputAddress" class="col-form-label">Tên bài</label>
+                                <input type="text" class="form-control" id="inputAddress" name="txtTen"
+                                    placeholder="Tên danh mục">
                             </div>
-                            <hr class="line-dashed line-full" />
-                            <div class="form-group">
-                                <label for="input01" class="col-sm-2 control-label">Địa chỉ</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="input01">
-                                </div>
-                            </div>
-                            <hr class="line-dashed line-full" />
-                            <div class="form-group">
-                                <label for="input01" class="col-sm-2 control-label">Diện tích</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="input01">
-                                </div>
-                            </div>
-                            <hr class="line-dashed line-full" />
-                            <div class="form-group">
-                                <label for="input01" class="col-sm-2 control-label">Số tầng</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="input01">
-                                </div>
-                            </div>
-                            <hr class="line-dashed line-full" />
-                            <div class="form-group">
-                                <label for="input01" class="col-sm-2 control-label">Số phòng</label>
-                                <div class="col-sm-10">
 
-                                    <input type="text" class="form-control" id="input01">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <textarea id="summernote-editor" name="txtNoiDung"></textarea>
+
+                                    <!-- end summernote-editor-->
                                 </div>
-                            </div>
-                            <hr class="line-dashed line-full" />
-                            <div class="form-group">
-                                <label for="input01" class="col-sm-2 control-label">Số phòng tắm</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="input01">
-                                </div>
-                            </div>
-                            <hr class="line-dashed line-full" />
-                            <div class="form-group">
-                                <label for="input01" class="col-sm-2 control-label">Giá</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="input01">
-                                </div>
-                            </div>
-                            <hr class="line-dashed line-full" />
-                            <div class="form-group">
-                                <label for="input01" class="col-sm-2 control-label">Tọa độ</label>
-                                <div class="col-sm-10">
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control" id="input01" placeholder="Vĩ độ">
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <label for="inputState" class="col-form-label">Danh mục</label>
+                                        <select class="form-control" data-toggle="select2" name="sltDanhMuc">
+                                            <option>Select</option>
+                                        </select>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control" id="input01" placeholder="Kinh độ">
+
+
+                                    <div class="form-group">
+                                        <label for="inputState" class="col-form-label">Thành phố</label>
+                                        <select class="form-control" data-toggle="select2" name="sltThanhPho">
+                                            <option>Select</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="inputState" class="col-form-label">Quận</label>
+                                        <select class="form-control" data-toggle="select2" name="sltQuan">
+                                            <option>Select</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputAddress" class="col-form-label">Diện tích</label>
+                                        <input type="text" class="form-control" id="inputAddress" name="txtDienTich"
+                                            placeholder="Tên danh mục">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputAddress" class="col-form-label">Số tầng</label>
+                                        <input type="text" class="form-control" id="inputAddress" name="txtSoTan"
+                                            placeholder="Tên danh mục">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputAddress" class="col-form-label">Phòng ngủ</label>
+                                        <input type="text" class="form-control" id="inputAddress" name="txtPhongNgu"
+                                            placeholder="Tên danh mục">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputAddress" class="col-form-label">Phòng tắm</label>
+                                        <input type="text" class="form-control" id="inputAddress" name="txtPhongTam"
+                                            placeholder="Tên danh mục">
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="inputAddress" class="col-form-label">Giá </label>
+                                        <input type="text" class="form-control" id="inputAddress" name="txtGia"
+                                            placeholder="Tên danh mục">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail4" class="col-form-label">Vĩ độ</label>
+                                            <input type="text" class="form-control" id="inputEmail4" name="txtViDo"
+                                                placeholder="Email">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword4" class="col-form-label">Kinh độ</label>
+                                            <input type="text" class="form-control" id="inputPassword4" name="txtKinhDo" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputAddress" class="col-form-label">Hình </label>
+                                        <input type="file" class="filestyle" data-icon="false">
                                     </div>
                                 </div>
                             </div>
 
-                            <hr class="line-dashed line-full" />
-                            <div class="form-group">
-                                <label for="input01" class="col-sm-2 control-label">Nội dung</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control summernote" rows="6" name="message" id="message"
-                                        placeholder="Type your message" required=""></textarea>
-                                </div>
-                            </div>
-                            <hr class="line-dashed line-full" />
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">File Input</label>
-                                <div class="col-sm-10">
-                                    <input type="file" class="filestyle" data-buttonText="Find file"
-                                        data-iconName="fa fa-inbox">
-                                </div>
-                            </div>
-
-
-
-                            <div class="form-group">
-                                <div class="col-sm-4 col-sm-offset-2">
-                                    <button type="submit" class="btn btn-lightred">Lưu</button>
-                                </div>
-                            </div>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Lưu</button>
 
                         </form>
 
-                    </div>
-                    <!-- /tile body -->
-
-                </section>
-                <!-- /tile -->
-
-
-
-            </div>
-            <!-- /col -->
+                    </div> <!-- end card-body -->
+                </div> <!-- end card-->
+            </div> <!-- end col -->
         </div>
-        <!-- /row -->
+        <!-- end row -->
 
-    </div>
 
-</section>
+    </div> <!-- end container -->
+</div>
 @endsection
 
 
 @section('js')
-<script src="asset/admin/js/vendor/slider/bootstrap-slider.min.js"></script>
+<script src="asset/admin/libs/datatables/jquery.dataTables.min.js"></script>
+<script src="asset/admin/libs/datatables/dataTables.bootstrap4.js"></script>
+<script src="asset/admin/libs/datatables/dataTables.responsive.min.js"></script>
+<script src="asset/admin/libs/datatables/responsive.bootstrap4.min.js"></script>
+<script src="asset/admin/libs/datatables/dataTables.buttons.min.js"></script>
+<script src="asset/admin/libs/datatables/buttons.bootstrap4.min.js"></script>
+<script src="asset/admin/libs/datatables/buttons.html5.min.js"></script>
+<script src="asset/admin/libs/datatables/buttons.flash.min.js"></script>
+<script src="asset/admin/libs/datatables/buttons.print.min.js"></script>
+<script src="asset/admin/libs/datatables/dataTables.keyTable.min.js"></script>
+<script src="asset/admin/libs/datatables/dataTables.select.min.js"></script>
+<script src="asset/admin/libs/pdfmake/pdfmake.min.js"></script>
+<script src="asset/admin/libs/pdfmake/vfs_fonts.js"></script>
 
-<script src="asset/admin/js/vendor/colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script src="asset/admin/libs/jquery-nice-select/jquery.nice-select.min.js"></script>
+<script src="asset/admin/libs/switchery/switchery.min.js"></script>
+<script src="asset/admin/libs/select2/select2.min.js"></script>
+<script src="asset/admin/libs/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="asset/admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+<script src="asset/admin/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+<script src="asset/admin/js/pages/form-advanced.init.js"></script>
 
-<script src="asset/admin/js/vendor/touchspin/jquery.bootstrap-touchspin.min.js"></script>
-
-<script src="asset/admin/js/vendor/daterangepicker/moment.min.js"></script>
-
-<script src="asset/admin/js/vendor/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-
-<script src="asset/admin/js/vendor/chosen/chosen.jquery.min.js"></script>
-
-<script src="asset/admin/js/vendor/filestyle/bootstrap-filestyle.min.js"></script>
-
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $(".note-btn").click(function() {
-            debugger;
-            $('.modal-backdrop').remove();
-            console.log('xxxx');
-        });
-        $('.summernote').summernote({
-            height: 300,
-        });
-    });
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-filestyle/2.1.0/bootstrap-filestyle.min.js"></script>
+<script src="asset/admin/libs/summernote/summernote-bs4.min.js"></script>
+<script src="asset/admin/js/pages/form-summernote.init.js"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+      $(":file").filestyle();
+      $('div.note-editable').height(830);
+  });
 </script>
-
 @endsection
