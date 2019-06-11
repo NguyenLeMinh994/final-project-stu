@@ -69,9 +69,11 @@
                                     </td>
                                     <td>
                                         <a href={{ route('admin.updateCategory', ['id'=>$danhMuc->id]) }} class="btn btn-primary waves-effect waves-light"><i
-                                                class="la la-pencil-square"></i></a>
-                                        <button type="button" data-id={{ $danhMuc->id }} class="clsXoaDanhMuc btn btn-danger waves-effect waves-light"><i
-                                                class="la la-trash-o"></i></button>
+                                                class="la la-pencil-square"></i>
+                                        </a>
+                                        <button type="button" data-id={{ $danhMuc->id }} class="clsXoaDanhMuc btn btn-danger waves-effect waves-light">
+                                            <i class="la la-trash-o"></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 @endforeach

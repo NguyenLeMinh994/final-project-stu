@@ -45,6 +45,16 @@ Route::prefix('user')->group(function () {
 
     Route::get('/tao-bai-dang', 'Admin\ProductController@create')->name('user.createPost');
     Route::post('/tao-bai-dang', 'Admin\ProductController@store')->name('user.postCreatePost');
+    
+    // 10/6/2019 Begin
+    Route::get('/cap-nhat-bai-dang/{id}', 'Admin\ProductController@edit')->name('user.updatePost');
+    Route::post('/cap-nhat-bai-dang/{id}', 'Admin\ProductController@update')->name('user.postUpdatePost');
+
+    // 10/6/2019 End
+    
+    Route::get('/ajax/danh-sach-quan/{id}', 'Admin\ProductController@getQuansByAjax');
+    Route::get('/ajax/xoa-bai-dang/{id}', 'Admin\ProductController@deletePostByAjax');
+    Route::get('/ajax/cap-nhat-trang-thai-bai-dang/{id}', 'Admin\ProductController@updateStatusByAjax');
 
 
 });
@@ -77,4 +87,8 @@ Route::get('/ajax/danh-sach-quan/{id}', 'User\AjaxController@getQuansByAjax');
 // Nguyễn Lê Minh End
 
 //AJAX End
+// 11/6/2019 Begin
+Route::get('/auth/{provider}', 'Admin\LoginController@redirectToProvider');
+Route::get('/auth/{provide}/callback', 'Admin\LoginController@handleProviderCallback');
+// 11/6/2019 End
 
