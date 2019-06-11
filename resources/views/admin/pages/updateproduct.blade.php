@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Tạo bài đăng')
+@section('title', 'Cập nhật bài đăng')
 
 @section('css')
 <link href="asset/admin/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
@@ -32,7 +32,7 @@
                             <li class="breadcrumb-item active">Basic Elements</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Basic Elements</h4>
+                    <h4 class="page-title">Cập nhật</h4>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Form row</h4>
+                        <h4 class="header-title">Form cập nhật</h4>
                         @if (count($errors)>0)
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -58,34 +58,37 @@
                             Thêm thành công
                         </div>
                         @endif
-                        <form action={{ route('user.postCreatePost') }} method="POST" enctype="multipart/form-data">
+                        <form action={{ route('user.postUpdatePost',['id'=>$post->id]) }} method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
                                 <label for="inputAddress" class="col-form-label">Tên bài</label>
                                 <input type="text" class="form-control" id="inputAddress" name="txtTen"
-                                    placeholder="Nhập tên bài">
+                                    placeholder="Nhập tên bài" value={{ $post->ten }}>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-8">
-                                    <textarea id="summernote-editor" name="txtNoiDung"></textarea>
+                                    <textarea id="summernote-editor" name="txtNoiDung">
+                                            {{ $post->noidung }}
+                                    </textarea>
 
                                     <!-- end summernote-editor-->
                                 </div>
                                 <div class="col-md-4">
-
                                     <div class="form-group">
                                         <label for="inputState" class="col-form-label">Danh mục</label>
                                         <select class="form-control" data-toggle="select2" name="sltDanhMuc">
-                                            <option value="">Select</option>
+                                            <option value="">Chọn loại</option>
                                             @foreach ($danhMucChas as $danhMucCha)
-                                            <option value={{ $danhMucCha->id }}>
-                                                {{ $danhMucCha->ten }}</option>
-                                                @foreach ($danhMucCha->getChildren as $danhMucCon)
-                                                <option value={{ $danhMucCon->id }}>
-                                                    --{{ $danhMucCon->ten }}</option>
-                                                @endforeach
+                                            <option value={{ $danhMucCha->id }} {{ $post->id_loai==$danhMucCha->id?'selected':'' }}>
+                                                {{ $danhMucCha->ten }}
+                                            </option>
+                                            @foreach ($danhMucCha->getChildren as $danhMucCon)
+                                            <option value={{ $danhMucCon->id }} {{ $post->id_loai==$danhMucCon->id?'selected':'' }}>
+                                                --{{ $danhMucCon->ten }}
+                                            </option>
+                                            @endforeach
                                             @endforeach
                                         </select>
                                     </div>
@@ -93,11 +96,13 @@
 
                                     <div class="form-group">
                                         <label for="inputState" class="col-form-label">Thành phố</label>
-                                        <select class="form-control" data-toggle="select2" id="idThanhPho" name="sltThanhPho">
+                                        <select class="form-control" data-toggle="select2" id="idThanhPho"
+                                            name="sltThanhPho">
                                             <option value="">Chọn thành phố</option>
                                             @foreach ($thanhPhos as $thanhPho)
-                                            <option value={{ $thanhPho->id }}>
-                                                {{ $thanhPho->ten }}</option>
+                                            <option value={{ $thanhPho->id }} {{ $post->id_tp==$thanhPho->id?'selected':'' }}>
+                                                {{ $thanhPho->ten }}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -105,59 +110,60 @@
 
                                     <div class="form-group">
                                         <label for="inputState" class="col-form-label">Quận</label>
-                                        <select class="form-control" data-toggle="select2" name="sltQuan" id="idQuan">
-                                            <option value="">Select</option>
+                                        <select class="form-control" data-toggle="select2" name="sltQuan" id="idQuan" data-id-quan={{ $post->id_quan }}>
+                                            <option value="">Quận</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Diện tích</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtDienTich"
-                                            placeholder="Nhập diện tích">
+                                            placeholder="Nhập diện tích" value={{ $post->dientich}}>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Số tầng</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtSoTang"
-                                            placeholder="Nhập số tầng">
+                                            placeholder="Nhập số tầng" value={{ $post->sotang?$post->sotang:'0' }}>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Phòng ngủ</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtPhongNgu"
-                                            placeholder="Nhập phòng ngủ">
+                                            placeholder="Nhập phòng ngủ" value={{ $post->phongngu}}>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Phòng tắm</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtPhongTam"
-                                            placeholder="Nhập phòng tắm">
+                                            placeholder="Nhập phòng tắm" value={{ $post->phongtam}}>
                                     </div>
                                     <div class="form-group ">
                                         <label for="inputAddress" class="col-form-label">Giá </label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtGia"
-                                            placeholder="Nhập giá">
+                                            placeholder="Nhập giá" value={{ $post->gia}}>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Địa chỉ </label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtDiaChi"
-                                            placeholder="Nhập địa chỉ">
+                                            placeholder="Nhập địa chỉ" value={{ $post->diachi}}>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputEmail4" class="col-form-label">Vĩ độ</label>
                                             <input type="text" class="form-control" id="inputEmail4" name="txtViDo"
-                                                placeholder="Nhập vĩ độ">
+                                                placeholder="Nhập vĩ độ" value={{ $post->latitude}}>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputPassword4" class="col-form-label">Kinh độ</label>
                                             <input type="text" class="form-control" id="inputPassword4" name="txtKinhDo"
-                                                placeholder="Nhập kinh độ">
+                                                placeholder="Nhập kinh độ" value={{ $post->longitude}}>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Hình </label>
-                                        <input type="file" class="filestyle" data-text="Choose image" data-placeholder="No file" data-btnClass="btn-primary" name="fileHinh" />
+                                        <input type="file" class="filestyle" data-text="Choose image"
+                                            data-placeholder="No file" data-btnClass="btn-primary" name="fileHinh" />
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +214,7 @@
     $(document).ready(function () {
         $(":file").filestyle();
         $('div.note-editable').height(920);
-
+        
         $('#idThanhPho').change(function (e) {
             e.preventDefault();
             var idThanhPho = $(this).val();
@@ -233,6 +239,33 @@
             }
 
         });
+        function getQuan() {
+            const idThanhPho = $('#idThanhPho').val();
+            const quanElement = $('#idQuan');
+            const idQuan=quanElement.data('id-quan');
+            
+            const url = "{{ url('/user/ajax/danh-sach-quan/') }}/" + idThanhPho;
+            let htmlQuan = `<option value="">Quận</option>`;
+
+            if (idThanhPho == '') {
+                quanElement.html(htmlQuan);
+            } else {
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    success: function (response) {
+                        $.each(response, function (key, value) {
+                            htmlQuan += `<option value=${value.id} ${idQuan==value.id?'selected':''}> ${value.ten} </option>`;
+                        });
+                        quanElement.html(htmlQuan);
+
+                    }
+                });
+            }
+            
+        }
+        getQuan();
+
     });
 </script>
 @endsection

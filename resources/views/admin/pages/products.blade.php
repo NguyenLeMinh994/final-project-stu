@@ -42,7 +42,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">Bảng bài đăng</h4>
-                        <a href={{ route('user.createPost') }} class="mb-4 btn btn-primary btn-rounded waves-effect waves-light">Thêm</a>
+                        <a href={{ route('user.createPost') }}
+                            class="mb-4 btn btn-primary btn-rounded waves-effect waves-light">Thêm</a>
 
                         <table id="basic-datatable" class="table dt-responsive nowrap">
                             <thead>
@@ -58,12 +59,36 @@
 
 
                             <tbody>
-                               <tr>
-                                   <td></td>
-                                   <td></td>
-                                   <td></td>
-                                   <td></td>
-                               </tr>
+                                @foreach ($posts as $post)
+                                <tr id="row_{{ $post->id }}">
+                                    <td>{{ $post->id }}</td>
+                                    <td>
+                                        <img src="upload/{{ $post->hinhdaidien }}" alt={{ $post->ten }} height="70">
+                                    </td>
+                                    <td>
+                                        {{ $post->ten }}
+                                    </td>
+                                    <td>
+                                        {{ date('d-m-Y', strtotime($post->created_at)) }}
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" data-plugin="switchery" data-color="#1bb99a"
+                                            {{ $post->trangthai==1?'checked':'' }} data-id={{ $post->id }}
+                                            class="clsTrangThai" />
+                                    </td>
+                                    <td>
+                                        <a href={{ route('user.postUpdatePost', ['id'=>$post->id]) }}
+                                            class="btn btn-primary waves-effect waves-light"><i
+                                                class="la la-pencil-square"></i>
+                                        </a>
+                                        <button type="button" data-id="{{ $post->id }}"
+                                            class="clsXoaBaiDang btn btn-danger waves-effect waves-light">
+                                            <i class="la la-trash-o"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
 
@@ -107,8 +132,74 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
+        $('.clsXoaBaiDang').click(function(e){
+            e.preventDefault();
+            var idPost=$(this).data('id');
+            if (confirm("Bạn có muốn xóa không?")) {
+                var url = "{{ url('/user/ajax/xoa-bai-dang/') }}/" + idPost;
 
-      
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    dataType: "html",
+                    success: function (response) {
+                        if (response == 'true') {
+                            $('#row_' + idPost).remove();
+                            $.toast({
+                                heading: 'Success',
+                                text: 'Xóa thành công',
+                                icon: 'success',
+                                position: 'top-right'
+                            });
+                        } else {
+                            $.toast({
+                                heading: 'oh!',
+                                text: 'Lỗi không thể xóa được',
+                                icon: 'error',
+                                position: 'top-right'
+                            });
+                            return;
+                        }
+                    }
+                });
+            }
+            
+        });
+
+        $('.clsTrangThai').change(function (e) { 
+            e.preventDefault();
+
+            var thisTr=this;
+            var idPost=$(this).data('id');
+            var url="{{ url('/user/ajax/cap-nhat-trang-thai-bai-dang/') }}/"+idPost;
+            console.log(url);
+            
+            $.ajax({
+                type: "get",
+                url: url,
+                dataType: "html",
+                success: function (response) {
+                    if (response == 'true') {
+                        $.toast({
+                            heading: 'Success',
+                            text: 'Cập nhật trạng thái thành công',
+                            icon: 'success',
+                            position: 'top-right'
+                        });
+                        return ;
+                    } else {
+                        $.toast({
+                            heading: 'Oh!',
+                            text: 'Cập nhật trạng thái thất bại',
+                            icon: 'error',
+                            position: 'top-right'
+                        });
+                        $(thisTr).prop('checked', false);
+                        return ;
+                    }
+                }
+            });
+        });
     });
 </script>
 @endsection
