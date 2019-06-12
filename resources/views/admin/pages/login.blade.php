@@ -31,14 +31,14 @@
                                     <span><img src="asset/admin/images/logo-light.png" alt="" height="18"></span>
                                 </a>
                                 @if(count($errors)>0)
-                                    @foreach ($errors->all() as $err)
-                                    <div class="alert alert-danger alert-dismissible mb-4 mt-3">
-                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                        <br>
-                                    </div>
-                                    @endforeach
+                                @foreach ($errors->all() as $err)
+                                <div class="alert alert-danger alert-dismissible mb-4 mt-3">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    {{$err}}<br>
+                                </div>
+                                @endforeach
                                 @else
-                                    <p class="text-muted mb-4 mt-3"></p>
+                                <p class="text-muted mb-4 mt-3"></p>
                                 @endif
                             </div>
 
@@ -72,27 +72,16 @@
                             </form>
 
                             <div class="text-center">
-                                <h5 class="mt-3 text-muted">Sign in with</h5>
+                                <h5 class="mt-3 text-muted">Đăng nhập với</h5>
                                 <ul class="social-list list-inline mt-3 mb-0">
+
                                     <li class="list-inline-item">
-                                        <a href="javascript: void(0);"
-                                            class="social-list-item border-primary text-primary"><i
-                                                class="mdi mdi-facebook"></i></a>
+                                        <a href={{ url('/auth/google/') }} class="social-list-item border-danger text-danger"><i
+                                                class="mdi mdi-google">
+                                            </i>
+                                        </a>
                                     </li>
-                                    <li class="list-inline-item">
-                                        <a href="javascript: void(0);"
-                                            class="social-list-item border-danger text-danger"><i
-                                                class="mdi mdi-google"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="javascript: void(0);" class="social-list-item border-info text-info"><i
-                                                class="mdi mdi-twitter"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="javascript: void(0);"
-                                            class="social-list-item border-secondary text-secondary"><i
-                                                class="mdi mdi-github-circle"></i></a>
-                                    </li>
+
                                 </ul>
                             </div>
 

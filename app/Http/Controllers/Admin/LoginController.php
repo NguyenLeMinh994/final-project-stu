@@ -58,17 +58,20 @@ class LoginController extends Controller
         $getInfo = Socialite::driver($provider)->user();
         $user = $this->createUser($getInfo, $provider);
         auth()->login($user);
-        return redirect()->to('/home');
+        return redirect()->to('/');
     }
+
     function createUser($getInfo, $provider)
     {
         $user = User::where('provider_id', $getInfo->id)->first();
         if (!$user) {
             $user = User::create([
-                'name'     => $getInfo->name,
-                'email'    => $getInfo->email,
-                'provider' => $provider,
-                'provider_id' => $getInfo->id
+                'hoten'             => $getInfo->name,
+                'email'             => $getInfo->email,
+                'email_verified_at' => now(),
+                'provider'          => $provider,
+                'provider_id'       => $getInfo->id,
+                'remember_token'    => bcrypt(str_random(10)),
             ]);
         }
         return $user;

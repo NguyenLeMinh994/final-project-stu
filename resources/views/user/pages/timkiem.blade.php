@@ -3,7 +3,7 @@
 ?>
 
 @extends('user.layouts.master') 
-@section('title', 'Danh sách') 
+@section('title', 'Tìm Kiếm') 
 @section('css')
 @endsection
  
@@ -13,8 +13,8 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">Home</a></span> <span>Danh sách</span></p>
-                <h1 class="mb-3 bread">Dang sách</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Property</span></p>
+                <h1 class="mb-3 bread">Property</h1>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
 <section class="ftco-section bg-light">
     <div class="container">
         <div class="row">
-            @foreach($listSanPham as $listSP)
+            @foreach($pruduct as $listSP)
             <div class="col-md-4 ftco-animate">
                 <div class="properties">
                     <a href={{ route("detail",["id"=>$listSP['id']]) }} class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(upload/{{$listSP->hinhdaidien}});">
@@ -40,7 +40,7 @@
                                 <span class="price">{{number_format($listSP->gia)}} VNĐ</span>
                             </div>
                         </div>
-                        <p class="ten3">{{catchuoi($listSP->ten)}}</p>
+                        <p>{{catchuoi($listSP->ten)}}</p>
                         <hr>
                         <p class="bottom-area d-flex">
                             <span><i class="flaticon-selection"></i>   {{$listSP->dientich}}  <sup>m2</sup></span>
@@ -54,7 +54,6 @@
         </div>
         <div class="row mt-5">
             <div class="col text-center">
-                        {{$listSanPham->links()}}
             </div>
         </div>
     </div>

@@ -27,7 +27,26 @@
     <link rel="stylesheet" href="asset/user/css/flaticon.css">
     <link rel="stylesheet" href="asset/user/css/icomoon.css">
     <link rel="stylesheet" href="asset/user/css/style.css">
-    
+    <style type="text/css">
+      .ten{
+        width: 300px;
+      }
+      .gia{
+        width: 200px;
+        color: red;
+      }
+      .ten1{
+        width: 150px;
+      }
+      .gia1{
+        width: 150;
+        color: red;
+      }
+      .ten3{
+        height: 40px;
+      }
+      
+    </style>
     @yield('css')
 
   </head>
@@ -59,8 +78,8 @@
   <script src="asset/user/js/bootstrap-datepicker.js"></script>
   <script src="asset/user/js/jquery.timepicker.min.js"></script>
   <script src="asset/user/js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="asset/user/js/google-map.js"></script>
+  <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="asset/user/js/google-map.js"></script>-->
   <script src="asset/user/js/main.js"></script>
 
   @yield('js')

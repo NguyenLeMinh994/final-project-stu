@@ -16,9 +16,7 @@ Route::get('/', 'User\PagesController@getIndex')->name('home');
 Auth::routes();
 
 // Nguyễn Lê Minh Begin
-Route::get('/chi-tiet', 'User\PagesController@getDetail')->name('detail');
 
-Route::get('/danh-sach/{id}', 'User\PagesController@getList')->name('list');
 
 //Đăng ký Begin
 Route::get('/dang-ky', 'User\PagesController@getSignUp')->name('signup');
@@ -34,9 +32,8 @@ Route::get('/admin-temp', function(){
 //Đăng ký End
 // Nguyễn Lê Minh End
 
-//Admin - User Begin
+//Admin - User Begin 
 // Nguyễn Lê Minh Begin
-// middleware('checkLogin')->
 Route::prefix('user')->group(function () {
 
     Route::get('/', 'Admin\UserController@index')->name('user.home');
@@ -45,13 +42,13 @@ Route::prefix('user')->group(function () {
 
     Route::get('/tao-bai-dang', 'Admin\ProductController@create')->name('user.createPost');
     Route::post('/tao-bai-dang', 'Admin\ProductController@store')->name('user.postCreatePost');
-    
-    // 10/6/2019 Begin
-    Route::get('/cap-nhat-bai-dang/{id}', 'Admin\ProductController@edit')->name('user.updatePost');
-    Route::post('/cap-nhat-bai-dang/{id}', 'Admin\ProductController@update')->name('user.postUpdatePost');
+     // 10/6/2019 Begin
+     Route::get('/cap-nhat-bai-dang/{id}', 'Admin\ProductController@edit')->name('user.updatePost');
+     Route::post('/cap-nhat-bai-dang/{id}', 'Admin\ProductController@update')->name('user.postUpdatePost');
+ 
+     // 10/6/2019 End
 
-    // 10/6/2019 End
-    
+    //  Ajax
     Route::get('/ajax/danh-sach-quan/{id}', 'Admin\ProductController@getQuansByAjax');
     Route::get('/ajax/xoa-bai-dang/{id}', 'Admin\ProductController@deletePostByAjax');
     Route::get('/ajax/cap-nhat-trang-thai-bai-dang/{id}', 'Admin\ProductController@updateStatusByAjax');
@@ -59,7 +56,7 @@ Route::prefix('user')->group(function () {
 
 });
 // ->middleware('checkLoginForAdmin')
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
 
     Route::get('/tao-danh-muc', 'Admin\CategoryController@create')->name('admin.createCategory');
     Route::post('/tao-danh-muc', 'Admin\CategoryController@store')->name('admin.postCreateCategory');
@@ -75,6 +72,13 @@ Route::prefix('admin')->group(function () {
 
 
 });
+// 11/6/2019 Begin
+Route::get('/auth/{provider}', 'Admin\LoginController@redirectToProvider');
+Route::get('/auth/{provide}/callback', 'Admin\LoginController@handleProviderCallback');
+// 11/6/2019 End
+
+// Nguyễn Lê Minh End
+//Admin - User End
 
 // Nguyễn Lê Minh End
 //Admin - User End
@@ -87,8 +91,15 @@ Route::get('/ajax/danh-sach-quan/{id}', 'User\AjaxController@getQuansByAjax');
 // Nguyễn Lê Minh End
 
 //AJAX End
-// 11/6/2019 Begin
-Route::get('/auth/{provider}', 'Admin\LoginController@redirectToProvider');
-Route::get('/auth/{provide}/callback', 'Admin\LoginController@handleProviderCallback');
-// 11/6/2019 End
+
+// Trần Thanh Tuấn
+Route::get('/chi-tiet/{id}', 'User\PagesController@getDetail')->name('detail');
+Route::get('/danh-sach/{id}', 'User\PagesController@getList')->name('list');
+Route::get('/contact','User\PagesController@contact')->name('contact');
+Route::get('/about','User\PagesController@about')->name('about');
+Route::get('timkiem',[
+	'as'=>'/timkiem',
+	'uses'=>'User\PagesController@timkiem'
+]);
+//Trần Thanh Tuấn END
 

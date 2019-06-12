@@ -35,7 +35,7 @@
                     <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
                         href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <span class="pro-user-name ml-1">
-                            Marcia J. <i class="mdi mdi-chevron-down"></i>
+                            {{ Auth::user()->hoten?Auth::user()->hoten:'No Name' }}<i class="mdi mdi-chevron-down"></i>
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -67,9 +67,9 @@
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a href={{ route('logout') }} class="dropdown-item notify-item">
                             <i class="fe-log-out"></i>
-                            <span>Logout</span>
+                            <span>Đăng xuất</span>
                         </a>
 
                     </div>
@@ -113,18 +113,18 @@
                             <i class="la la-clone"></i>Bài đăng
                         </a>
                     </li>
-
-                    <li class="has-submenu">
-                        <a href={{ route('admin.category') }}>
-                            <i class="la la-cube"></i>Danh mục
-                        </a>
-                    </li>
-
-                    <li class="has-submenu">
-                        <a href="#">
-                            <i class="la la-ship"></i>Danh sách thành viên
-                        </a>
-                    </li>
+                    @if (Auth::user()->quyen==0)
+                        <li class="has-submenu">
+                            <a href={{ route('admin.category') }}>
+                                <i class="la la-cube"></i>Danh mục
+                            </a>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#">
+                                <i class="la la-ship"></i>Danh sách thành viên
+                            </a>
+                        </li>
+                    @endif
 
                 </ul>
                 <!-- End navigation menu -->

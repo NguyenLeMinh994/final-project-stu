@@ -1,127 +1,19 @@
+<?php
+  include("../resources/views/user/layouts/catchuoi.php");
+?>
+
 @extends('user.layouts.master') 
 @section('title', 'Trang chủ') 
 @section('css')
 @endsection
 
 @section('container')
-<section class="home-slider owl-carousel">
-  <div class="slider-item" style="background-image:url(asset/user/images/images/bg_1.jpg);">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row no-gutters slider-text align-items-md-end align-items-center justify-content-end">
-        <div class="col-md-6 text p-4 ftco-animate">
-          <h1 class="mb-3">Florida 5, Pinecrest, FL</h1>
-          <span class="location d-block mb-3"><i class="icon-my_location"></i> Melbourne, Vic 3004</span>
-          <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic
-            country, in which roasted parts of sentences fly into your mouth.</p>
-          <span class="price">$28,000</span>
-          <a href="#" class="btn-custom p-3 px-4 bg-primary">View Details <span class="icon-plus ml-1"></span></a>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="slider-item" style="background-image:url(asset/user/images/bg_2.jpg);">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row no-gutters slider-text align-items-md-end align-items-center justify-content-end">
-        <div class="col-md-6 text p-4 ftco-animate">
-          <h1 class="mb-3">3015 Grand Avenue, CocoWalk</h1>
-          <span class="location d-block mb-3"><i class="icon-my_location"></i> Melbourne, Vic 3004</span>
-          <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic
-            country, in which roasted parts of sentences fly into your mouth.</p>
-          <span class="price">$28,000</span>
-          <a href="#" class="btn-custom p-3 px-4 bg-primary">View Details <span class="icon-plus ml-1"></span></a>
-        </div>
-      </div>
-    </div>
-  </div>
+@include('user.layouts.slide')
 
-  <div class="slider-item" style="background-image:url(asset/user/images/bg_2.jpg);">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row no-gutters slider-text align-items-md-end align-items-center justify-content-end">
-        <div class="col-md-6 text p-4 ftco-animate">
-          <h1 class="mb-3">3015 Grand Avenue, CocoWalk</h1>
-          <span class="location d-block mb-3"><i class="icon-my_location"></i> Melbourne, Vic 3004</span>
-          <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic
-            country, in which roasted parts of sentences fly into your mouth.</p>
-          <span class="price">$28,000</span>
-          <a href="#" class="btn-custom p-3 px-4 bg-primary">View Details <span class="icon-plus ml-1"></span></a>
-        </div>
-      </div>
-    </div>
-  </div>
+@include('user.layouts.search')
 
-</section>
-
-<section class="ftco-search">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 search-wrap">
-        <h2 class="heading h5 d-flex align-items-center pr-4"><span class="ion-ios-search mr-3"></span> Search Property</h2>
-        <form action="#" method="GET" class="search-property">
-          
-
-          <div class="row">
-            
-            <div class="col-md align-items-end">
-              <div class="form-group">
-                <label for="#">Tìm kiếm</label>
-                <div class="form-field">
-                  <div class="select-wrap">
-                    <div class="icon"><span class="ion-ios-search"></span></div>
-                    <input type="text" class="form-control" id="usr">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md align-items-end">
-              <div class="form-group">
-                <label for="#">Tỉnh/Thành Phố</label>
-                <div class="form-field">
-                  <div class="select-wrap">
-                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                      <select name="" id="idThanhPho" class="form-control">
-                            <option value="">Tỉnh/Thành Phố</option>
-                            @foreach ($tinhThanhPhos as $thanhPho)
-                            
-                              <option value={!! $thanhPho->id !!}>{{$thanhPho->ten}}</option>
-                            @endforeach
-                      </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md align-items-end">
-              <div class="form-group">
-                <label for="#">Quận</label>
-                <div class="form-field">
-                  <div class="select-wrap">
-                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                      <select name="" id="idQuan" class="form-control">
-                        <option value="">Quận</option>
-                            
-                      </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md align-self-end">
-              <div class="form-group">
-                <div class="form-field">
-                  <input type="submit" value="Tìm kiếm" class="form-control btn btn-primary">
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
+</div>
 
 <section class="ftco-section bg-light">
   <div class="container">
@@ -132,7 +24,7 @@
             <div class="icon"><span class="flaticon-pin"></span></div>
           </div>
           <div class="media-body p-2 mt-2">
-            <h3 class="heading mb-3">Find Places Anywhere In The World</h3>
+            <h3 class="heading mb-3">TÌM ĐỊA ĐIỂM</h3>
             <p>A small river named Duden flows by their place and supplies.</p>
           </div>
         </div>
@@ -143,7 +35,7 @@
             <div class="icon"><span class="flaticon-detective"></span></div>
           </div>
           <div class="media-body p-2 mt-2">
-            <h3 class="heading mb-3">We Have Agents With Experience</h3>
+            <h3 class="heading mb-3">THÀNH VIÊN</h3>
             <p>A small river named Duden flows by their place and supplies.</p>
           </div>
         </div>
@@ -154,7 +46,7 @@
             <div class="icon"><span class="flaticon-house"></span></div>
           </div>
           <div class="media-body p-2 mt-2">
-            <h3 class="heading mb-3">Buy &amp; Rent Modern Properties</h3>
+            <h3 class="heading mb-3">MUA &amp; THUÊ BẤT ĐỘNG SẢN</h3>
             <p>A small river named Duden flows by their place and supplies.</p>
           </div>
         </div>
@@ -165,151 +57,8 @@
             <div class="icon"><span class="flaticon-purse"></span></div>
           </div>
           <div class="media-body p-2 mt-2">
-            <h3 class="heading mb-3">Making Money</h3>
+            <h3 class="heading mb-3">CƠ HỘI KIẾM TIỀN</h3>
             <p>A small river named Duden flows by their place and supplies.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="ftco-section ftco-properties">
-  <div class="container">
-    <div class="row justify-content-center mb-5 pb-3">
-      <div class="col-md-7 heading-section text-center ftco-animate">
-        <span class="subheading">Recent Posts</span>
-        <h2 class="mb-4">Recent Properties</h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="properties-slider owl-carousel ftco-animate">
-          <div class="item">
-            <div class="properties">
-              <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/properties-1.jpg);">
-                <div class="icon d-flex justify-content-center align-items-center">
-                  <span class="icon-search2"></span>
-                </div>
-              </a>
-              <div class="text p-3">
-                <span class="status sale">Sale</span>
-                <div class="d-flex">
-                  <div class="one">
-                    <h3><a href="#">North Parchmore Street</a></h3>
-                    <p>Apartment</p>
-                  </div>
-                  <div class="two">
-                    <span class="price">$20,000</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="properties">
-              <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/properties-2.jpg);">
-                <div class="icon d-flex justify-content-center align-items-center">
-                  <span class="icon-search2"></span>
-                </div>
-              </a>
-              <div class="text p-3">
-                <div class="d-flex">
-                  <span class="status rent">Rent</span>
-                  <div class="one">
-                    <h3><a href="#">North Parchmore Street</a></h3>
-                    <p>Apartment</p>
-                  </div>
-                  <div class="two">
-                    <span class="price">$2,000 <small>/ month</small></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="properties">
-              <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/properties-3.jpg);">
-                <div class="icon d-flex justify-content-center align-items-center">
-                  <span class="icon-search2"></span>
-                </div>
-              </a>
-              <div class="text p-3">
-                <span class="status sale">Sale</span>
-                <div class="d-flex">
-                  <div class="one">
-                    <h3><a href="#">North Parchmore Street</a></h3>
-                    <p>Apartment</p>
-                  </div>
-                  <div class="two">
-                    <span class="price">$20,000</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="properties">
-              <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/properties-4.jpg);">
-                <div class="icon d-flex justify-content-center align-items-center">
-                  <span class="icon-search2"></span>
-                </div>
-              </a>
-              <div class="text p-3">
-                <span class="status sale">Sale</span>
-                <div class="d-flex">
-                  <div class="one">
-                    <h3><a href="#">North Parchmore Street</a></h3>
-                    <p>Apartment</p>
-                  </div>
-                  <div class="two">
-                    <span class="price">$20,000</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="properties">
-              <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/properties-5.jpg);">
-                <div class="icon d-flex justify-content-center align-items-center">
-                  <span class="icon-search2"></span>
-                </div>
-              </a>
-              <div class="text p-3">
-                <span class="status rent">Rent</span>
-                <div class="d-flex">
-                  <div class="one">
-                    <h3><a href="#">North Parchmore Street</a></h3>
-                    <p>Apartment</p>
-                  </div>
-                  <div class="two">
-                    <span class="price">$900 <small>/ month</small></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="properties">
-              <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/properties-6.jpg);">
-                <div class="icon d-flex justify-content-center align-items-center">
-                  <span class="icon-search2"></span>
-                </div>
-              </a>
-              <div class="text p-3">
-                <span class="status sale">Sale</span>
-                <div class="d-flex">
-                  <div class="one">
-                    <h3><a href="#">North Parchmore Street</a></h3>
-                    <p>Apartment</p>
-                  </div>
-                  <div class="two">
-                    <span class="price">$20,000</span>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -321,134 +70,54 @@
   <div class="container">
     <div class="row justify-content-center mb-5 pb-3">
       <div class="col-md-7 heading-section text-center ftco-animate">
-        <span class="subheading">Special Offers</span>
-        <h2 class="mb-4">Most Recommended Properties</h2>
+        <h2 class="mb-4">CÁC TIN BẤT ĐỘNG SẢN  {{count($SanPham)}}</h2>
       </div>
     </div>
   </div>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm col-md-6 col-lg ftco-animate">
-        <div class="properties">
-          <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/properties-1.jpg);">
-            <div class="icon d-flex justify-content-center align-items-center">
-              <span class="icon-search2"></span>
+    <div class="container">
+        <div class="row">
+            @foreach($SanPham as $All)
+            <div class="col-md-4 ftco-animate">
+                <div class="properties">
+                    <a href={{ route("detail",["id"=>$All['id']]) }} class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(upload/{{$All->hinhdaidien}});">
+                        <div class="icon d-flex justify-content-center align-items-center">
+                            <span class="icon-search2"></span>
+                        </div>
+                    </a>
+                    <div class="text p-3">
+                        <span class="status sale">{{$All->getLoai->ten}}</span>
+                        <div class="d-flex">
+                            <div class="gia">
+                                <span class="price">{{number_format($All->gia)}} VNĐ</span>
+                            </div>
+                        </div>
+                        <p class="ten3">{{catchuoi($All->ten)}}</p>
+                        <hr>
+                        <p class="bottom-area d-flex">
+                            <span><i class="flaticon-selection"></i>   {{$All->dientich}}  <sup>m2</sup></span>
+                            <span class="ml-auto"><i class="flaticon-bathtub"></i>  {{$All->phongtam}}</span>
+                            <span><i class="flaticon-bed"></i>  {{$All->phongngu}}</span>
+                        </p>
+                    </div>
+                </div>
             </div>
-          </a>
-          <div class="text p-3">
-            <span class="status sale">Sale</span>
-            <div class="d-flex">
-              <div class="one">
-                <h3><a href="#">North Parchmore Street</a></h3>
-                <p>Apartment</p>
-              </div>
-              <div class="two">
-                <span class="price">$20,000</span>
-              </div>
-            </div>
-            <p>Far far away, behind the word mountains, far from the countries</p>
-            <hr>
-            <p class="bottom-area d-flex">
-              <span><i class="flaticon-selection"></i> 250sqft</span>
-              <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-              <span><i class="flaticon-bed"></i> 4</span>
-            </p>
-          </div>
+            @endforeach
         </div>
-      </div>
-      <div class="col-sm col-md-6 col-lg ftco-animate">
-        <div class="properties">
-          <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/properties-2.jpg);">
-            <div class="icon d-flex justify-content-center align-items-center">
-              <span class="icon-search2"></span>
+        <div class="row mt-5">
+            <div class="col text-center">
+                        {{$SanPham->links()}}
             </div>
-          </a>
-          <div class="text p-3">
-            <span class="status sale">Sale</span>
-            <div class="d-flex">
-              <div class="one">
-                <h3><a href="#">North Parchmore Street</a></h3>
-                <p>Apartment</p>
-              </div>
-              <div class="two">
-                <span class="price">$20,000</span>
-              </div>
-            </div>
-            <p>Far far away, behind the word mountains, far from the countries</p>
-            <hr>
-            <p class="bottom-area d-flex">
-              <span><i class="flaticon-selection"></i> 250sqft</span>
-              <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-              <span><i class="flaticon-bed"></i> 4</span>
-            </p>
-          </div>
         </div>
-      </div>
-      <div class="col-sm col-md-6 col-lg ftco-animate">
-        <div class="properties">
-          <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/properties-3.jpg);">
-            <div class="icon d-flex justify-content-center align-items-center">
-              <span class="icon-search2"></span>
-            </div>
-          </a>
-          <div class="text p-3">
-            <span class="status rent">Rent</span>
-            <div class="d-flex">
-              <div class="one">
-                <h3><a href="#">North Parchmore Street</a></h3>
-                <p>Apartment</p>
-              </div>
-              <div class="two">
-                <span class="price">$800 <small>/ month</small></span>
-              </div>
-            </div>
-            <p>Far far away, behind the word mountains, far from the countries</p>
-            <hr>
-            <p class="bottom-area d-flex">
-              <span><i class="flaticon-selection"></i> 250sqft</span>
-              <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-              <span><i class="flaticon-bed"></i> 4</span>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm col-md-6 col-lg ftco-animate">
-        <div class="properties">
-          <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/properties-4.jpg);">
-            <div class="icon d-flex justify-content-center align-items-center">
-              <span class="icon-search2"></span>
-            </div>
-          </a>
-          <div class="text p-3">
-            <span class="status sale">Sale</span>
-            <div class="d-flex">
-              <div class="one">
-                <h3><a href="#">North Parchmore Street</a></h3>
-                <p>Apartment</p>
-              </div>
-              <div class="two">
-                <span class="price">$20,000</span>
-              </div>
-            </div>
-            <p>Far far away, behind the word mountains, far from the countries</p>
-            <hr>
-            <p class="bottom-area d-flex">
-              <span><i class="flaticon-selection"></i> 250sqft</span>
-              <span class="ml-auto"><i class="flaticon-bathtub"></i> 3</span>
-              <span><i class="flaticon-bed"></i> 4</span>
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
 </section>
+
+
 
 <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_1.jpg);">
   <div class="container">
     <div class="row justify-content-center mb-3 pb-3">
       <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-        <h2 class="mb-4">Some fun facts</h2>
+        <h2 class="mb-4">CÓ THỂ BẠN CHƯA BIẾT VỀ CHÚNG TÔI ?</h2>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -458,7 +127,7 @@
             <div class="block-18 text-center">
               <div class="text">
                 <strong class="number" data-number="9000">0</strong>
-                <span>Happy Customers</span>
+                <span>SỰ HÀI LÒNG</span>
               </div>
             </div>
           </div>
@@ -466,7 +135,7 @@
             <div class="block-18 text-center">
               <div class="text">
                 <strong class="number" data-number="10000">0</strong>
-                <span>Properties</span>
+                <span>BẤT ĐỘNG SẢN</span>
               </div>
             </div>
           </div>
@@ -482,7 +151,7 @@
             <div class="block-18 text-center">
               <div class="text">
                 <strong class="number" data-number="100">0</strong>
-                <span>Awards</span>
+                <span>ƯU ĐÃI</span>
               </div>
             </div>
           </div>
@@ -492,95 +161,75 @@
   </div>
 </section>
 
-
 <section class="ftco-section testimony-section bg-light">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8 ftco-animate">
-        <div class="row ftco-animate">
-          <div class="col-md-12">
-            <div class="carousel-testimony owl-carousel ftco-owl">
-              <div class="item">
-                <div class="testimony-wrap py-4 pb-5">
-                  <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                            <i class="icon-quote-left"></i>
-                          </span>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 ftco-animate">
+            <div class="row ftco-animate">
+              <div class="col-md-12">
+                <div class="carousel-testimony owl-carousel ftco-owl">
+                  <div class="item">
+                    <div class="testimony-wrap py-4 pb-5">
+                      <div class="user-img mb-4" style="background-image: url(asset/user/images/Tuan.jpg)">
+                        <span class="quote d-flex align-items-center justify-content-center">
+                          <i class="icon-quote-left"></i>
+                        </span>
+                      </div>
+                      <div class="text text-center">
+                        <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                        <p class="name">TRẦN THANH TUẤN</p>
+                        <span class="position">Quản Lý</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="text text-center">
-                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a
-                      paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                    <p class="name">Roger Scott</p>
-                    <span class="position">Clients</span>
+                  <div class="item">
+                    <div class="testimony-wrap py-4 pb-5">
+                      <div class="user-img mb-4" style="background-image: url(asset/user/images/Minh.jpg)">
+                        <span class="quote d-flex align-items-center justify-content-center">
+                          <i class="icon-quote-left"></i>
+                        </span>
+                      </div>
+                      <div class="text text-center">
+                        <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                        <p class="name">NGUYỄN LÊ MINH</p>
+                        <span class="position">Quản Lý</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4 pb-5">
-                  <div class="user-img mb-4" style="background-image: url(images/person_2.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                            <i class="icon-quote-left"></i>
-                          </span>
+                  <div class="item">
+                    <div class="testimony-wrap py-4 pb-5">
+                      <div class="user-img mb-4" style="background-image: url(asset/user/images/Tuan.jpg)">
+                        <span class="quote d-flex align-items-center justify-content-center">
+                          <i class="icon-quote-left"></i>
+                        </span>
+                      </div>
+                      <div class="text text-center">
+                        <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                        <p class="name">TRẦN THANH TUẤN</p>
+                        <span class="position">Thành Viên</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="text text-center">
-                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a
-                      paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                    <p class="name">Roger Scott</p>
-                    <span class="position">Agent</span>
+                  <div class="item">
+                    <div class="testimony-wrap py-4 pb-5">
+                      <div class="user-img mb-4" style="background-image: url(asset/user/images/Minh.jpg)">
+                        <span class="quote d-flex align-items-center justify-content-center">
+                          <i class="icon-quote-left"></i>
+                        </span>
+                      </div>
+                      <div class="text text-center">
+                        <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                        <p class="name">NGUYỄN LÊ MINH</p>
+                        <span class="position">Thành Viên</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4 pb-5">
-                  <div class="user-img mb-4" style="background-image: url(images/person_3.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                            <i class="icon-quote-left"></i>
-                          </span>
                   </div>
-                  <div class="text text-center">
-                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a
-                      paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                    <p class="name">Roger Scott</p>
-                    <span class="position">Client</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4 pb-5">
-                  <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                            <i class="icon-quote-left"></i>
-                          </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a
-                      paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                    <p class="name">Roger Scott</p>
-                    <span class="position">Client</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4 pb-5">
-                  <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                            <i class="icon-quote-left"></i>
-                          </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a
-                      paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                    <p class="name">Roger Scott</p>
-                    <span class="position">Client</span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </section>
 
 
@@ -653,29 +302,8 @@
   </div>
 </section>
 
-<section class="ftco-section-parallax">
-  <div class="parallax-img d-flex align-items-center">
-    <div class="container">
-      <div class="row d-flex justify-content-center">
-        <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-          <h2>Subcribe to our Newsletter</h2>
-          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.
-            Separated they live in</p>
-          <div class="row d-flex justify-content-center mt-5">
-            <div class="col-md-8">
-              <form action="#" class="subscribe-form">
-                <div class="form-group d-flex">
-                  <input type="text" class="form-control" placeholder="Enter email address">
-                  <input type="submit" value="Subscribe" class="submit px-3">
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+@include('user.layouts.dangky')
+
 @endsection
 
 @section('js')

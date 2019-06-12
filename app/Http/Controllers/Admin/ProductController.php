@@ -8,6 +8,7 @@ use App\SanPham;
 use App\TinhThanhPho;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
@@ -19,7 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $posts = SanPham::all();
+        $posts = SanPham::where('id_user',Auth::user()->id)->get();
         return view('admin.pages.products', ['posts' => $posts]);
     }
 
@@ -125,7 +126,7 @@ class ProductController extends Controller
         $post->id_tp = $request->sltThanhPho;
         $post->id_quan = $request->sltQuan;
         $post->id_loai = $request->sltDanhMuc;
-        $post->id_user = 1;
+        $post->id_user = Auth::user()->id;
         if ($post->save()) {
             return redirect()->back()->with(['success' => 'Thêm thành công']);
         }
@@ -257,7 +258,7 @@ class ProductController extends Controller
         $post->id_tp = $request->sltThanhPho;
         $post->id_quan = $request->sltQuan;
         $post->id_loai = $request->sltDanhMuc;
-        $post->id_user = 1;
+        $post->id_user = Auth::user()->id;
         if ($post->save()) {
             return redirect()->back()->with(['success' => 'Cập nhật thành công']);
         }

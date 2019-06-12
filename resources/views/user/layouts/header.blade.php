@@ -10,7 +10,7 @@
                 </p>
             </div>
             <div class="col d-flex justify-content-end">
-                <p class="num"><span class="icon-phone"></span> + 1700 12345 6789</p>
+                <p class="num"><span class="icon-phone"></span> 084.786.000.286 || 084.909.331.312</p>
             </div>
         </div>
     </div>
