@@ -32,9 +32,10 @@ Route::get('/admin-temp', function(){
 //Đăng ký End
 // Nguyễn Lê Minh End
 
-//Admin - User Begin 
+//Admin - User Begin
 // Nguyễn Lê Minh Begin
-Route::prefix('user')->group(function () {
+// middleware('checkLogin')->
+Route::prefix('user')->middleware('checkLogin')->group(function () {
 
     Route::get('/', 'Admin\UserController@index')->name('user.home');
 
