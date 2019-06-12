@@ -11,6 +11,11 @@ class DanhSachHinh extends Model
 
     public function getSanPham()
     {
-        return $this->belongsTo('App\SanPham','id_sanpham');
+        return $this->belongsTo('App\SanPham','id_sanpham','id');
+    }
+
+    public function getHinhs()
+    {
+        return $this->hasMany('App\DanhSachHinh','id_sanpham','id');
     }
 }

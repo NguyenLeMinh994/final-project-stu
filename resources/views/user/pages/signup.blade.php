@@ -68,10 +68,10 @@
                                 <input type="submit" value="Đăng ký" class="btn  btn-primary py-3 px-5">
                             </div>
                             <div class="col-md-6">
-                                    <a href="/users/google-oauth/" class="btn btn-sm btn-social btn-google py-3">
-                                        <i class="fab fa-google py-3" style="line-height: 19px;"></i>
-                                        Đăng ký bằng google
-                                    </a>
+                                <a href={{ url('/auth/google/') }} class="btn btn-sm btn-social btn-google py-3">
+                                    <i class="fab fa-google py-3" style="line-height: 19px;"></i>
+                                    Đăng ký bằng google
+                                </a>
                             </div>
                         </div>
                     </div>

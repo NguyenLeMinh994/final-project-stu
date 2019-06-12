@@ -8,40 +8,52 @@ use App\User;
 use App\Loai;
 use App\TinhThanhPho;
 use App\Quan;
+use App\Silde;
+use App\SanPham;
+use App\DanhSachHinh;
 
 class PagesController extends Controller
 {
+    // Nguyễn Lê Minh Begin
     public function __construct ()
     {
-        // danh cho menu
-        $loaiOfMenus=Loai::where('parent_id', 0)->get();
+        // Loại nhà
+        $loaiOfMenus=Loai::where('parent_id', null)->get();
         view()->share('loaiOfMenus',$loaiOfMenus);
+
+        //Trần Thanh Tuấn
+        $Silde = Silde::all();
+        view()->share('Silde',$Silde);
+        $SanPham=SanPham::where('trangthai',1)->paginate(6);
+        view()->share('SanPham',$SanPham);
+        //$SanPham_new = SanPham::where('NewPosts',1)->get();
+        //view()->share('SanPham_new',$SanPham_new);
+        //$SanPham_highlights = SanPham::where('Highlights',1)->get();
+        //view()->share('SanPham_highlights',$SanPham_highlights);
+        $tinhThanhPhos=TinhThanhPho::all();
+        view()->share('tinhThanhPhos',$tinhThanhPhos);       
     }
 
     //get trang chủ
     public function getIndex()
     {
-
-        $tinhThanhPhos=TinhThanhPho::all();
-       /*  echo"<pre>";
-        print_r($tinhThanhPhos);
-
-        exit; */
-        // dd($tinhThanhPhos);
-
-        return view('user.pages.index',['tinhThanhPhos'=>$tinhThanhPhos]);
+        return view('user.pages.index');
     }
 
-    //get trang chi tiết    
-    public function getDetail()
+    //get trang chi tiết  //Trần Thanh Tuấn  
+    public function getDetail($id)
     {
-        return view('user.pages.detail');
+        $getDetail=SanPham::find($id);
+        $sp_khac = sanpham::where('id_loai',$getDetail->id_loai)->paginate(6);
+        return view('user.pages.detail',['getDetail'=>$getDetail, 'sp_khac'=>$sp_khac]);
     }
     
-    //get danh sách   
-    public function getList()
+    //get danh sách //Trần Thanh Tuấn
+    public function getList($id)
     {
-        return view('user.pages.list');
+        $listLoai=Loai::find($id);
+        $listSanPham=SanPham::where('id_loai',$id)->paginate(6);
+        return view('user.pages.list',['listLoai'=>$listLoai, 'listSanPham'=>$listSanPham]);
     }
 
     // trang dang ký
@@ -100,18 +112,31 @@ class PagesController extends Controller
 
         }
     }
-    
-    // Ajax
-    public function getQuansByAjax($idThanhPho)
+
+    // Nguyễn Lê Minh End
+
+    //Trần Thanh Tuấn
+    //get trang liên hệ 
+    public function contact()
     {
-        if($idThanhPho<10)
-        {
-            $idThanhPho="0".$idThanhPho;
-        }
-        $quansOfThanhPho=Quan::where('id_tinh',$idThanhPho)->get();
-        
-        return response()->json($quansOfThanhPho);
+        return view('user.pages.contact');
     }
+
+    public function about()
+    {
+        return view('user.pages.about');
+    }
+
+    public function timkiem(Request $req)
+    {
+        $pruduct = SanPham::where('ten','like','%'.$req->key.'%')
+                            ->orWhere('gia',$req->key)
+                            ->get();
+        return view('user.pages.timkiem',compact('pruduct'));
+    }
+
+    //Trần Thanh Tuấn END
+
 
     
 }

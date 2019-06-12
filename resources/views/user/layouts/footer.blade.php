@@ -14,7 +14,7 @@
         </div>
         <div class="col-md">
           <div class="ftco-footer-widget mb-4 ml-md-5">
-            <h2 class="ftco-heading-2">Buy</h2>
+            <h2 class="ftco-heading-2">NHÀ BÁN</h2>
             <ul class="list-unstyled">
               <li><a href="#" class="py-2 d-block">Home For Sale</a></li>
               <li><a href="#" class="py-2 d-block">Open Houses</a></li>
@@ -26,7 +26,7 @@
         </div>
         <div class="col-md">
            <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Sell</h2>
+            <h2 class="ftco-heading-2">NHÀ CHO THUÊ</h2>
             <ul class="list-unstyled">
               <li><a href="#" class="py-2 d-block">Sell Your Home</a></li>
               <li><a href="#" class="py-2 d-block">Get A Home Valuation</a></li>
@@ -38,12 +38,12 @@
         </div>
         <div class="col-md">
           <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Have a Questions?</h2>
+              <h2 class="ftco-heading-2">LIÊN HỆ</h2>
               <div class="block-23 mb-3">
                 <ul>
-                  <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                  <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                  <li><span class="icon icon-map-marker"></span><span class="text">180 Cao Lổ, Phường 4, Quận 8, TP.HCM</span></li>
+                  <li><a href="#"><span class="icon icon-phone"></span><span class="text">084.786.000.286  084.909.331.312</span></a></li>
+                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">stranthanhtuans@gmail.com</span></a></li>
                 </ul>
               </div>
           </div>
