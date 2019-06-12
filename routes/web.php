@@ -55,8 +55,8 @@ Route::prefix('user')->group(function () {
 
 
 });
-
-Route::prefix('admin')->group(function () {
+// ->middleware('checkLoginForAdmin')
+Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
 
     Route::get('/tao-danh-muc', 'Admin\CategoryController@create')->name('admin.createCategory');
     Route::post('/tao-danh-muc', 'Admin\CategoryController@store')->name('admin.postCreateCategory');
@@ -76,6 +76,9 @@ Route::prefix('admin')->group(function () {
 Route::get('/auth/{provider}', 'Admin\LoginController@redirectToProvider');
 Route::get('/auth/{provide}/callback', 'Admin\LoginController@handleProviderCallback');
 // 11/6/2019 End
+
+// Nguyễn Lê Minh End
+//Admin - User End
 
 // Nguyễn Lê Minh End
 //Admin - User End

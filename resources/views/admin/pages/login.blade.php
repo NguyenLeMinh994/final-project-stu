@@ -34,7 +34,7 @@
                                 @foreach ($errors->all() as $err)
                                 <div class="alert alert-danger alert-dismissible mb-4 mt-3">
                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                    <br>
+                                    {{$err}}<br>
                                 </div>
                                 @endforeach
                                 @else
@@ -53,7 +53,7 @@
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label for="password"> </label>
+                                    <label for="password">  </label>
                                     <input class="form-control" type="password" required="" id="password"
                                         name="txtPassword" placeholder="Nhập password">
                                 </div>

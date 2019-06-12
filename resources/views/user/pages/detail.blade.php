@@ -136,7 +136,7 @@
 @include('user.layouts.dangky')
 
 @endsection
- 
+
 @section('js')
     <script>
       function initMap() {
