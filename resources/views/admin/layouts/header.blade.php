@@ -47,22 +47,20 @@
                         </div>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a href={{ route('user.myAccount', ['id'=>Auth::user()->id]) }}
+                            class="dropdown-item notify-item">
                             <i class="fe-user"></i>
-                            <span>My Account</span>
+                            <span>Tài khoản</span>
                         </a>
 
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <i class="fe-settings"></i>
-                            <span>Settings</span>
-                        </a>
 
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        @if (empty($user->provider) && empty($user->provider_id))
+                        <a href="{{ route('user.changePassword', ['id'=>Auth::user()->id]) }}" class="dropdown-item notify-item">
                             <i class="fe-lock"></i>
-                            <span>Lock Screen</span>
+                            <span>Đổi mật khẩu</span>
                         </a>
+                        @endif
+                       
 
                         <div class="dropdown-divider"></div>
 
@@ -114,16 +112,16 @@
                         </a>
                     </li>
                     @if (Auth::user()->quyen==0)
-                        <li class="has-submenu">
-                            <a href={{ route('admin.category') }}>
-                                <i class="la la-cube"></i>Danh mục
-                            </a>
-                        </li>
-                        <li class="has-submenu">
-                            <a href="#">
-                                <i class="la la-ship"></i>Danh sách thành viên
-                            </a>
-                        </li>
+                    <li class="has-submenu">
+                        <a href={{ route('admin.category') }}>
+                            <i class="la la-cube"></i>Danh mục
+                        </a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#">
+                            <i class="la la-ship"></i>Danh sách thành viên
+                        </a>
+                    </li>
                     @endif
 
                 </ul>

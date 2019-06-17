@@ -30,22 +30,21 @@
                                 <a href="index.html">
                                     <span><img src="asset/admin/images/logo-light.png" alt="" height="18"></span>
                                 </a>
-                                @if(count($errors)>0)
+                                <p class="text-muted mb-4 mt-3"></p>
+                            </div>
+
+                            <h5 class="auth-title">Đăng Nhập</h5>
+                            @if(count($errors)>0)
                                 @foreach ($errors->all() as $err)
                                 <div class="alert alert-danger alert-dismissible mb-4 mt-3">
                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                                     {{$err}}<br>
                                 </div>
                                 @endforeach
-                                @else
-                                <p class="text-muted mb-4 mt-3"></p>
-                                @endif
-                            </div>
+                            @endif
 
-                            <h5 class="auth-title">Đăng Nhập</h5>
-
-                            <form action="#">
-
+                            <form action={{ route('postLogin') }} method="POST">
+                                @csrf
                                 <div class="form-group mb-3">
                                     <label for="emailaddress">Email</label>
                                     <input class="form-control" type="email" id="emailaddress" name="txtEmail"

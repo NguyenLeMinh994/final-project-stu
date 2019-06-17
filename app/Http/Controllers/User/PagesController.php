@@ -73,7 +73,10 @@ class PagesController extends Controller
         $rules=[
             'txtFullName'=>'required',
             'txtEmail'=>'required|email|unique:users,email',
+            
             'txtPhone'=>'required|numeric|digits:10',
+            'txtAddress'=>'required',
+
             'txtPassword'=>'required',
             'txtPasswordConfirmation'=>'same:txtPassword',
         ];
@@ -87,6 +90,8 @@ class PagesController extends Controller
             'txtPhone.required'=>'Vui lòng nhập số điện thoại',
             'txtPhone.numeric'=>'Vui lòng nhập số',
             'txtPhone.digits'=>'Số điện thoại tối đa 10 số phải là số nguyên',
+
+            'txtAddress.required'=>'Vui lòng nhập địa chỉ',
 
             'txtPassword.required'=>'Vui lòng nhập mật khẩu',
             'txtPasswordConfirmation.same'=>'Mật khẩu không khớp ',

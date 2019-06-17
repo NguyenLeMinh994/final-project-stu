@@ -56,7 +56,7 @@
                             {{ session()->get('success') }}
                         </div>
                         @endif
-                        <form action={{ route('user.post.myAccount',['id'=>$user->id]) }} method="POST">
+                        <form action={{ route('user.post.changePassword',['id'=>$user->id]) }} method="POST">
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-8">
@@ -65,25 +65,28 @@
                                         placeholder="Email" value="{{$user->email}}" disabled>
                                 </div>
                             </div>
+                            
                             <div class="form-row">
                                 <div class="form-group col-md-8">
-                                    <label for="inputAddress" class="col-form-label">Họ tên</label>
-                                    <input type="text" class="form-control"  name="txtFullName"
-                                    value="{{ $user->hoten }}" placeholder="Họ tên" >
+                                    <label for="inputAddress" class="col-form-label">Mật khẩu củ</label>
+                                    <input type="password" class="form-control" id="inputAddress" name="txtCurrentPassword"
+                                        placeholder="Điện thoại">
                                 </div>
                             </div>
+
                             <div class="form-row">
                                 <div class="form-group col-md-8">
-                                    <label for="inputAddress" class="col-form-label">Điện thoại</label>
-                                    <input type="text" class="form-control" id="inputAddress" name="txtPhone"
-                                        placeholder="Điện thoại" value="{{$user->dienthoai}}">
+                                    <label for="inputAddress" class="col-form-label">Mật khẩu mới</label>
+                                    <input type="password" class="form-control" id="inputAddress" name="txtPassword"
+                                        placeholder="Địa chỉ">
                                 </div>
                             </div>
+
                             <div class="form-row">
                                 <div class="form-group col-md-8">
-                                    <label for="inputAddress" class="col-form-label">Địa chỉ</label>
-                                    <input type="text" class="form-control" id="inputAddress" name="txtAddress"
-                                        placeholder="Địa chỉ" value="{{$user->diachi}}">
+                                    <label for="inputAddress" class="col-form-label">Xác nhận mật khẩu</label>
+                                    <input type="password" class="form-control" id="inputAddress" name="txtPasswordConfirmation"
+                                        placeholder="Địa chỉ">
                                 </div>
                             </div>
 

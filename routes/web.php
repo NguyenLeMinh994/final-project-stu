@@ -26,8 +26,10 @@ Route::post('/dang-ky', 'User\PagesController@postSignUp')->name('postSignup');
 Route::get('/dang-nhap', 'Admin\LoginController@getLogin')->name('login');
 Route::post('/dang-nhap', 'Admin\LoginController@postLogin')->name('postLogin');
 Route::get('/dang-xuat', 'Admin\LoginController@getLogout')->name('logout');
-Route::get('/admin-temp', function(){
-    return view('admin.layouts.master');
+
+Route::get('/admin-temp', function () {
+    $a = App\User::where('id', 1)->first();
+    return $a->dienthoai;
 });
 //Đăng ký End
 // Nguyễn Lê Minh End
@@ -39,25 +41,38 @@ Route::prefix('user')->middleware('checkLogin')->group(function () {
 
     Route::get('/', 'Admin\UserController@index')->name('user.home');
 
+    Route::get('/tai-khoan/{id}', 'Admin\LoginController@myAccountPage')->name('user.myAccount');
+    Route::post('/tai-khoan/{id}', 'Admin\LoginController@updateAccountPage')->name('user.post.myAccount');
+
+    Route::get('/doi-mat-khau/{id}', 'Admin\LoginController@changePassword')->name('user.changePassword');
+    Route::post('/doi-mat-khau/{id}', 'Admin\LoginController@updateNewPassword')->name('user.post.changePassword');
+
     Route::get('/bai-dang', 'Admin\ProductController@index')->name('user.post');
 
     Route::get('/tao-bai-dang', 'Admin\ProductController@create')->name('user.createPost');
     Route::post('/tao-bai-dang', 'Admin\ProductController@store')->name('user.postCreatePost');
-     // 10/6/2019 Begin
-     Route::get('/cap-nhat-bai-dang/{id}', 'Admin\ProductController@edit')->name('user.updatePost');
-     Route::post('/cap-nhat-bai-dang/{id}', 'Admin\ProductController@update')->name('user.postUpdatePost');
- 
-     // 10/6/2019 End
+
+    // 10/6/2019 Begin
+    Route::get('/cap-nhat-bai-dang/{id}', 'Admin\ProductController@edit')->name('user.updatePost');
+    Route::post('/cap-nhat-bai-dang/{id}', 'Admin\ProductController@update')->name('user.postUpdatePost');
+
+    // 10/6/2019 End
 
     //  Ajax
     Route::get('/ajax/danh-sach-quan/{id}', 'Admin\ProductController@getQuansByAjax');
     Route::get('/ajax/xoa-bai-dang/{id}', 'Admin\ProductController@deletePostByAjax');
     Route::get('/ajax/cap-nhat-trang-thai-bai-dang/{id}', 'Admin\ProductController@updateStatusByAjax');
-
-
 });
 // ->middleware('checkLoginForAdmin')
 Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
+
+    Route::get('/', 'Admin\UserController@index')->name('admin.home');
+
+    Route::get('/tai-khoan/{id}', 'Admin\LoginController@myAccountPage')->name('admin.myAccount');
+    Route::post('/tai-khoan/{id}', 'Admin\LoginController@updateAccountPage')->name('admin.post.myAccount');
+
+
+    Route::get('/danh-muc', 'Admin\CategoryController@index')->name('admin.category');
 
     Route::get('/tao-danh-muc', 'Admin\CategoryController@create')->name('admin.createCategory');
     Route::post('/tao-danh-muc', 'Admin\CategoryController@store')->name('admin.postCreateCategory');
@@ -66,12 +81,8 @@ Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
     Route::post('/cap-nhat-danh-muc/{id}', 'Admin\CategoryController@update')->name('admin.postUpdateCategory');
 
     Route::get('/xoa-danh-muc/{id}', 'Admin\CategoryController@ajaxDestroy')->name('admin.ajaxDestroy');
-    
+
     Route::get('/cap-nhat-trang-thai-danh-muc/{id}', 'Admin\CategoryController@ajaxCapNhatTrangThai')->name('admin.ajaxCapNhatTrangThai');
-
-    Route::get('/danh-muc', 'Admin\CategoryController@index')->name('admin.category');
-
-
 });
 // 11/6/2019 Begin
 Route::get('/auth/{provider}', 'Admin\LoginController@redirectToProvider');
@@ -96,11 +107,10 @@ Route::get('/ajax/danh-sach-quan/{id}', 'User\AjaxController@getQuansByAjax');
 // Trần Thanh Tuấn
 Route::get('/chi-tiet/{id}', 'User\PagesController@getDetail')->name('detail');
 Route::get('/danh-sach/{id}', 'User\PagesController@getList')->name('list');
-Route::get('/contact','User\PagesController@contact')->name('contact');
-Route::get('/about','User\PagesController@about')->name('about');
-Route::get('timkiem',[
-	'as'=>'/timkiem',
-	'uses'=>'User\PagesController@timkiem'
+Route::get('/contact', 'User\PagesController@contact')->name('contact');
+Route::get('/about', 'User\PagesController@about')->name('about');
+Route::get('timkiem', [
+    'as' => '/timkiem',
+    'uses' => 'User\PagesController@timkiem'
 ]);
 //Trần Thanh Tuấn END
-
