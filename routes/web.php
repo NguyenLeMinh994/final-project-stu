@@ -25,7 +25,7 @@ Route::post('/dang-ky', 'User\PagesController@postSignUp')->name('postSignup');
 
 Route::get('/dang-nhap', 'Admin\LoginController@getLogin')->name('login');
 Route::post('/dang-nhap', 'Admin\LoginController@postLogin')->name('postLogin');
-Route::get('/dang-xuat', 'Admin\LoginController@getLogout')->name('logout');
+Route::get('/dang-xuat', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/admin-temp', function () {
     $a = App\User::where('id', 1)->first();
@@ -63,6 +63,7 @@ Route::prefix('user')->middleware('checkLogin')->group(function () {
     Route::get('/ajax/xoa-bai-dang/{id}', 'Admin\ProductController@deletePostByAjax');
     Route::get('/ajax/cap-nhat-trang-thai-bai-dang/{id}', 'Admin\ProductController@updateStatusByAjax');
 });
+
 // ->middleware('checkLoginForAdmin')
 Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
 
@@ -71,6 +72,7 @@ Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
     Route::get('/tai-khoan/{id}', 'Admin\LoginController@myAccountPage')->name('admin.myAccount');
     Route::post('/tai-khoan/{id}', 'Admin\LoginController@updateAccountPage')->name('admin.post.myAccount');
 
+    Route::get('/bai-dang', 'Admin\ProductController@getPostList')->name('admin.postList');
 
     Route::get('/danh-muc', 'Admin\CategoryController@index')->name('admin.category');
 
@@ -82,7 +84,11 @@ Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
 
     Route::get('/xoa-danh-muc/{id}', 'Admin\CategoryController@ajaxDestroy')->name('admin.ajaxDestroy');
 
-    Route::get('/cap-nhat-trang-thai-danh-muc/{id}', 'Admin\CategoryController@ajaxCapNhatTrangThai')->name('admin.ajaxCapNhatTrangThai');
+    Route::get('/doi-mat-khau/{id}', 'Admin\LoginController@changePassword')->name('admin.changePassword');
+    Route::post('/doi-mat-khau/{id}', 'Admin\LoginController@updateNewPassword')->name('admin.post.changePassword');
+
+    // ajax
+    Route::get('/ajax/cap-nhat-trang-thai-danh-muc/{id}', 'Admin\CategoryController@ajaxCapNhatTrangThai')->name('admin.ajaxCapNhatTrangThai');
 });
 // 11/6/2019 Begin
 Route::get('/auth/{provider}', 'Admin\LoginController@redirectToProvider');

@@ -66,7 +66,7 @@
                                         <img src="upload/{{ $post->hinhdaidien }}" alt={{ $post->ten }} height="70">
                                     </td>
                                     <td>
-                                        {{ $post->ten }}
+                                        {{ str_limit($post->ten, $limit = 20, $end = ' ...') }}
                                     </td>
                                     <td>
                                         {{ date('d-m-Y', strtotime($post->created_at)) }}

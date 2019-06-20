@@ -276,6 +276,12 @@ class ProductController extends Controller
         //
     }
 
+
+    public function getPostList(){
+        $posts = SanPham::all();
+        return view('admin.pages.products', ['posts' => $posts]);
+    }
+
     public function getQuansByAjax($idThanhPho)
     {
         $quansOfThanhPho = Quan::where('id_tp', $idThanhPho)->get();

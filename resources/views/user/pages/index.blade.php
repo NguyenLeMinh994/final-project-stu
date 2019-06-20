@@ -2,8 +2,8 @@
   include("../resources/views/user/layouts/catchuoi.php");
 ?>
 
-@extends('user.layouts.master') 
-@section('title', 'Trang chủ') 
+@extends('user.layouts.master')
+@section('title', 'Trang chủ')
 @section('css')
 @endsection
 
@@ -13,9 +13,9 @@
 
 @include('user.layouts.search')
 
-  
+
 </div>
- 
+
 <section class="ftco-section bg-light">
   <div class="container">
     <div class="row d-flex">
@@ -71,45 +71,47 @@
   <div class="container">
     <div class="row justify-content-center mb-5 pb-3">
       <div class="col-md-7 heading-section text-center ftco-animate">
-        <h2 class="mb-4">CÁC TIN BẤT ĐỘNG SẢN  {{count($SanPham)}}</h2>
+        <h2 class="mb-4">CÁC TIN BẤT ĐỘNG SẢN</h2>
       </div>
     </div>
   </div>
-    <div class="container">
-        <div class="row">
-            @foreach($SanPham as $All)
-            <div class="col-md-4 ftco-animate">
-                <div class="properties">
-                    <a href={{ route("detail",["id"=>$All['id']]) }} class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(upload/{{$All->hinhdaidien}});">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <span class="status sale">{{$All->getLoai->ten}}</span>
-                        <div class="d-flex">
-                            <div class="gia">
-                                <span class="price">{{number_format($All->gia)}} VNĐ</span>
-                            </div>
-                        </div>
-                        <p class="ten3">{{catchuoi($All->ten)}}</p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="flaticon-selection"></i>   {{$All->dientich}}  <sup>m2</sup></span>
-                            <span class="ml-auto"><i class="flaticon-bathtub"></i>  {{$All->phongtam}}</span>
-                            <span><i class="flaticon-bed"></i>  {{$All->phongngu}}</span>
-                        </p>
-                    </div>
-                </div>
+  <div class="container">
+    <div class="row">
+      @foreach($SanPham as $All)
+      <div class="col-md-4 ftco-animate">
+        <div class="properties">
+          <a href={{ route("detail",["id"=>$All['id']]) }}
+            class="img img-2 d-flex justify-content-center align-items-center"
+            style="background-image: url(upload/{{$All->hinhdaidien}});">
+            <div class="icon d-flex justify-content-center align-items-center">
+              <span class="icon-search2"></span>
             </div>
-            @endforeach
-        </div>
-        <div class="row mt-5">
-            <div class="col text-center">
-                        {{$SanPham->links()}}
+          </a>
+          <div class="text p-3">
+            <span class="status sale">{{$All->getLoai->ten}}</span>
+            <div class="d-flex">
+              <div class="gia">
+                <span class="price">{{number_format($All->gia)}} VNĐ</span>
+              </div>
             </div>
+            <p class="ten3">{{catchuoi($All->ten)}}</p>
+            <hr>
+            <p class="bottom-area d-flex">
+              <span><i class="flaticon-selection"></i> {{$All->dientich}} <sup>m2</sup></span>
+              <span class="ml-auto"><i class="flaticon-bathtub"></i> {{$All->phongtam}}</span>
+              <span><i class="flaticon-bed"></i> {{$All->phongngu}}</span>
+            </p>
+          </div>
         </div>
+      </div>
+      @endforeach
     </div>
+    <div class="row mt-5">
+      <div class="col text-center">
+        {{$SanPham->links()}}
+      </div>
+    </div>
+  </div>
 </section>
 
 
@@ -163,74 +165,82 @@
 </section>
 
 <section class="ftco-section testimony-section bg-light">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-8 ftco-animate">
-            <div class="row ftco-animate">
-              <div class="col-md-12">
-                <div class="carousel-testimony owl-carousel ftco-owl">
-                  <div class="item">
-                    <div class="testimony-wrap py-4 pb-5">
-                      <div class="user-img mb-4" style="background-image: url(asset/user/images/Tuan.jpg)">
-                        <span class="quote d-flex align-items-center justify-content-center">
-                          <i class="icon-quote-left"></i>
-                        </span>
-                      </div>
-                      <div class="text text-center">
-                        <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                        <p class="name">TRẦN THANH TUẤN</p>
-                        <span class="position">Quản Lý</span>
-                      </div>
-                    </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 ftco-animate">
+        <div class="row ftco-animate">
+          <div class="col-md-12">
+            <div class="carousel-testimony owl-carousel ftco-owl">
+              <div class="item">
+                <div class="testimony-wrap py-4 pb-5">
+                  <div class="user-img mb-4" style="background-image: url(asset/user/images/Tuan.jpg)">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
                   </div>
-                  <div class="item">
-                    <div class="testimony-wrap py-4 pb-5">
-                      <div class="user-img mb-4" style="background-image: url(asset/user/images/Minh.jpg)">
-                        <span class="quote d-flex align-items-center justify-content-center">
-                          <i class="icon-quote-left"></i>
-                        </span>
-                      </div>
-                      <div class="text text-center">
-                        <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                        <p class="name">NGUYỄN LÊ MINH</p>
-                        <span class="position">Quản Lý</span>
-                      </div>
-                    </div>
+                  <div class="text text-center">
+                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary
+                      regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your
+                      mouth.</p>
+                    <p class="name">TRẦN THANH TUẤN</p>
+                    <span class="position">Quản Lý</span>
                   </div>
-                  <div class="item">
-                    <div class="testimony-wrap py-4 pb-5">
-                      <div class="user-img mb-4" style="background-image: url(asset/user/images/Tuan.jpg)">
-                        <span class="quote d-flex align-items-center justify-content-center">
-                          <i class="icon-quote-left"></i>
-                        </span>
-                      </div>
-                      <div class="text text-center">
-                        <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                        <p class="name">TRẦN THANH TUẤN</p>
-                        <span class="position">Thành Viên</span>
-                      </div>
-                    </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap py-4 pb-5">
+                  <div class="user-img mb-4" style="background-image: url(asset/user/images/Minh.jpg)">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
                   </div>
-                  <div class="item">
-                    <div class="testimony-wrap py-4 pb-5">
-                      <div class="user-img mb-4" style="background-image: url(asset/user/images/Minh.jpg)">
-                        <span class="quote d-flex align-items-center justify-content-center">
-                          <i class="icon-quote-left"></i>
-                        </span>
-                      </div>
-                      <div class="text text-center">
-                        <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                        <p class="name">NGUYỄN LÊ MINH</p>
-                        <span class="position">Thành Viên</span>
-                      </div>
-                    </div>
+                  <div class="text text-center">
+                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary
+                      regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your
+                      mouth.</p>
+                    <p class="name">NGUYỄN LÊ MINH</p>
+                    <span class="position">Quản Lý</span>
                   </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap py-4 pb-5">
+                  <div class="user-img mb-4" style="background-image: url(asset/user/images/Tuan.jpg)">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
                   </div>
+                  <div class="text text-center">
+                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary
+                      regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your
+                      mouth.</p>
+                    <p class="name">TRẦN THANH TUẤN</p>
+                    <span class="position">Thành Viên</span>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap py-4 pb-5">
+                  <div class="user-img mb-4" style="background-image: url(asset/user/images/Minh.jpg)">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
+                  </div>
+                  <div class="text text-center">
+                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary
+                      regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your
+                      mouth.</p>
+                    <p class="name">NGUYỄN LÊ MINH</p>
+                    <span class="position">Thành Viên</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
 </section>
 
 
@@ -246,9 +256,10 @@
       <div class="col-md-3 d-flex ftco-animate">
         <div class="blog-entry align-self-stretch">
           <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
-            </a>
+          </a>
           <div class="text mt-3 d-block">
-            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a>
+            </h3>
             <div class="meta mb-3">
               <div><a href="#">Dec 6, 2018</a></div>
               <div><a href="#">Admin</a></div>
@@ -260,9 +271,10 @@
       <div class="col-md-3 d-flex ftco-animate">
         <div class="blog-entry align-self-stretch">
           <a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
-            </a>
+          </a>
           <div class="text mt-3">
-            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a>
+            </h3>
             <div class="meta mb-3">
               <div><a href="#">Dec 6, 2018</a></div>
               <div><a href="#">Admin</a></div>
@@ -274,9 +286,10 @@
       <div class="col-md-3 d-flex ftco-animate">
         <div class="blog-entry align-self-stretch">
           <a href="blog-single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
-            </a>
+          </a>
           <div class="text mt-3">
-            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a>
+            </h3>
             <div class="meta mb-3">
               <div><a href="#">Dec 6, 2018</a></div>
               <div><a href="#">Admin</a></div>
@@ -288,9 +301,10 @@
       <div class="col-md-3 d-flex ftco-animate">
         <div class="blog-entry align-self-stretch">
           <a href="blog-single.html" class="block-20" style="background-image: url('images/image_4.jpg');">
-            </a>
+          </a>
           <div class="text mt-3">
-            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a>
+            </h3>
             <div class="meta mb-3">
               <div><a href="#">Dec 6, 2018</a></div>
               <div><a href="#">Admin</a></div>
@@ -308,8 +322,8 @@
 @endsection
 
 @section('js')
-<script >
-$(document).ready(function () {
+<script>
+  $(document).ready(function () {
 
   $('#idThanhPho').change(function (e) { 
     e.preventDefault();

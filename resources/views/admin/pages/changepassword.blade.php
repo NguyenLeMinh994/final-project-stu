@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Tài khoản')
+@section('title', 'Mật khẩu')
 
 @section('css')
 <link href="asset/admin/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
@@ -42,7 +42,7 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Form tài khoản</h4>
+                        <h4 class="header-title">Form mật khẩu</h4>
                         @if (count($errors)>0)
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -56,7 +56,9 @@
                             {{ session()->get('success') }}
                         </div>
                         @endif
-                        <form action={{ route('user.post.changePassword',['id'=>$user->id]) }} method="POST">
+                        <form
+                            action={{ route($user->quyen!=0?'user.post.changePassword':'admin.post.changePassword',['id'=>$user->id]) }}
+                            method="POST">
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-8">
@@ -65,12 +67,12 @@
                                         placeholder="Email" value="{{$user->email}}" disabled>
                                 </div>
                             </div>
-                            
+
                             <div class="form-row">
                                 <div class="form-group col-md-8">
                                     <label for="inputAddress" class="col-form-label">Mật khẩu củ</label>
-                                    <input type="password" class="form-control" id="inputAddress" name="txtCurrentPassword"
-                                        placeholder="Điện thoại">
+                                    <input type="password" class="form-control" id="inputAddress"
+                                        name="txtCurrentPassword" placeholder="Mật khẩu củ">
                                 </div>
                             </div>
 
@@ -78,20 +80,20 @@
                                 <div class="form-group col-md-8">
                                     <label for="inputAddress" class="col-form-label">Mật khẩu mới</label>
                                     <input type="password" class="form-control" id="inputAddress" name="txtPassword"
-                                        placeholder="Địa chỉ">
+                                        placeholder="Mật khẩu mới">
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-8">
                                     <label for="inputAddress" class="col-form-label">Xác nhận mật khẩu</label>
-                                    <input type="password" class="form-control" id="inputAddress" name="txtPasswordConfirmation"
-                                        placeholder="Địa chỉ">
+                                    <input type="password" class="form-control" id="inputAddress"
+                                        name="txtPasswordConfirmation" placeholder="Xác nhận mật khẩu">
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary waves-effect waves-light">Lưu</button>
-                            
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Đổi mật khẩu</button>
+
 
                         </form>
 

@@ -18,18 +18,7 @@
                 </li>
 
 
-                <li class="dropdown notification-list">
 
-                    <div class="dropdown-menu dropdown-menu-right dropdown-lg">
-                        <!-- All-->
-                        <a href="javascript:void(0);"
-                            class="dropdown-item text-center text-primary notify-item notify-all">
-                            View all
-                            <i class="fi-arrow-right"></i>
-                        </a>
-
-                    </div>
-                </li>
 
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
@@ -47,7 +36,7 @@
                         </div>
 
                         <!-- item-->
-                        <a href={{ route('user.myAccount', ['id'=>Auth::user()->id]) }}
+                        <a href="{{ route(Auth::user()->quyen!=0?'user.myAccount':'admin.myAccount', ['id'=>Auth::user()->id]) }}"
                             class="dropdown-item notify-item">
                             <i class="fe-user"></i>
                             <span>Tài khoản</span>
@@ -55,12 +44,13 @@
 
 
                         @if (empty($user->provider) && empty($user->provider_id))
-                        <a href="{{ route('user.changePassword', ['id'=>Auth::user()->id]) }}" class="dropdown-item notify-item">
+                        <a href="{{ route(Auth::user()->quyen!=0?'user.changePassword':'admin.changePassword', ['id'=>Auth::user()->id]) }}"
+                            class="dropdown-item notify-item">
                             <i class="fe-lock"></i>
                             <span>Đổi mật khẩu</span>
                         </a>
                         @endif
-                       
+
 
                         <div class="dropdown-divider"></div>
 
@@ -77,7 +67,7 @@
 
             <!-- LOGO -->
             <div class="logo-box">
-                <a href="index.html" class="logo text-center">
+                <a href="{{ route(Auth::user()->quyen!=0?'user.home':'admin.home') }}" class="logo text-center">
                     <span class="logo-lg">
                         <img src="asset/admin/images/logo-light.png" alt="" height="16">
                         <!-- <span class="logo-lg-text-dark">Xeria</span> -->
@@ -101,19 +91,19 @@
                 <ul class="navigation-menu">
 
                     <li class="has-submenu">
-                        <a href={{ route('user.home') }}>
+                        <a href={{ route(Auth::user()->quyen!=0?'user.home':'admin.home') }}>
                             <i class="la la-dashboard"></i>Dashboard
                         </a>
                     </li>
 
                     <li class="has-submenu">
-                        <a href={{ route('user.post') }}>
+                        <a href="{{ route( (Auth::user()->quyen!=0?'user.post':'admin.postList')) }}">
                             <i class="la la-clone"></i>Bài đăng
                         </a>
                     </li>
                     @if (Auth::user()->quyen==0)
                     <li class="has-submenu">
-                        <a href={{ route('admin.category') }}>
+                        <a href="{{ route('admin.category') }}">
                             <i class="la la-cube"></i>Danh mục
                         </a>
                     </li>

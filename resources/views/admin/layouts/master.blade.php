@@ -39,7 +39,7 @@
 
     <!-- Third Party js-->
     @yield('js')
-    
+
 
     <!-- Dashboard init -->
     <script src="asset/admin/js/pages/datatables.init.js"></script>

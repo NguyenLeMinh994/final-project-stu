@@ -157,7 +157,7 @@ class LoginController extends Controller
                     return redirect()->back()->with(['success' => 'Thay đổi mật khẩu thành công']);
                 }
             }
-            return redirect()->back()->withErrors(['err' => 'Mật khẩu không trùng khớp']);
+            return redirect()->back()->withErrors(['err' => 'Mật khẩu không trùng khớp với tài khoản']);
         }
         return redirect()->back()->withErrors(['err' => 'Lỗi không truy cập dữ liệu']);
     }
