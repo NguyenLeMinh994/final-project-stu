@@ -59,9 +59,7 @@ Route::prefix('user')->middleware('checkLogin')->group(function () {
     // 10/6/2019 End
 
     //  Ajax
-    Route::get('/ajax/danh-sach-quan/{id}', 'Admin\ProductController@getQuansByAjax');
-    Route::get('/ajax/xoa-bai-dang/{id}', 'Admin\ProductController@deletePostByAjax');
-    Route::get('/ajax/cap-nhat-trang-thai-bai-dang/{id}', 'Admin\ProductController@updateStatusByAjax');
+
 });
 
 // ->middleware('checkLoginForAdmin')
@@ -73,6 +71,11 @@ Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
     Route::post('/tai-khoan/{id}', 'Admin\LoginController@updateAccountPage')->name('admin.post.myAccount');
 
     Route::get('/bai-dang', 'Admin\ProductController@getPostList')->name('admin.postList');
+    Route::get('/tao-bai-dang', 'Admin\ProductController@create')->name('admin.createPost');
+    Route::post('/tao-bai-dang', 'Admin\ProductController@store')->name('admin.postCreatePost');
+
+    Route::get('/cap-nhat-bai-dang/{id}', 'Admin\ProductController@edit')->name('admin.updatePost');
+    Route::post('/cap-nhat-bai-dang/{id}', 'Admin\ProductController@update')->name('admin.postUpdatePost');
 
     Route::get('/danh-muc', 'Admin\CategoryController@index')->name('admin.category');
 
@@ -87,9 +90,15 @@ Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
     Route::get('/doi-mat-khau/{id}', 'Admin\LoginController@changePassword')->name('admin.changePassword');
     Route::post('/doi-mat-khau/{id}', 'Admin\LoginController@updateNewPassword')->name('admin.post.changePassword');
 
+    Route::get('/slide/', 'Admin\SildeController@index')->name('admin.slide');
+
     // ajax
     Route::get('/ajax/cap-nhat-trang-thai-danh-muc/{id}', 'Admin\CategoryController@ajaxCapNhatTrangThai')->name('admin.ajaxCapNhatTrangThai');
+    Route::get('/ajax/them-slide/{id}', 'Admin\SildeController@addSlideByAjax')->name('admin.ajax.addSlide');
 });
+Route::get('/ajax/danh-sach-quan/{id}', 'Admin\ProductController@getQuansByAjax');
+Route::get('/ajax/xoa-bai-dang/{id}', 'Admin\ProductController@deletePostByAjax');
+Route::get('/ajax/cap-nhat-trang-thai-bai-dang/{id}', 'Admin\ProductController@updateStatusByAjax');
 // 11/6/2019 Begin
 Route::get('/auth/{provider}', 'Admin\LoginController@redirectToProvider');
 Route::get('/auth/{provide}/callback', 'Admin\LoginController@handleProviderCallback');

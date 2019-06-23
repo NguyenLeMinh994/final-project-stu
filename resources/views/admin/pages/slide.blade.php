@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Bài đăng')
+@section('title', 'Slide')
 
 @section('css')
 <link href="asset/admin/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
@@ -41,8 +41,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Bảng bài đăng</h4>
-                        <a href={{ route(Auth::user()->quyen==1?'user.createPost':'admin.createPost') }}
+                        <h4 class="header-title">Bảng danh mục</h4>
+                        <a href={{ route('admin.createCategory') }}
                             class="mb-4 btn btn-primary btn-rounded waves-effect waves-light">Thêm</a>
 
                         <table id="basic-datatable" class="table dt-responsive nowrap">
@@ -51,51 +51,39 @@
                                     <th>ID</th>
                                     <th>Hình</th>
                                     <th>Tên</th>
-                                    <th>Ngày đăng</th>
                                     <th>Trạng thái</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
 
-
                             <tbody>
-                                @foreach ($posts as $post)
-                                <tr id="row_{{ $post->id }}">
-                                    <td>{{ $post->id }}</td>
+                                @foreach ($slideList as $slide)
+                                <tr id="row_{{ $slide->id }}">
+                                    <td>{{ $slide->id }}</td>
                                     <td>
-                                        <img src="upload/{{ $post->hinhdaidien }}" alt={{ $post->ten }} height="70">
+                                        @php
+                                        $link =empty($slide->link)?$slide->getSanPham()->hinhdaidien:$slide->link;
+                                        @endphp
+                                        <img src="upload/{{ $link }}" alt={{ $slide->getSanPham()->ten }} height="70">
                                     </td>
-                                    <td>
-                                        {{ str_limit($post->ten, $limit = 20, $end = ' ...') }}
-                                    </td>
-                                    <td>
-                                        {{ date('d-m-Y', strtotime($post->created_at)) }}
-                                    </td>
+                                    <td>{{ $slide->getSanPham()->ten }}</td>
                                     <td>
                                         <input type="checkbox" data-plugin="switchery" data-color="#1bb99a"
-                                            {{ $post->trangthai==1?'checked':'' }} data-id={{ $post->id }}
+                                            {{ $slide->trangthai==1?'checked':'' }} data-id={{ $danhMuc->id }}
                                             class="clsTrangThai" />
                                     </td>
                                     <td>
-                                        <a href={{ route(Auth::user()->quyen==1?'user.postUpdatePost':'admin.postUpdatePost', ['id'=>$post->id]) }}
+                                        <a href={{ route('admin.updateCategory', ['id'=>$danhMuc->id]) }}
                                             class="btn btn-primary waves-effect waves-light"><i
                                                 class="la la-pencil-square"></i>
                                         </a>
-                                        <button type="button" data-id="{{ $post->id }}"
-                                            class="clsXoaBaiDang btn btn-danger waves-effect waves-light">
+                                        <button type="button" data-id={{ $danhMuc->id }}
+                                            class="clsXoaDanhMuc btn btn-danger waves-effect waves-light">
                                             <i class="la la-trash-o"></i>
                                         </button>
-                                        @if (Auth::user()->quyen==0)
-                                        @php $cls=(count($post->getSlide)<=0)?'clsSlide btn btn-light waves-effect':'btn
-                                            btn-outline-secondary waves-effect'; @endphp <button type="button"
-                                            data-id="{{ $post->id }}" class="{{$cls}}">
-                                            Slide
-                                            </button>
-                                            @endif
                                     </td>
                                 </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
 
@@ -138,110 +126,76 @@
 <script src="asset/admin/js/pages/form-advanced.init.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-    $('.clsXoaBaiDang').click(function(e) {
-        e.preventDefault();
-        var idPost = $(this).data('id');
-        if (confirm("Bạn có muốn xóa không?")) {
-            var url = "{{ url('/ajax/xoa-bai-dang/') }}/" + idPost;
+    $(document).ready(function(){
+
+        $(".clsXoaDanhMuc").click(function (e) {
+            e.preventDefault();
+            var id = $(this).attr('data-id');
+
+            if (confirm("Bạn có muốn xóa không?")) {
+                var url = "{{ url('admin/xoa-danh-muc') }}/" + id;
+
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    dataType: "html",
+                    success: function (response) {
+                        if (response == 'true') {
+                            $('#row_' + id).remove();
+                            $.toast({
+                                heading: 'Success',
+                                text: 'Xóa thành công',
+                                icon: 'success',
+                                position: 'top-right'
+                            });
+                        } else {
+                            $.toast({
+                                heading: 'oh!',
+                                text: 'Không thể xóa',
+                                icon: 'error',
+                                position: 'top-right'
+                            });
+                            return false;
+                        }
+                    }
+                });
+            }
+        });
+
+
+        $(".clsTrangThai").change(function (e) {
+            e.preventDefault();
+            var thisTr=this;
+            var id=$(thisTr).data('id');
+
+            var url="{{ url('admin/cap-nhat-trang-thai-danh-muc') }}/"+id;
 
             $.ajax({
                 type: "get",
                 url: url,
                 dataType: "html",
-                success: function(response) {
+                success: function (response) {
                     if (response == 'true') {
-                        $('#row_' + idPost).remove();
                         $.toast({
                             heading: 'Success',
-                            text: 'Xóa thành công',
+                            text: 'Cập nhật trạng thái thành công',
                             icon: 'success',
                             position: 'top-right'
                         });
                     } else {
                         $.toast({
-                            heading: 'oh!',
-                            text: 'Lỗi không thể xóa được',
+                            heading: 'Oh!',
+                            text: 'Cập nhật trạng thái thất bại',
                             icon: 'error',
                             position: 'top-right'
                         });
-                        return;
+                        $(thisTr).prop('checked', false);
+                        return false;
                     }
                 }
             });
-        }
-
-    });
-
-    $('.clsTrangThai').change(function(e) {
-        e.preventDefault();
-
-        var thisTr = this;
-        var idPost = $(this).data('id');
-        var url = "{{ url('/ajax/cap-nhat-trang-thai-bai-dang/') }}/" + idPost;
-
-        $.ajax({
-            type: "get",
-            url: url,
-            dataType: "html",
-            success: function(response) {
-                if (response == 'true') {
-                    $.toast({
-                        heading: 'Success',
-                        text: 'Cập nhật trạng thái thành công',
-                        icon: 'success',
-                        position: 'top-right'
-                    });
-                    return;
-                } else {
-                    $.toast({
-                        heading: 'Oh!',
-                        text: 'Cập nhật trạng thái thất bại',
-                        icon: 'error',
-                        position: 'top-right'
-                    });
-                    $(thisTr).prop('checked', false);
-                    return;
-                }
-            }
+            
         });
     });
-
-    $('.clsSlide').click(function(e) {
-        e.preventDefault();
-        const postId = $(this).data('id');
-        const thisSlide = this;
-
-        const url = "{{ url('admin/ajax/them-slide') }}/" + postId;
-        $.ajax({
-            type: "GET",
-            url: url,
-
-            success: function(response) {
-                console.log('Show', response);
-                $(thisSlide).addClass('btn-outline-dark').removeClass("clsSlide btn-light");
-
-                // if (response != 'false') {
-                //     $.toast({
-                //         heading: 'Success',
-                //         text: 'Thêm thành công',
-                //         icon: 'success',
-                //         position: 'top-right'
-                //     });
-
-                // } else {
-                //     $.toast({
-                //         heading: 'Oh!',
-                //         text: 'Thêm thất bại',
-                //         icon: 'error',
-                //         position: 'top-right'
-                //     });
-                //     return;
-                // }
-
-            }
-        });
-    });
-});
 </script>
 @endsection

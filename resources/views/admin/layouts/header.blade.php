@@ -109,9 +109,15 @@
                     </li>
                     <li class="has-submenu">
                         <a href="#">
+                            <i class="la la-ship"></i>Slide
+                        </a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#">
                             <i class="la la-ship"></i>Danh sách thành viên
                         </a>
                     </li>
+
                     @endif
 
                 </ul>

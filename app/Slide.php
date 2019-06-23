@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Silde extends Model
+class Slide extends Model
 {
     protected $table = 'slide';
-    
+
     public function getSanPham()
     {
-        return $this->belongsTo('App\SanPham','id_sanpham','id');
+        return $this->belongsTo('App\SanPham', 'id_sanpham', 'id');
     }
 }

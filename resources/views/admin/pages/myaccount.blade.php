@@ -56,7 +56,9 @@
                             {{ session()->get('success') }}
                         </div>
                         @endif
-                        <form action={{ route('user.post.myAccount',['id'=>$user->id]) }} method="POST">
+                        <form
+                            action={{ route(Auth::user()->quyen==1?'user.post.myAccount':'admin.post.myAccount',['id'=>$user->id]) }}
+                            method="POST">
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-8">
@@ -68,8 +70,8 @@
                             <div class="form-row">
                                 <div class="form-group col-md-8">
                                     <label for="inputAddress" class="col-form-label">Họ tên</label>
-                                    <input type="text" class="form-control"  name="txtFullName"
-                                    value="{{ $user->hoten }}" placeholder="Họ tên" >
+                                    <input type="text" class="form-control" name="txtFullName"
+                                        value="{{ $user->hoten }}" placeholder="Họ tên">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -88,7 +90,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Lưu</button>
-                            
+
 
                         </form>
 
