@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Slide;
+use App\SanPham;
 
 class SildeController extends Controller
 {
     public function index()
     {
         $slideList = Slide::all();
+        $slideList = SanPham::find(2);
+        dd($slideList->getSlide);
         return view('admin.pages.slide', ['slideList' => $slideList]);
     }
 
@@ -23,7 +26,9 @@ class SildeController extends Controller
         } else {
             $slide = new Slide;
             $slide->id_sanpham = $postId;
-            return $postId;
+            if ($slide->save()) {
+                return $slide->id;
+            }
         }
         return 'false';
     }

@@ -85,13 +85,14 @@
                                             class="clsXoaBaiDang btn btn-danger waves-effect waves-light">
                                             <i class="la la-trash-o"></i>
                                         </button>
-                                        @if (Auth::user()->quyen==0)
-                                        @php $cls=(count($post->getSlide)<=0)?'clsSlide btn btn-light waves-effect':'btn
-                                            btn-outline-secondary waves-effect'; @endphp <button type="button"
-                                            data-id="{{ $post->id }}" class="{{$cls}}">
+
+                                        @if (Auth::user()->quyen==0 && empty($post->getSlide) )
+
+                                        <button type="button" data-id="{{ $post->id }}"
+                                            class="clsSlide btn btn-light waves-effect ">
                                             Slide
-                                            </button>
-                                            @endif
+                                        </button>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
@@ -213,34 +214,47 @@
         const thisSlide = this;
 
         const url = "{{ url('admin/ajax/them-slide') }}/" + postId;
-        $.ajax({
+        if(window.confirm(`Bạn có muốn chọn bài ${postId} này làm slide ko?`))
+        {
+            $.ajax({
             type: "GET",
             url: url,
 
             success: function(response) {
                 console.log('Show', response);
-                $(thisSlide).addClass('btn-outline-dark').removeClass("clsSlide btn-light");
 
-                // if (response != 'false') {
-                //     $.toast({
-                //         heading: 'Success',
-                //         text: 'Thêm thành công',
-                //         icon: 'success',
-                //         position: 'top-right'
-                //     });
+                if (response == 'false') {
+                    $.toast({
+                        heading: 'Oh!',
+                        text: 'Thêm thất bại',
+                        icon: 'error',
+                        position: 'top-right'
+                    });
+                    return;
 
-                // } else {
-                //     $.toast({
-                //         heading: 'Oh!',
-                //         text: 'Thêm thất bại',
-                //         icon: 'error',
-                //         position: 'top-right'
-                //     });
-                //     return;
-                // }
+                }else
+                if(response==-1) {
+                    $.toast({
+                        heading: 'Oh!',
+                        text: `Bài ${postId} tồn tại`,
+                        icon: 'warning',
+                        position: 'top-right'
+                    });
+                }else {
+                    console.log(response);
+                    
+                    $.toast({
+                        heading: 'Success',
+                        text: 'Thêm thành công',
+                        icon: 'success',
+                        position: 'top-right'
+                    });
+                    $(thisSlide).remove();
+                }
 
             }
         });
+        }
     });
 });
 </script>

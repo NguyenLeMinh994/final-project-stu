@@ -90,7 +90,7 @@ Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
     Route::get('/doi-mat-khau/{id}', 'Admin\LoginController@changePassword')->name('admin.changePassword');
     Route::post('/doi-mat-khau/{id}', 'Admin\LoginController@updateNewPassword')->name('admin.post.changePassword');
 
-    Route::get('/slide/', 'Admin\SildeController@index')->name('admin.slide');
+    Route::get("/slide/", 'Admin\SildeController@index')->name('admin.slide');
 
     // ajax
     Route::get('/ajax/cap-nhat-trang-thai-danh-muc/{id}', 'Admin\CategoryController@ajaxCapNhatTrangThai')->name('admin.ajaxCapNhatTrangThai');

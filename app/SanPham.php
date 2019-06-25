@@ -26,12 +26,12 @@ class SanPham extends Model
 
     public function getQuan()
     {
-        return $this->belongsTo('App\Quan', 'id_quan', 'id');
+        return $this->hasOne('App\Quan', 'id_quan', 'id');
     }
 
     public function getSlide()
     {
-        return $this->hasMany('App\Slide', 'id_sanpham', 'id');
+        return $this->hasOne('App\Slide', 'id_sanpham', 'id');
     }
 
     public function getDanhSachHinhs()
