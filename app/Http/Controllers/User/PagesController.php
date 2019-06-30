@@ -20,32 +20,25 @@ class PagesController extends Controller
         // Loại nhà
         $loaiOfMenus = Loai::where('parent_id', null)->get();
         view()->share('loaiOfMenus', $loaiOfMenus);
-
-        //Trần Thanh Tuấn
-        $Slide = Slide::all();
-        view()->share('Slide', $Slide);
-        $SanPham = SanPham::where('trangthai', 1)->paginate(6);
-        view()->share('SanPham', $SanPham);
-        //$SanPham_new = SanPham::where('NewPosts',1)->get();
-        //view()->share('SanPham_new',$SanPham_new);
-        //$SanPham_highlights = SanPham::where('Highlights',1)->get();
-        //view()->share('SanPham_highlights',$SanPham_highlights);
-        $tinhThanhPhos = TinhThanhPho::all();
-        view()->share('tinhThanhPhos', $tinhThanhPhos);
     }
 
     //get trang chủ
     public function getIndex()
     {
-        return view('user.pages.index');
+        $slideList = Slide::where('trangthai', 1)->orderBy('created_at', 'desc')->limit(5)->get();
+        $tinhThanhPhos = TinhThanhPho::all();
+        $newPostList = SanPham::where('trangthai', 1)->orderBy('created_at', 'desc')->limit(9)->get();
+        $featuredPosts = SanPham::where('trangthai', 1)->orderBy('views', 'desc')->limit(4)->get();
+
+        return view('user.pages.index', ['newPostList' => $newPostList, 'tinhThanhPhos' => $tinhThanhPhos, 'slideList' => $slideList, 'featuredPosts' => $featuredPosts]);
     }
 
-    //get trang chi tiết  //Trần Thanh Tuấn  
+    //get trang chi tiết 
     public function getDetail($id)
     {
         $getDetail = SanPham::find($id);
-        $sp_khac = sanpham::where('id_loai', $getDetail->id_loai)->paginate(6);
-        return view('user.pages.detail', ['getDetail' => $getDetail, 'sp_khac' => $sp_khac]);
+        // $sp_khac = sanpham::where('id_loai', $getDetail->id_loai)->paginate(6);
+        return view('user.pages.detail', ['getDetail' => $getDetail]);
     }
 
     //get danh sách //Trần Thanh Tuấn

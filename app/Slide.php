@@ -10,6 +10,6 @@ class Slide extends Model
 
     public function getSanPham()
     {
-        return $this->hasOne('App\SanPham', 'id', 'id_sanpham');
+        return $this->belongsTo('App\SanPham', 'id', 'id_sanpham');
     }
 }

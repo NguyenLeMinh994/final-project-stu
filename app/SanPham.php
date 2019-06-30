@@ -11,12 +11,12 @@ class SanPham extends Model
 
     public function getLoai()
     {
-        return $this->belongsTo('App\Loai', 'id_loai', 'id');
+        return $this->hasOne('App\Loai', 'id_loai', 'id');
     }
 
     public function getUser()
     {
-        return $this->belongsTo('App\User', 'id_user');
+        return $this->hasOne('App\User', 'id_user');
     }
 
     public function getTinhThanhPho()
@@ -26,7 +26,7 @@ class SanPham extends Model
 
     public function getQuan()
     {
-        return $this->hasOne('App\Quan', 'id_quan', 'id');
+        return $this->belongsTo('App\Quan', 'id_quan', 'id');
     }
 
     public function getSlide()

@@ -129,8 +129,6 @@ Route::get('/chi-tiet/{id}', 'User\PagesController@getDetail')->name('detail');
 Route::get('/danh-sach/{id}', 'User\PagesController@getList')->name('list');
 Route::get('/contact', 'User\PagesController@contact')->name('contact');
 Route::get('/about', 'User\PagesController@about')->name('about');
-Route::get('timkiem', [
-    'as' => '/timkiem',
-    'uses' => 'User\PagesController@timkiem'
-]);
 //Trần Thanh Tuấn END
+
+Route::get('/timkiem', 'User\PagesController@timkiem')->name('timkiem');
