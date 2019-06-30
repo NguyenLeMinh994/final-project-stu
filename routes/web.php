@@ -94,8 +94,13 @@ Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
 
     // ajax
     Route::get('/ajax/cap-nhat-trang-thai-danh-muc/{id}', 'Admin\CategoryController@ajaxCapNhatTrangThai')->name('admin.ajaxCapNhatTrangThai');
+    Route::get('/ajax/xoa-danh-muc/{id}', 'Admin\CategoryController@ajaxDestroy')->name('admin.ajax.removeCategory');
     Route::get('/ajax/them-slide/{id}', 'Admin\SildeController@addSlideByAjax')->name('admin.ajax.addSlide');
+
+    Route::get('/ajax/xoa-slide/{id}', 'Admin\SildeController@removeSlideByAjax')->name('admin.ajax.removeSlide');
+    Route::get('/ajax/cap-nhat-trang-thai-slide/{id}', 'Admin\SildeController@updateStatusSlideByAjax')->name('admin.ajax.updateStatusSlide');
 });
+
 Route::get('/ajax/danh-sach-quan/{id}', 'Admin\ProductController@getQuansByAjax');
 Route::get('/ajax/xoa-bai-dang/{id}', 'Admin\ProductController@deletePostByAjax');
 Route::get('/ajax/cap-nhat-trang-thai-bai-dang/{id}', 'Admin\ProductController@updateStatusByAjax');

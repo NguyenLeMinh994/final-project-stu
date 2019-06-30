@@ -13,9 +13,37 @@ class SildeController extends Controller
     public function index()
     {
         $slideList = Slide::all();
-        $slideList = SanPham::find(2);
-        dd($slideList->getSlide);
+        // $slideList = SanPham::find(2);
+        // dd($slideList->getSlide);
         return view('admin.pages.slide', ['slideList' => $slideList]);
+    }
+
+    public function removeSlideByAjax($slideId)
+    {
+        $slide = Slide::find($slideId);
+        if (!$slide) {
+            return -1;
+        } else {
+            if ($slide->delete()) {
+                return $slideId;
+            }
+        }
+        return 'false';
+    }
+
+
+    public function updateStatusSlideByAjax($slideId)
+    {
+        $slide = Slide::find($slideId);
+        if (!$slide) {
+            return -1;
+        } else {
+            $slide->status = $slide->status == 1 ? 0 : 1;
+            if ($slide->save()) {
+                return $slideId;
+            }
+        }
+        return 'false';
     }
 
     public function addSlideByAjax($postId)

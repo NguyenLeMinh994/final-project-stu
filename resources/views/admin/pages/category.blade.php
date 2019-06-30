@@ -42,7 +42,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">Bảng danh mục</h4>
-                        <a href={{ route('admin.createCategory') }} class="mb-4 btn btn-primary btn-rounded waves-effect waves-light">Thêm</a>
+                        <a href={{ route('admin.createCategory') }}
+                            class="mb-4 btn btn-primary btn-rounded waves-effect waves-light">Thêm</a>
 
                         <table id="basic-datatable" class="table dt-responsive nowrap">
                             <thead>
@@ -68,10 +69,12 @@
                                             class="clsTrangThai" />
                                     </td>
                                     <td>
-                                        <a href={{ route('admin.updateCategory', ['id'=>$danhMuc->id]) }} class="btn btn-primary waves-effect waves-light"><i
+                                        <a href={{ route('admin.updateCategory', ['id'=>$danhMuc->id]) }}
+                                            class="btn btn-primary waves-effect waves-light"><i
                                                 class="la la-pencil-square"></i>
                                         </a>
-                                        <button type="button" data-id={{ $danhMuc->id }} class="clsXoaDanhMuc btn btn-danger waves-effect waves-light">
+                                        <button type="button" data-id={{ $danhMuc->id }}
+                                            class="clsXoaDanhMuc btn btn-danger waves-effect waves-light">
                                             <i class="la la-trash-o"></i>
                                         </button>
                                     </td>
@@ -119,14 +122,14 @@
 <script src="asset/admin/js/pages/form-advanced.init.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         $(".clsXoaDanhMuc").click(function (e) {
             e.preventDefault();
             var id = $(this).attr('data-id');
 
             if (confirm("Bạn có muốn xóa không?")) {
-                var url = "{{ url('admin/xoa-danh-muc') }}/" + id;
+                var url = "{{ url('admin/ajax/xoa-danh-muc') }}/" + id;
 
                 $.ajax({
                     type: "get",
@@ -158,37 +161,40 @@
 
         $(".clsTrangThai").change(function (e) {
             e.preventDefault();
-            var thisTr=this;
-            var id=$(thisTr).data('id');
+            var thisTr = this;
+            var id = $(thisTr).data('id');
+            if (window.confirm(`Bạn có muốn thay đổi trạng thái ${id}?`)) {
+                var url = "{{ url('admin/ajax/cap-nhat-trang-thai-danh-muc') }}/" + id;
 
-            var url="{{ url('admin/cap-nhat-trang-thai-danh-muc') }}/"+id;
-
-            $.ajax({
-                type: "get",
-                url: url,
-                dataType: "html",
-                success: function (response) {
-                    if (response == 'true') {
-                        $.toast({
-                            heading: 'Success',
-                            text: 'Cập nhật trạng thái thành công',
-                            icon: 'success',
-                            position: 'top-right'
-                        });
-                    } else {
-                        $.toast({
-                            heading: 'Oh!',
-                            text: 'Cập nhật trạng thái thất bại',
-                            icon: 'error',
-                            position: 'top-right'
-                        });
-                        $(thisTr).prop('checked', false);
-                        return false;
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    dataType: "html",
+                    success: function (response) {
+                        if (response == 'true') {
+                            $.toast({
+                                heading: 'Success',
+                                text: 'Cập nhật trạng thái thành công',
+                                icon: 'success',
+                                position: 'top-right'
+                            });
+                        } else {
+                            $.toast({
+                                heading: 'Oh!',
+                                text: 'Cập nhật trạng thái thất bại',
+                                icon: 'error',
+                                position: 'top-right'
+                            });
+                            $(thisTr).prop('checked', false);
+                            return false;
+                        }
                     }
-                }
-            });
-            
+                });
+            }
+
+
         });
     });
+
 </script>
 @endsection

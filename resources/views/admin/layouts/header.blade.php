@@ -108,7 +108,7 @@
                         </a>
                     </li>
                     <li class="has-submenu">
-                        <a href="#">
+                        <a href="{{ route('admin.slide') }}">
                             <i class="la la-ship"></i>Slide
                         </a>
                     </li>
