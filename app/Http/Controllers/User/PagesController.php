@@ -11,6 +11,7 @@ use App\Quan;
 use App\Slide;
 use App\SanPham;
 use App\DanhSachHinh;
+use Carbon\Carbon;
 
 class PagesController extends Controller
 {
@@ -22,21 +23,31 @@ class PagesController extends Controller
         view()->share('loaiOfMenus', $loaiOfMenus);
     }
 
+    public function getCityList()
+    {
+        return TinhThanhPho::all();
+    }
+
     //get trang chủ
     public function getIndex()
     {
+        $tinhThanhPhos = $this->getCityList();
+
         $slideList = Slide::where('trangthai', 1)->orderBy('created_at', 'desc')->limit(5)->get();
-        $tinhThanhPhos = TinhThanhPho::all();
         $newPostList = SanPham::where('trangthai', 1)->orderBy('created_at', 'desc')->limit(9)->get();
         $featuredPosts = SanPham::where('trangthai', 1)->orderBy('views', 'desc')->limit(4)->get();
 
         return view('user.pages.index', ['newPostList' => $newPostList, 'tinhThanhPhos' => $tinhThanhPhos, 'slideList' => $slideList, 'featuredPosts' => $featuredPosts]);
     }
 
-    //get trang chi tiết 
+    //get trang chi tiết
     public function getDetail($id)
     {
+
         $getDetail = SanPham::find($id);
+        // $countDate = Carbon::parse($getDetail->created_at)->diffInDays(Carbon::now());
+        $getDetail->views = (int) ($getDetail->views + 1);
+        $getDetail->save();
         // $sp_khac = sanpham::where('id_loai', $getDetail->id_loai)->paginate(6);
         return view('user.pages.detail', ['getDetail' => $getDetail]);
     }
@@ -109,7 +120,6 @@ class PagesController extends Controller
 
     // Nguyễn Lê Minh End
 
-    //Trần Thanh Tuấn
     //get trang liên hệ 
     public function contact()
     {
@@ -121,16 +131,34 @@ class PagesController extends Controller
         return view('user.pages.about');
     }
 
-    public function timkiem(Request $req)
+    public function searchPost(Request $req)
     {
-        $pruduct = SanPham::where('ten', 'like', '%' . $req->key . '%')
-            ->orWhere('gia', $req->key)
-            ->get();
-        return view('user.pages.timkiem', compact('pruduct'));
+        $tinhThanhPhos = $this->getCityList();
+        $postList = null;
+        if ($req->keyWord && $req->thanhPho && $req->quan) {
+            $postList = SanPham::where('ten', 'like', '%' . $req->keyWord . '%')
+                ->orWhere('id', $req->keyWord)
+                ->where('id_tp', $req->thanhPho)
+                ->where('id_quan', $req->quan)
+                ->get();
+        } elseif ($req->keyWord && $req->thanhPho) {
+            $postList = SanPham::where('ten', 'like', '%' . $req->keyWord . '%')
+                ->orWhere('id', $req->keyWord)
+                ->where('id_tp', $req->thanhPho)
+                ->get();
+        } elseif ($req->keyWord) {
+            $postList = SanPham::where('ten', 'like', '%' . $req->keyWord . '%')
+                ->orWhere('id', $req->keyWord)
+                ->get();
+        } elseif ($req->thanhPho) {
+            $postList = SanPham::where('id_tp', $req->thanhPho)
+                ->orwhere('id_quan', $req->quan)
+                ->get();
+        } else {
+            $postList = SanPham::orderBy('id', 'DESC')->get();
+        }
+        // dd($postList);
+
+        return view('user.pages.list', compact('postList', 'tinhThanhPhos'));
     }
-
-    //Trần Thanh Tuấn END
-
-
-
 }

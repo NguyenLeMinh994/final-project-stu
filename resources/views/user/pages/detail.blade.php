@@ -14,7 +14,7 @@
                 <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span
                         class="mr-2"><a href="{{ route('home') }}">Trang chủ</a></span> <span class="mr-2"></span>
                     <span>Chi tiết</span></p>
-                <h1 class="mb-3 bread">Chi tiết tin tức</h1>
+                <h1 class="mb-3 bread">Chi tiết</h1>
             </div>
         </div>
     </div>
@@ -38,8 +38,8 @@
                         </div>
                     </div>
                     <div class="col-md-12 Properties-single mt-4 mb-5 ftco-animate">
-                        {{-- <h2>{{$getDetail->getLoai->ten}}</h2> --}}
-                        <p>{{$getDetail->ten}}</p>
+                        <h2>{{ $getDetail->ten }}</h2>
+                        <p>{{ $getDetail->getLoai->ten}}</p>
                         <p class="gia">Giá: {{number_format($getDetail->gia)}} VNĐ</p>
                         <p class="rate mb-4">
                             <span class="loc"><a href="#"><i class="icon-map"></i> {{$getDetail->diachi}} -

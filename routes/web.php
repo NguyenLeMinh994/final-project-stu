@@ -131,4 +131,4 @@ Route::get('/contact', 'User\PagesController@contact')->name('contact');
 Route::get('/about', 'User\PagesController@about')->name('about');
 //Trần Thanh Tuấn END
 
-Route::get('/timkiem', 'User\PagesController@timkiem')->name('timkiem');
+Route::get('/timkiem', 'User\PagesController@searchPost')->name('search');
