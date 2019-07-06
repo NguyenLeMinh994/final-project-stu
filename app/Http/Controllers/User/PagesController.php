@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\User;
 use App\Loai;
 use App\TinhThanhPho;
@@ -55,9 +56,10 @@ class PagesController extends Controller
     //get danh sách //Trần Thanh Tuấn
     public function getList($id)
     {
-        $listLoai = Loai::find($id);
-        $listSanPham = SanPham::where('id_loai', $id)->paginate(6);
-        return view('user.pages.list', ['listLoai' => $listLoai, 'listSanPham' => $listSanPham]);
+        $tinhThanhPhos = $this->getCityList();
+
+        $postList = Loai::find()->getSanPhams;
+        return view('user.pages.list', compact('postList', 'tinhThanhPhos'));
     }
 
     // trang dang ký
