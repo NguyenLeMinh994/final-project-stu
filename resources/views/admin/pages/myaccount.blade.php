@@ -39,7 +39,7 @@
 
         <!-- Form row -->
         <div class="row d-flex justify-content-center">
-            <div class="col-6">
+            <div class="col-8">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">Form tài khoản</h4>
@@ -53,20 +53,44 @@
                         @elseif(session()->has('success'))
                         <div class="alert alert-success alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            Thêm thành công
+                            {{ session()->get('success') }}
                         </div>
                         @endif
-                        <form action={{ route('admin.createCategory') }} method="POST">
+                        <form
+                            action={{ route(Auth::user()->quyen==1?'user.post.myAccount':'admin.post.myAccount',['id'=>$user->id]) }}
+                            method="POST">
                             @csrf
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputAddress" class="col-form-label">Tên danh mục</label>
-                                    <input type="text" class="form-control" id="inputAddress" name="txtTen"
-                                        placeholder="Tên danh mục">
+                                <div class="form-group col-md-8">
+                                    <label for="inputAddress" class="col-form-label">Email</label>
+                                    <input type="email" class="form-control" id="inputAddress" name="txtEmail"
+                                        placeholder="Email" value="{{$user->email}}" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-8">
+                                    <label for="inputAddress" class="col-form-label">Họ tên</label>
+                                    <input type="text" class="form-control" name="txtFullName"
+                                        value="{{ $user->hoten }}" placeholder="Họ tên">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-8">
+                                    <label for="inputAddress" class="col-form-label">Điện thoại</label>
+                                    <input type="text" class="form-control" id="inputAddress" name="txtPhone"
+                                        placeholder="Điện thoại" value="{{$user->dienthoai}}">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-8">
+                                    <label for="inputAddress" class="col-form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" id="inputAddress" name="txtAddress"
+                                        placeholder="Địa chỉ" value="{{$user->diachi}}">
                                 </div>
                             </div>
 
                             <button type="submit" class="btn btn-primary waves-effect waves-light">Lưu</button>
+
 
                         </form>
 

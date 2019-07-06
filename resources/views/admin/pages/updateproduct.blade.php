@@ -55,10 +55,11 @@
                         @elseif(session()->has('success'))
                         <div class="alert alert-success alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            Thêm thành công
+                            {{ session('success') }}
                         </div>
                         @endif
-                        <form action={{ route('user.postUpdatePost',['id'=>$post->id]) }} method="POST" enctype="multipart/form-data">
+                        <form action={{ route('user.postUpdatePost',['id'=>$post->id]) }} method="POST"
+                            enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
@@ -69,8 +70,8 @@
 
                             <div class="row">
                                 <div class="col-md-8">
-                                    <textarea id="summernote-editor" name="txtNoiDung">
-                                            {{ $post->noidung }}
+                                    <textarea id="noidung" name="txtNoiDung">
+                                    {!! $post->noidung !!}
                                     </textarea>
 
                                     <!-- end summernote-editor-->
@@ -81,11 +82,13 @@
                                         <select class="form-control" data-toggle="select2" name="sltDanhMuc">
                                             <option value="">Chọn loại</option>
                                             @foreach ($danhMucChas as $danhMucCha)
-                                            <option value={{ $danhMucCha->id }} {{ $post->id_loai==$danhMucCha->id?'selected':'' }}>
+                                            <option value={{ $danhMucCha->id }}
+                                                {{ $post->id_loai==$danhMucCha->id?'selected':'' }}>
                                                 {{ $danhMucCha->ten }}
                                             </option>
                                             @foreach ($danhMucCha->getChildren as $danhMucCon)
-                                            <option value={{ $danhMucCon->id }} {{ $post->id_loai==$danhMucCon->id?'selected':'' }}>
+                                            <option value={{ $danhMucCon->id }}
+                                                {{ $post->id_loai==$danhMucCon->id?'selected':'' }}>
                                                 --{{ $danhMucCon->ten }}
                                             </option>
                                             @endforeach
@@ -100,7 +103,8 @@
                                             name="sltThanhPho">
                                             <option value="">Chọn thành phố</option>
                                             @foreach ($thanhPhos as $thanhPho)
-                                            <option value={{ $thanhPho->id }} {{ $post->id_tp==$thanhPho->id?'selected':'' }}>
+                                            <option value={{ $thanhPho->id }}
+                                                {{ $post->id_tp==$thanhPho->id?'selected':'' }}>
                                                 {{ $thanhPho->ten }}
                                             </option>
                                             @endforeach
@@ -110,7 +114,8 @@
 
                                     <div class="form-group">
                                         <label for="inputState" class="col-form-label">Quận</label>
-                                        <select class="form-control" data-toggle="select2" name="sltQuan" id="idQuan" data-id-quan={{ $post->id_quan }}>
+                                        <select class="form-control" data-toggle="select2" name="sltQuan" id="idQuan"
+                                            data-id-quan={{ $post->id_quan }}>
                                             <option value="">Quận</option>
                                         </select>
                                     </div>
@@ -208,12 +213,19 @@
 <script src="asset/admin/js/pages/form-advanced.init.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-filestyle/2.1.0/bootstrap-filestyle.min.js"></script>
-<script src="asset/admin/libs/summernote/summernote-bs4.min.js"></script>
-<script src="asset/admin/js/pages/form-summernote.init.js"></script>
+<script src="{{ asset('/vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $(":file").filestyle();
-        $('div.note-editable').height(920);
+        const options = {
+            filebrowserImageBrowseUrl: "{{ asset('/laravel-filemanager?type=Images')}}",
+            filebrowserImageUploadUrl: "{{ asset('/laravel-filemanager/upload?type=Images&_token=') }}",
+            filebrowserBrowseUrl: "{{ asset('/laravel-filemanager?type=Files') }}",
+            filebrowserUploadUrl: "{{ asset('/laravel-filemanager/upload?type=Files&_token=') }}",
+            height: 840
+        };
+        CKEDITOR.replace('noidung',options);
         
         $('#idThanhPho').change(function (e) {
             e.preventDefault();
@@ -239,12 +251,13 @@
             }
 
         });
+
         function getQuan() {
             const idThanhPho = $('#idThanhPho').val();
             const quanElement = $('#idQuan');
             const idQuan=quanElement.data('id-quan');
             
-            const url = "{{ url('/user/ajax/danh-sach-quan/') }}/" + idThanhPho;
+            const url = "{{ url('ajax/danh-sach-quan/') }}/" + idThanhPho;
             let htmlQuan = `<option value="">Quận</option>`;
 
             if (idThanhPho == '') {

@@ -55,7 +55,7 @@
                         @elseif(session()->has('success'))
                         <div class="alert alert-success alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            Thêm thành công
+                            {{ session('success') }}
                         </div>
                         @endif
                         <form action={{ route('user.postCreatePost') }} method="POST" enctype="multipart/form-data">
@@ -69,7 +69,7 @@
 
                             <div class="row">
                                 <div class="col-md-8">
-                                    <textarea id="summernote-editor" name="txtNoiDung"></textarea>
+                                    <textarea id="noidung" name="txtNoiDung"></textarea>
 
                                     <!-- end summernote-editor-->
                                 </div>
@@ -82,10 +82,10 @@
                                             @foreach ($danhMucChas as $danhMucCha)
                                             <option value={{ $danhMucCha->id }}>
                                                 {{ $danhMucCha->ten }}</option>
-                                                @foreach ($danhMucCha->getChildren as $danhMucCon)
-                                                <option value={{ $danhMucCon->id }}>
-                                                    --{{ $danhMucCon->ten }}</option>
-                                                @endforeach
+                                            @foreach ($danhMucCha->getChildren as $danhMucCon)
+                                            <option value={{ $danhMucCon->id }}>
+                                                --{{ $danhMucCon->ten }}</option>
+                                            @endforeach
                                             @endforeach
                                         </select>
                                     </div>
@@ -93,7 +93,8 @@
 
                                     <div class="form-group">
                                         <label for="inputState" class="col-form-label">Thành phố</label>
-                                        <select class="form-control" data-toggle="select2" id="idThanhPho" name="sltThanhPho">
+                                        <select class="form-control" data-toggle="select2" id="idThanhPho"
+                                            name="sltThanhPho">
                                             <option value="">Chọn thành phố</option>
                                             @foreach ($thanhPhos as $thanhPho)
                                             <option value={{ $thanhPho->id }}>
@@ -157,7 +158,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Hình </label>
-                                        <input type="file" class="filestyle" data-text="Choose image" data-placeholder="No file" data-btnClass="btn-primary" name="fileHinh" />
+                                        <input type="file" class="filestyle" data-text="Choose image"
+                                            data-placeholder="No file" data-btnClass="btn-primary" name="fileHinh" />
                                     </div>
                                 </div>
                             </div>
@@ -202,12 +204,18 @@
 <script src="asset/admin/js/pages/form-advanced.init.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-filestyle/2.1.0/bootstrap-filestyle.min.js"></script>
-<script src="asset/admin/libs/summernote/summernote-bs4.min.js"></script>
-<script src="asset/admin/js/pages/form-summernote.init.js"></script>
+<script src="{{ asset('/vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $(":file").filestyle();
-        $('div.note-editable').height(920);
+        const options = {
+            filebrowserImageBrowseUrl: "{{ asset('/laravel-filemanager?type=Images')}}",
+            filebrowserImageUploadUrl: "{{ asset('/laravel-filemanager/upload?type=Images&_token=') }}",
+            filebrowserBrowseUrl: "{{ asset('/laravel-filemanager?type=Files') }}",
+            filebrowserUploadUrl: "{{ asset('/laravel-filemanager/upload?type=Files&_token=') }}",
+            height: 840
+        };
+        CKEDITOR.replace('noidung',options);
 
         $('#idThanhPho').change(function (e) {
             e.preventDefault();

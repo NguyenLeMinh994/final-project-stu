@@ -53,7 +53,7 @@
                         @elseif(session()->has('success'))
                         <div class="alert alert-success alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            Cập nhật thành công
+                            {{ session('success') }}
                         </div>
                         @endif
                         <form action={{ route('admin.postUpdateCategory',['id'=>$danhMuc->id]) }} method="POST">

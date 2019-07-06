@@ -96,7 +96,7 @@ class CategoryController extends Controller
         }
 
         $danhMuc = Loai::findOrfail($id);
-        
+
         return view('admin.pages.updatecategory', ['danhMuc' => $danhMuc, 'danhMucChas' => $danhMucChas]);
     }
 
@@ -124,10 +124,9 @@ class CategoryController extends Controller
                 $danhMucCha = Loai::findOrfail($request->sltParent);
             }
 
-            if ($danhMucCha == null || $danhMucCha->parent_id == null ) {
+            if ($danhMucCha == null || $danhMucCha->parent_id == null) {
                 $category = Loai::findOrfail($id);
-                if(count($category->getChildren)<=0)
-                {
+                if (count($category->getChildren) <= 0) {
                     $category->ten = $request->txtTen;
 
                     if (!empty($request->sltParent)) {
@@ -169,7 +168,7 @@ class CategoryController extends Controller
             if (count($danhmuc->getChildren) > 0 || count($danhmuc->getSanPhams) > 0) {
                 return 'false';
             } else {
-                if($danhmuc->delete())
+                if ($danhmuc->delete())
                     return 'true';
                 return 'false';
             }
@@ -186,8 +185,8 @@ class CategoryController extends Controller
             if (count($danhmuc->getChildren) > 0 || count($danhmuc->getSanPhams) > 0) {
                 return 'false';
             } else {
-                $danhmuc->trangthai=($danhmuc->trangthai==1?'0':'1');
-                if($danhmuc->save())
+                $danhmuc->trangthai = ($danhmuc->trangthai == 1 ? '0' : '1');
+                if ($danhmuc->save())
                     return 'true';
                 return 'false';
             }
