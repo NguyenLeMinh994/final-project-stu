@@ -42,7 +42,7 @@
 
 
     <!-- Dashboard init -->
-    {{-- <script src="asset/admin/js/pages/datatables.init.js"></script> --}}
+
 
     <!-- App js-->
     <script src="asset/admin/js/app.min.js"></script>

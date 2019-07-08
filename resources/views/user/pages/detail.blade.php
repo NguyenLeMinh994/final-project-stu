@@ -31,7 +31,7 @@
                             @foreach($getDetail->getDanhSachHinhs as $hinh)
                             <div class="item">
                                 <div class="properties-img"
-                                    style="background-image: url(asset/user/images/{{$hinh->link}});">
+                                    style="background-image: url(upload/images/{{$hinh->link}});">
                                 </div>
                             </div>
                             @endforeach

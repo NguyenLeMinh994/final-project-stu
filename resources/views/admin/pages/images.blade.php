@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Danh mục')
+@section('title', 'Hình')
 
 @section('css')
 <link href="asset/admin/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
@@ -28,10 +28,10 @@
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="javascript: void(0);">Xeria</a></li>
                             <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                            <li class="breadcrumb-item active">Datatables</li>
+                            <li class="breadcrumb-item active">Image List</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Datatables</h4>
+                    <h4 class="page-title">Image List</h4>
                 </div>
             </div>
         </div>
@@ -41,45 +41,45 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Bảng danh mục</h4>
-                        <a href={{ route('admin.createCategory') }}
-                            class="mb-4 btn btn-primary btn-rounded waves-effect waves-light">Thêm</a>
+                        <h4 class="header-title">Hình của {{ $post->id }} </h4>
+                        <a href={{ route(Auth::user()->quyen==1?'user.image':'admin.image',['id'=>$post->id]) }}
+                            class="mb-4 btn btn-primary btn-rounded waves-effect waves-light">Thêm hình
+                        </a>
 
                         <table id="basic-datatable" class="table dt-responsive nowrap">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Tên</th>
-                                    <th>Parent</th>
-                                    <th>Trạng thái</th>
+                                    <th>Hình</th>
+                                    <th>Ngày đăng</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
 
 
                             <tbody>
-                                @foreach ($danhMucs as $danhMuc)
-                                <tr id="row_{{ $danhMuc->id }}">
-                                    <td>{{ $danhMuc->id }}</td>
-                                    <td>{{ $danhMuc->ten }}</td>
-                                    <td>{{ $danhMuc->parent_id==null?'0':$danhMuc->parent_id }}</td>
+                                @php
+                                $imageList=$post->getDanhSachHinhs;
+                                @endphp
+                                @foreach ($imageList as $image)
+                                <tr id="row_{{ $image->id }}">
+                                    <td>{{ $image->id }}</td>
                                     <td>
-                                        <input type="checkbox" data-plugin="switchery" data-color="#1bb99a"
-                                            {{ $danhMuc->trangthai==1?'checked':'' }} data-id={{ $danhMuc->id }}
-                                            class="clsTrangThai" />
+                                        <img src="upload/images/{{ $image->link }}" alt={{ $image->link }} height="70">
                                     </td>
                                     <td>
-                                        <a href={{ route('admin.updateCategory', ['id'=>$danhMuc->id]) }}
-                                            class="btn btn-primary waves-effect waves-light"><i
-                                                class="la la-pencil-square"></i>
-                                        </a>
-                                        <button type="button" data-id={{ $danhMuc->id }}
-                                            class="clsXoaDanhMuc btn btn-danger waves-effect waves-light">
+                                        {{ date('d-m-Y', strtotime($image->created_at)) }}
+                                    </td>
+
+                                    <td>
+                                        <button type="button" data-id="{{ $image->id }}"
+                                            class="clsXoaHinh btn btn-danger waves-effect waves-light">
                                             <i class="la la-trash-o"></i>
                                         </button>
                                     </td>
                                 </tr>
                                 @endforeach
+
                             </tbody>
                         </table>
 
@@ -122,79 +122,23 @@
 <script src="asset/admin/js/pages/form-advanced.init.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-
-        $(".clsXoaDanhMuc").click(function (e) {
-            e.preventDefault();
-            var id = $(this).attr('data-id');
-
-            if (confirm("Bạn có muốn xóa không?")) {
-                var url = "{{ url('admin/ajax/xoa-danh-muc') }}/" + id;
-
+    $(document).ready(function() {
+        $('.clsXoaHinh').click(function(){
+            const thisImage=this;
+            const idImage=$(thisImage).data('id');
+            if(window.confirm(`Bạn có muốn xóa hình ${idImage} không?`)){
                 $.ajax({
-                    type: "get",
-                    url: url,
-                    dataType: "html",
+                    type: "GET",
+                    url: "{{ url('image/remove/') }}/"+idImage,
                     success: function (response) {
-                        if (response == 'true') {
-                            $('#row_' + id).remove();
-                            $.toast({
-                                heading: 'Success',
-                                text: 'Xóa thành công',
-                                icon: 'success',
-                                position: 'top-right'
-                            });
-                        } else {
-                            $.toast({
-                                heading: 'oh!',
-                                text: 'Không thể xóa',
-                                icon: 'error',
-                                position: 'top-right'
-                            });
-                            return false;
-                        }
+                      window.location.reload();
+                    },
+                    error: function( error){
+                        console.log(error);
                     }
                 });
             }
-        });
-
-
-        $(".clsTrangThai").change(function (e) {
-            e.preventDefault();
-            var thisTr = this;
-            var id = $(thisTr).data('id');
-            if (window.confirm(`Bạn có muốn thay đổi trạng thái ${id}?`)) {
-                var url = "{{ url('admin/ajax/cap-nhat-trang-thai-danh-muc') }}/" + id;
-
-                $.ajax({
-                    type: "get",
-                    url: url,
-                    dataType: "html",
-                    success: function (response) {
-                        if (response == 'true') {
-                            $.toast({
-                                heading: 'Success',
-                                text: 'Cập nhật trạng thái thành công',
-                                icon: 'success',
-                                position: 'top-right'
-                            });
-                        } else {
-                            $.toast({
-                                heading: 'Oh!',
-                                text: 'Cập nhật trạng thái thất bại',
-                                icon: 'error',
-                                position: 'top-right'
-                            });
-                            $(thisTr).prop('checked', false);
-                            return false;
-                        }
-                    }
-                });
-            }
-
-
         });
     });
-
 </script>
 @endsection

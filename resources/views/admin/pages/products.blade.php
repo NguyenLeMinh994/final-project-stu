@@ -77,6 +77,9 @@
                                             class="clsTrangThai" />
                                     </td>
                                     <td>
+                                        <a href={{ route(Auth::user()->quyen==1?'user.indexImage':'admin.indexImage', ['id'=>$post->id]) }}
+                                            class="btn btn-purple waves-effect waves-light"><i class="fe-image"></i>
+                                        </a>
                                         <a href={{ route(Auth::user()->quyen==1?'user.postUpdatePost':'admin.postUpdatePost', ['id'=>$post->id]) }}
                                             class="btn btn-primary waves-effect waves-light"><i
                                                 class="la la-pencil-square"></i>
@@ -93,6 +96,7 @@
                                             Slide
                                         </button>
                                         @endif
+
                                     </td>
                                 </tr>
                                 @endforeach
@@ -129,7 +133,7 @@
 <script src="asset/admin/libs/pdfmake/vfs_fonts.js"></script>
 <script src="asset/admin/libs/jquery-toast/jquery.toast.min.js"></script>
 <script src="asset/admin/js/pages/toastr.init.js"></script>
-
+<script src="asset/admin/js/pages/datatables.init.js"></script>
 <script src="asset/admin/libs/jquery-nice-select/jquery.nice-select.min.js"></script>
 <script src="asset/admin/libs/switchery/switchery.min.js"></script>
 <script src="asset/admin/libs/select2/select2.min.js"></script>
