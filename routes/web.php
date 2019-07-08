@@ -58,6 +58,8 @@ Route::prefix('user')->middleware('checkLogin')->group(function () {
 
     // 10/6/2019 End
 
+    Route::get('image/upload/{id}', 'Admin\ImagesController@uploadImage')->name('user.image');
+
     //  Ajax
 
 });
@@ -90,9 +92,10 @@ Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
     Route::get('/doi-mat-khau/{id}', 'Admin\LoginController@changePassword')->name('admin.changePassword');
     Route::post('/doi-mat-khau/{id}', 'Admin\LoginController@updateNewPassword')->name('admin.post.changePassword');
 
-    Route::get("/slide/", 'Admin\SildeController@index')->name('admin.slide');
+    Route::get('/slide/', 'Admin\SildeController@index')->name('admin.slide');
 
-    // ajax
+    Route::get('image/upload/{id}', 'Admin\ImagesController@uploadImage')->name('admin.image');
+
     Route::get('/ajax/cap-nhat-trang-thai-danh-muc/{id}', 'Admin\CategoryController@ajaxCapNhatTrangThai')->name('admin.ajaxCapNhatTrangThai');
     Route::get('/ajax/xoa-danh-muc/{id}', 'Admin\CategoryController@ajaxDestroy')->name('admin.ajax.removeCategory');
     Route::get('/ajax/them-slide/{id}', 'Admin\SildeController@addSlideByAjax')->name('admin.ajax.addSlide');
@@ -100,7 +103,9 @@ Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
     Route::get('/ajax/xoa-slide/{id}', 'Admin\SildeController@removeSlideByAjax')->name('admin.ajax.removeSlide');
     Route::get('/ajax/cap-nhat-trang-thai-slide/{id}', 'Admin\SildeController@updateStatusSlideByAjax')->name('admin.ajax.updateStatusSlide');
 });
-
+Route::post('image/upload/store', 'Admin\ImagesController@fileStore')->name('user.uploadImage');
+Route::post('image/delete/{id}', 'Admin\ImagesController@fileDestroy')->name('user.deleteImage');
+//ajax
 Route::get('/ajax/danh-sach-quan/{id}', 'Admin\ProductController@getQuansByAjax');
 Route::get('/ajax/xoa-bai-dang/{id}', 'Admin\ProductController@deletePostByAjax');
 Route::get('/ajax/cap-nhat-trang-thai-bai-dang/{id}', 'Admin\ProductController@updateStatusByAjax');

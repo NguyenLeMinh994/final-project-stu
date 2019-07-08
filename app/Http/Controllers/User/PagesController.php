@@ -53,12 +53,17 @@ class PagesController extends Controller
         return view('user.pages.detail', ['getDetail' => $getDetail]);
     }
 
-    //get danh sách //Trần Thanh Tuấn
+    //get danh sách
     public function getList($id)
     {
         $tinhThanhPhos = $this->getCityList();
-
-        $postList = Loai::find()->getSanPhams;
+        $parentIdList = Loai::where('parent_id', null)->pluck('id')->toArray();
+        $postList = Loai::find($id)->getSanPhams;
+        // dd($parentIdList);
+        if (in_array($id, $parentIdList)) {
+            $postList = Loai::find($id)->getPosts;
+        }
+        // $postList = Loai::find($id)->getSanPhams;
         return view('user.pages.list', compact('postList', 'tinhThanhPhos'));
     }
 

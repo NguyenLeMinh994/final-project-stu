@@ -45,8 +45,8 @@ return [
     // You should create routes to serve images if it is not set to public.
     'base_directory' => 'public',
 
-    'images_folder_name' => 'photos',
-    'files_folder_name'  => 'files',
+    'images_folder_name' => 'storage/photos',
+    'files_folder_name'  => 'storage/files',
 
     'shared_folder_name' => 'shares',
     'thumb_folder_name'  => 'thumbs',
@@ -110,7 +110,7 @@ return [
 
     // permissions to be set on file upload.
     'create_file_mode' => 0644,
-    
+
     // If true, it will attempt to chmod the file after upload
     'should_change_file_mode' => true,
 
