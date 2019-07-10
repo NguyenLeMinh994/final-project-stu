@@ -131,7 +131,8 @@
                     type: "GET",
                     url: "{{ url('image/remove/') }}/"+idImage,
                     success: function (response) {
-                      window.location.reload();
+                     console.log(response);
+                     
                     },
                     error: function( error){
                         console.log(error);

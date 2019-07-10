@@ -12,7 +12,7 @@ function jamReadNumForVietnamese($num = false)
         $r = explode(',', $f);
         switch (count($r)) {
             case 4:
-                $str = $r[0] . ' tỉ';
+                $str = $r[0] . ' tỷ';
                 if ((int) $r[1]) {
                     $str .= ' ' . $r[1] . ' triệu';
                 }
@@ -31,5 +31,5 @@ function jamReadNumForVietnamese($num = false)
                 break;
         }
     }
-    return ($str);
+    return ($str . ' VND');
 }

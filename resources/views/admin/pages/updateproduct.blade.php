@@ -65,7 +65,7 @@
                             <div class="form-group">
                                 <label for="inputAddress" class="col-form-label">Tên bài</label>
                                 <input type="text" class="form-control" id="inputAddress" name="txtTen"
-                                    placeholder="Nhập tên bài" value={{ $post->ten }}>
+                                    placeholder="Nhập tên bài" value="{{ $post->ten }}">
                             </div>
 
                             <div class="row">
@@ -80,7 +80,7 @@
                                     <div class="form-group">
                                         <label for="inputState" class="col-form-label">Danh mục</label>
                                         <select class="form-control" data-toggle="select2" name="sltDanhMuc">
-                                            <option value="">Chọn loại</option>
+                                            <option value="">Chọn danh mục</option>
                                             @foreach ($danhMucChas as $danhMucCha)
                                             <option value={{ $danhMucCha->id }}
                                                 {{ $post->id_loai==$danhMucCha->id?'selected':'' }}>
@@ -116,7 +116,7 @@
                                         <label for="inputState" class="col-form-label">Quận</label>
                                         <select class="form-control" data-toggle="select2" name="sltQuan" id="idQuan"
                                             data-id-quan={{ $post->id_quan }}>
-                                            <option value="">Quận</option>
+                                            <option value="">Chọn quận</option>
                                         </select>
                                     </div>
 
@@ -227,11 +227,47 @@
         };
         CKEDITOR.replace('noidung',options);
         
+        $("input[name='txtGia']").on('keyup', function () {
+            const thisPrice=$(this);
+            var input = thisPrice.val();
+            input = input.replace(/[\D\s\._\-]+/g, "");
+            
+            input = input ? parseInt(input, 10) : 0;
+            
+            thisPrice.val(function () {
+                return (input === 0) ? "" : input.toLocaleString();
+            });
+        });
+        function pasteFormatNumber() {
+            const thisPrice=$("input[name='txtGia']");
+            var input = thisPrice.val();
+            input = input.replace(/[\D\s\._\-]+/g, "");
+            
+            input = input ? parseInt(input, 10) : 0;
+            
+            thisPrice.val(function () {
+                return (input === 0) ? "" : input.toLocaleString();
+            });
+        }
+
+        $("input[name='txtGia']").on('focus', function () {
+            const thisPrice=$(this);
+            var input = thisPrice.val();
+            input = input.replace(/[\D\s\._\-]+/g, "");
+            
+            input = input ? parseInt(input, 10) : 0;
+            
+            thisPrice.val(function () {
+                return (input === 0) ? "" : input.toLocaleString();
+            });
+        });
+
+      
         $('#idThanhPho').change(function (e) {
             e.preventDefault();
             var idThanhPho = $(this).val();
             var idQuan = $('#idQuan');
-            var url = "{{ url('/user/ajax/danh-sach-quan/') }}/" + idThanhPho;
+            var url = "{{ url('/ajax/danh-sach-quan/') }}/" + idThanhPho;
             var htmlQuan = `<option value="">Quận</option>`;
             if (idThanhPho == '') {
                 idQuan.html(htmlQuan);
@@ -278,6 +314,7 @@
             
         }
         getQuan();
+        pasteFormatNumber();
 
     });
 </script>

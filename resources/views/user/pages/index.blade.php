@@ -61,17 +61,21 @@
               <div class="text p-3">
                 <span class="status sale">Mới</span>
                 <div class="d-flex">
-                  <div class="one">
-                    <h3><a href="{{ route('detail', ['id'=> $newPost->id]) }}">
-                        {!! str_limit($newPost->ten, $limit = 20, $end = '...') !!}
-                      </a>
-                    </h3>
-                    {{-- <p>Apartment</p> --}}
-                  </div>
-                  <div class="two">
+
+                  <div class="gia">
                     <span class="price">{{ jamReadNumForVietnamese($newPost->gia) }}</span>
                   </div>
                 </div>
+
+                <div class="ten3">
+                  <h3><a href="{{ route('detail', ['id'=> $newPost->id]) }}">
+                      {!! str_limit($newPost->ten, $limit = 20, $end = '...') !!}
+                    </a>
+                  </h3>
+                </div>
+
+                {{-- <p>Apartment</p> --}}
+
               </div>
             </div>
           </div>
@@ -109,17 +113,15 @@
           <div class="text p-3">
             <span class="status sale">Sale</span>
             <div class="d-flex">
-              <div class="one">
-                <h3><a href="{{ route('detail', ['id'=>$post->id]) }}">{{ $post->ten }}</a></h3>
-                {{-- <p>Apartment</p> --}}
-              </div>
-              <div class="two">
+              <div class="gia">
                 <span class="price">{{ jamReadNumForVietnamese($post->gia) }}</span>
               </div>
+
             </div>
-            <p>
-              {!! str_limit($post->noidung, $limit = 50, $end = '...') !!}
-            </p>
+            <div class="ten3">
+              <h3><a href="{{ route('detail', ['id'=>$post->id]) }}">{{ $post->ten }}</a></h3>
+              {{-- <p>Apartment</p> --}}
+            </div>
             <hr>
             <p class="bottom-area d-flex">
               <span><i class="flaticon-selection"></i> 250sqft</span>

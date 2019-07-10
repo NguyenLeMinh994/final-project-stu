@@ -107,7 +107,7 @@ Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
 });
 // image
 Route::post('image/upload/store', 'Admin\ImagesController@fileStore')->name('user.uploadImage');
-Route::post('image/delete/{id}', 'Admin\ImagesController@fileDestroy')->name('user.deleteImage');
+Route::post('image/delete/', 'Admin\ImagesController@fileDestroy')->name('user.deleteImage');
 Route::get('image/remove/{id}', 'Admin\ImagesController@removeImage')->name('user.removeImage');
 // image
 

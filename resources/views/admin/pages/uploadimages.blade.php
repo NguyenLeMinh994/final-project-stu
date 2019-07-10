@@ -110,10 +110,14 @@
                                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                             },
                     type: 'POST',
-                    url: '{{ route("user.deleteImage",["id"=>$id]) }}',
-                    data: {filename: name},
+                    url: '{{ route("user.deleteImage") }}',
+                    data: {
+                        filename: name,
+                        },
                     success: function (data){
-                        console.log("File has been successfully removed!!");
+                        console.log(data);
+                        
+                        // console.log("File has been successfully removed!!");
                     },
                     error: function(e) {
                         console.log(e);

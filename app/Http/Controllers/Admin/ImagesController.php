@@ -24,7 +24,6 @@ class ImagesController extends Controller
     public function removeImage($id)
     {
         $image = DanhSachHinh::find($id);
-
         $link = $image->link;
         $path = public_path('upload/images/' . $link);
         if (file_exists($path)) {
@@ -46,14 +45,14 @@ class ImagesController extends Controller
         $imageUpload->save();
         return response()->json(['success' => $imageName]);
     }
-    public function fileDestroy(Request $request, $id)
+    public function fileDestroy(Request $request)
     {
         $filename =  $request->get('filename');
-        DanhSachHinh::where('id', $id)->delete();
+        $a = DanhSachHinh::where('link', $filename)->delete() ? '1' : '0';
         $path = public_path('upload/images/' . $filename);
         if (file_exists($path)) {
             unlink($path);
         }
-        return $id;
+        return $a;
     }
 }
