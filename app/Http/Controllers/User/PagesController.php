@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\User;
-use App\Loai;
 use App\TinhThanhPho;
 use App\Quan;
 use App\Slide;
 use App\SanPham;
 use App\DanhSachHinh;
 use Carbon\Carbon;
+use DB;
+use App\Loai;
 
 class PagesController extends Controller
 {
@@ -49,8 +50,15 @@ class PagesController extends Controller
         // $countDate = Carbon::parse($getDetail->created_at)->diffInDays(Carbon::now());
         $getDetail->views = (int) ($getDetail->views + 1);
         $getDetail->save();
-        // $sp_khac = sanpham::where('id_loai', $getDetail->id_loai)->paginate(6);
-        return view('user.pages.detail', ['getDetail' => $getDetail]);
+        $otherCategories = DB::select(
+            'SELECT l2.*
+            FROM loai l1,loai l2
+            Where l1.parent_id=l2.parent_id and l1.id=?',
+            [$id]
+        );
+        $randomPost = SanPham::where('trangthai', 1)->inRandomOrder()->limit(4)->get();
+        // dd($randomPost);
+        return view('user.pages.detail', compact(['getDetail', 'otherCategories', 'randomPost']));
     }
 
     //get danh sách
@@ -127,7 +135,7 @@ class PagesController extends Controller
 
     // Nguyễn Lê Minh End
 
-    //get trang liên hệ 
+    //get trang liên hệ
     public function contact()
     {
         return view('user.pages.contact');

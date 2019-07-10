@@ -14,6 +14,7 @@ class Loai extends Model
         return $this->hasMany('App\Loai', 'parent_id', 'id');
     }
 
+
     public function getSanPhams()
     {
         return $this->hasMany('App\SanPham', 'id_loai');

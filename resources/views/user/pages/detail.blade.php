@@ -99,39 +99,36 @@
                 </div>
                 <div class="sidebar-box ftco-animate">
                     <h3>BÀI VIẾT LIÊN QUAN</h3>
-                    {{-- @foreach($sp_khac as $sp_k)
+                    @foreach($randomPost as $post)
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(upload/{{$sp_k->hinhdaidien}});"></a>
-                    <div class="text">
-                        <h3 class="ten4"><a href="#">
-                                <h6>{{catchuoi($sp_k->ten)}}</h6>
-                            </a></h3>
-                        <div class="meta">
-                            <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                            <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                        <a class="blog-img mr-4" style="background-image: url(upload/{{$post->hinhdaidien}});"></a>
+                        <div class="text">
+                            <h3 class="ten4"><a href="{{ route('detail', ['id'=>$post->id]) }}">
+                                    <h6>{{$post->ten}}</h6>
+                                </a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                {{-- <div><a href="#"><span class="icon-chat"></span> 19</a></div> --}}
+                            </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach --}}
-            </div>
 
-            <div class="sidebar-box ftco-animate">
-                <h3>Tag Cloud</h3>
-                <div class="tagcloud">
-                    <a href="#" class="tag-cloud-link">dish</a>
-                    <a href="#" class="tag-cloud-link">menu</a>
-                    <a href="#" class="tag-cloud-link">food</a>
-                    <a href="#" class="tag-cloud-link">sweet</a>
-                    <a href="#" class="tag-cloud-link">tasty</a>
-                    <a href="#" class="tag-cloud-link">delicious</a>
-                    <a href="#" class="tag-cloud-link">desserts</a>
-                    <a href="#" class="tag-cloud-link">drinks</a>
+                <div class="sidebar-box ftco-animate">
+                    <h3>Tag Cloud</h3>
+                    <div class="tagcloud">
+                        @foreach ($otherCategories as $categories)
+                        <a href="{{ route('list', ['id'=>$categories->id]) }}"
+                            class="tag-cloud-link">{{$categories->ten}}</a>
+                        @endforeach
+
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
     </div>
 </section>
 <!-- .section -->
