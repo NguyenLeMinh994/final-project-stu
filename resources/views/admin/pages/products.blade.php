@@ -77,6 +77,7 @@
                                             class="clsTrangThai" />
                                     </td>
                                     <td>
+                                        @if (Auth::user()->quyen!=0 && empty($post->getSlide))
                                         <a href={{ route(Auth::user()->quyen==1?'user.indexImage':'admin.indexImage', ['id'=>$post->id]) }}
                                             class="btn btn-purple waves-effect waves-light"><i class="fe-image"></i>
                                         </a>
@@ -88,12 +89,12 @@
                                             class="clsXoaBaiDang btn btn-danger waves-effect waves-light">
                                             <i class="la la-trash-o"></i>
                                         </button>
+                                        @endif
 
-                                        @if (Auth::user()->quyen==0 && empty($post->getSlide) )
-
-                                        <button type="button" data-id="{{ $post->id }}"
-                                            class="clsSlide btn btn-light waves-effect ">
-                                            Slide
+                                        @if (Auth::user()->quyen==0 && empty($post->getSlide))
+                                        <button type="button" class="clsSlide btn btn-light waves-effect"
+                                            data-id="{{ $post->id }}">
+                                            Add Slide
                                         </button>
                                         @endif
 
@@ -144,6 +145,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+
     $('.clsXoaBaiDang').click(function(e) {
         e.preventDefault();
         var idPost = $(this).data('id');
@@ -213,7 +215,6 @@
     });
 
     $('.clsSlide').click(function(e) {
-        e.preventDefault();
         const postId = $(this).data('id');
         const thisSlide = this;
 
@@ -223,7 +224,7 @@
             $.ajax({
             type: "GET",
             url: url,
-
+            dataType: "html",
             success: function(response) {
                 console.log('Show', response);
 
@@ -256,7 +257,11 @@
                     $(thisSlide).remove();
                 }
 
+            },
+            error:function(err){
+                console.log(err);
             }
+            
         });
         }
     });

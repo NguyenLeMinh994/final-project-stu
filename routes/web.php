@@ -141,6 +141,7 @@ Route::get('/ajax/danh-sach-quan/{id}', 'User\AjaxController@getQuansByAjax');
 Route::get('/chi-tiet/{id}', 'User\PagesController@getDetail')->name('detail');
 Route::get('/danh-sach/{id}', 'User\PagesController@getList')->name('list');
 Route::get('/contact', 'User\PagesController@contact')->name('contact');
+Route::post('/contact', 'User\PagesController@postContact')->name('postContact');
 Route::get('/about', 'User\PagesController@about')->name('about');
 //Trần Thanh Tuấn END
 

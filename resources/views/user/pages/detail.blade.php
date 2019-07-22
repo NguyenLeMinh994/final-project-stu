@@ -76,7 +76,7 @@
             <div class="col-lg-4 sidebar ftco-animate">
                 <div class="sidebar-box ftco-animate">
                     <div class="categories">
-                        <h3>LOẠI BẤT ĐỘNG SẢN</h3>
+                        {{-- <h3>LOẠI BẤT ĐỘNG SẢN</h3> --}}
                         {{-- @if (count($loaiOfMenus)>0)
                         @foreach ($loaiOfMenus as $item)
                         <li>{{ $item->ten }}</li>

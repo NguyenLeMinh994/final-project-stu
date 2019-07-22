@@ -7,49 +7,61 @@
 	<div class="container">
 		<div class="row no-gutters slider-text align-items-center justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
-				<p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">Home</a></span> <span>Giới
-						Thiệu</span></p>
+				<p class="breadcrumbs"><span class="mr-2"><a href="{{ route('home') }}">HOME</a></span> | <span>GIỚI
+						THIỆU</span></p>
 				<h1 class="mb-3 bread">Giới Thiệu</h1>
 			</div>
 		</div>
 	</div>
 </div>
 
-<section class="ftco-section ftc-no-pb">
+<section class="ftco-section contact-section bg-light">
 	<div class="container">
-		<div class="row no-gutters">
-			<div class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center"
-				style="background-image: url(asset/user/images/bg_1.jpg);">
-				<a href="https://vimeo.com/45830194"
-					class="icon popup-vimeo d-flex justify-content-center align-items-center">
-					<span class="icon-play"></span>
-				</a>
+		<div class="row d-flex mb-5 contact-info">
+			<div class="col-md-6 mb-4">
+				<h2 class="h3" style="color: blue; font-weight: bold;">GIỚI THIỆU VỀ WEBSITE:</h2>
 			</div>
-			<div class="col-md-7 wrap-about pb-md-5 ftco-animate">
-				<div class="heading-section heading-section-wo-line mb-5 pl-md-5">
-					<div class="pl-md-5 ml-md-5">
-						<span class="subheading">Tổng quan</span>
-						<h2 class="mb-4">Am hiểu về lĩnh vực Bất đông sản</h2>
-					</div>
+			<div class="w-100"></div>
+			<div class="col-md-6 d-flex">
+				<div class="info bg-white p-4">
+					<p><video controls autoplay="" width="500" height="350">
+							<source src="upload/about.mp4" type="video/mp4" />
+						</video></p>
+					<p style="color: blue; font-size: 30px; "><span>Các dịch vụ chính:</span></p>
+					<p><span>- Đăng thông tin quảng cáo nhà đất;<br>
+							- Đăng banner quảng cáo;<br>
+							- Đăng bài PR quảng bá sản phẩm, dịch vụ;<br>
+							- Danh bạ doanh nghiệp;<br>
+							- Danh bạ các nhà môi giới nhà đất số 1.</span></p>
 				</div>
-				<div class="pl-md-5 ml-md-5 mb-5">
-					<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it
-						would have been rewritten a thousand times and everything that was left from its origin would be
-						the word "and" and the Little Blind Text should turn around and return to its own, safe country.
-						But nothing the copy said could convince her and so it didn’t take long until a few insidious
-						Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their
-						agency, where they abused her for their.</p>
-					<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline
-						of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own
-						road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.
+			</div>
+			<div class="col-md-6 d-flex" style="text-align: justify;">
+				<div class="info bg-white p-4">
+					<p><span>- Đi đầu về công nghệ, số lượng tin rao cũng như chất lượng tin tức, Batdongsan.com.vn được
+							tổ chức đánh giá website danh tiếng là Comscore và SimilarWeb đánh giá là kênh thông tin về
+							bất động sản có lượng truy cập lớn nhất Đông Nam Á, vượt trội so với các website hàng đầu
+							trong cùng lĩnh vực ở các quốc gia trong khu vực như Singapore, Malaysia, Indonesia… (tham
+							khảo số liệu thống kê chi tiết tại đây).</span></p>
+					<p><span>- Hiện nay, mỗi tháng, website cập nhật hơn 1 triệu tin rao mới, đạt 10 triệu lượt truy cập
+							(visits) và 70 triệu lượt xem trang (pageviews). Cùng với đó, mọi diễn biến mới nhất về thị
+							trường bất động sản được phản ánh kịp thời, chính xác và đầy đủ nhất. Với lượng truy cập dẫn
+							đầu, là chuyên trang bất động sản có số lượng tin đăng và nội dung phong phú nhất Việt Nam,
+							Batdongsan.com.vn đã mang đến cho khách hàng những lợi thế cạnh tranh cao nhất, không những
+							đẩy mạnh doanh số bán hàng mà còn thúc đẩy phát triển thương hiệu. Trong nhiều năm qua,
+							Batdongsan.com.vn đã trở thành đối tác tin cậy và thường xuyên của hầu hết các chủ đầu tư,
+							sàn giao dịch, nhà môi giới cá nhân ở Việt Nam và cả trên thế giới.</span></p>
+					<p><span>- Đến nay, bên cạnh trụ sở chính tại Hà Nội, Batdongsan.com.vn đã xây dựng thêm 8 chi nhánh
+							tại các địa phương trên cả nước là Hải Phòng, Đà Nẵng, Nha Trang, Tp.HCM, Bình Dương, Bà Rịa
+							- Vũng Tàu, Cần Thơ, Đồng Nai để phục vụ khách hàng một cách tốt nhất.</span></p>
+					<p><span><a href="{{ route('home') }}" class="btn-custom" style="color: red;">Quay về >>></a></span>
 					</p>
-					<p><a href="{{ route('home') }}" class="btn-custom">Quay về <span
-								class="ion-ios-arrow-forward"></span></a></p>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
+
+
 
 <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_1.jpg);">
 	<div class="container">

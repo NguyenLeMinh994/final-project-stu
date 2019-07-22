@@ -12,7 +12,7 @@ use App\Slide;
 use App\SanPham;
 use App\DanhSachHinh;
 use Carbon\Carbon;
-use DB;
+use DB, Mail;
 use App\Loai;
 
 class PagesController extends Controller
@@ -138,6 +138,19 @@ class PagesController extends Controller
     public function contact()
     {
         return view('user.pages.contact');
+    }
+
+    public function postContact(Request $request)
+    {
+        $data = ['hoten' => $request->input('name'), 'email' => $request->input('email'), 'tinnhan' => $request->input('message')];
+        Mail::send('user.emails.blaks', $data, function ($mess) {
+            $mess->from('rvbatdongsan@gmail.com', 'Thanh Tuấn');
+            $mess->to('rvbatdongsan@gmail.com', 'Tuan Thanh')->subject('đây là Mail BDS');
+        });
+        echo "<script>
+            alert('Cảm ơn bạn đã góp ý. Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất');
+            window.location =  '" . url('/') . "'
+        </script>";
     }
 
     public function about()

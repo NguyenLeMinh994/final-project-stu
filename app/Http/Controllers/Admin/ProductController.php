@@ -280,7 +280,7 @@ class ProductController extends Controller
 
     public function getPostList()
     {
-        $posts = SanPham::all();
+        $posts = SanPham::orderBy('id', 'DESC')->get();
         return view('admin.pages.products', ['posts' => $posts]);
     }
 
