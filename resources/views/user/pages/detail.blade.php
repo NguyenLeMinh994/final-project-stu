@@ -139,13 +139,28 @@
 @section('js')
 <script>
     function initMap() {
-        var uluru = {lat: {{$getDetail->latitude}}, lng: {{$getDetail->longitude}}};
-        var map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 17, center: uluru});
-        var marker = new google.maps.Marker({position: uluru, map: map});
+       
+        const infoItem=`<div style='float:left'><img src='upload/{{$getDetail->hinhdaidien}}' width='100' height='100'></div>
+        <div style='float:right; padding: 10px;'><b>{{$getDetail->ten}}</b><br /> {{  $getDetail->diachi }}, {{ $getDetail->getQuan->ten }},{{$getDetail->getTinhThanhPho->ten}}</div>`;
+        const uluru = {lat: {{$getDetail->latitude}}, lng: {{$getDetail->longitude}} };
+        const map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 17, center: uluru
+        });
+
+        const marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+        });
+           
+        const infowindow = new google.maps.InfoWindow({
+            content:infoItem
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map,marker);
+        });
       }
 </script>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaSfNEU1ZIOydsCy1JtSSevejrbpHcAp4&callback=initMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_API_KEY') }}&callback=initMap">
 </script>
 @endsection

@@ -24,9 +24,12 @@
 			<div class="w-100"></div>
 			<div class="col-md-6 d-flex">
 				<div class="info bg-white p-4">
-					<p><video controls autoplay="" width="500" height="350">
-							<source src="upload/about.mp4" type="video/mp4" />
-						</video></p>
+					<p>
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/xseLtZfJRAM" frameborder="0"
+							allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+							allowfullscreen></iframe>
+
+					</p>
 					<p style="color: blue; font-size: 30px; "><span>Các dịch vụ chính:</span></p>
 					<p><span>- Đăng thông tin quảng cáo nhà đất;<br>
 							- Đăng banner quảng cáo;<br>

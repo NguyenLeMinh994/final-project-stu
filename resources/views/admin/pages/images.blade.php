@@ -41,7 +41,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Hình của {{ $post->id }} </h4>
+                        <h4 class="header-title">Hình của bài viết số {{ $post->id }} </h4>
                         <a href={{ route(Auth::user()->quyen==1?'user.image':'admin.image',['id'=>$post->id]) }}
                             class="mb-4 btn btn-primary btn-rounded waves-effect waves-light">Thêm hình
                         </a>

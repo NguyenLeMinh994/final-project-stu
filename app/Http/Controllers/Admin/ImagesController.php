@@ -32,6 +32,7 @@ class ImagesController extends Controller
         }
         return response()->json(['success' => $link]);
     }
+
     public function fileStore(Request $request)
     {
         $image = $request->file('file');
@@ -45,6 +46,7 @@ class ImagesController extends Controller
         $imageUpload->save();
         return response()->json(['success' => $imageName]);
     }
+
     public function fileDestroy(Request $request)
     {
         $filename =  $request->get('filename');

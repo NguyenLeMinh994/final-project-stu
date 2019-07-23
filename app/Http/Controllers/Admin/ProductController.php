@@ -292,15 +292,24 @@ class ProductController extends Controller
 
     public function deletePostByAjax($idPost)
     {
-        $checkDel = 'false';
+        $checkDel = 'Fail';
         $post = SanPham::findOrfail($idPost);
-        $file_path = public_path('upload/' . $post->hinhdaidien);
-        if (File::exists($file_path)) {
-            if (File::delete($file_path)) {
-                if ($post->delete()) {
-                    $checkDel = 'true';
-                }
+
+        $images = $post->getDanhSachHinhs();
+        if ($images->count() > 0) {
+            $pathImages = "upload/images/";
+            foreach ($images->get() as $image) {
+                File::delete($pathImages . $image->link);
             }
+            $images->delete();
+            $checkDel = 'image';
+        }
+        $file_path = public_path("upload/" . $post->hinhdaidien);
+        if (File::exists($file_path)) {
+            File::delete($file_path);
+        }
+        if ($post->delete()) {
+            $checkDel = 'OK';
         }
         return $checkDel;
     }

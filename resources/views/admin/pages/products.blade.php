@@ -45,7 +45,7 @@
                         <a href={{ route(Auth::user()->quyen==1?'user.createPost':'admin.createPost') }}
                             class="mb-4 btn btn-primary btn-rounded waves-effect waves-light">Thêm</a>
 
-                        <table id="basic-datatable" class="table dt-responsive nowrap">
+                        <table id="scroll-vertical-datatable" class="table dt-responsive nowrap">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -66,7 +66,7 @@
                                         <img src="upload/{{ $post->hinhdaidien }}" alt={{ $post->ten }} height="70">
                                     </td>
                                     <td>
-                                        {{ str_limit($post->ten, $limit = 20, $end = ' ...') }}
+                                        {{ str_limit($post->ten, $limit = 10, $end = ' ...') }}
                                     </td>
                                     <td>
                                         {{ date('d-m-Y', strtotime($post->created_at)) }}
@@ -77,7 +77,7 @@
                                             class="clsTrangThai" />
                                     </td>
                                     <td>
-                                        @if (Auth::user()->quyen!=0 && empty($post->getSlide))
+                                        @if (Auth::user()->quyen!= 0)
                                         <a href={{ route(Auth::user()->quyen==1?'user.indexImage':'admin.indexImage', ['id'=>$post->id]) }}
                                             class="btn btn-purple waves-effect waves-light"><i class="fe-image"></i>
                                         </a>
@@ -133,8 +133,7 @@
 <script src="asset/admin/libs/pdfmake/pdfmake.min.js"></script>
 <script src="asset/admin/libs/pdfmake/vfs_fonts.js"></script>
 <script src="asset/admin/libs/jquery-toast/jquery.toast.min.js"></script>
-<script src="asset/admin/js/pages/toastr.init.js"></script>
-<script src="asset/admin/js/pages/datatables.init.js"></script>
+
 <script src="asset/admin/libs/jquery-nice-select/jquery.nice-select.min.js"></script>
 <script src="asset/admin/libs/switchery/switchery.min.js"></script>
 <script src="asset/admin/libs/select2/select2.min.js"></script>
@@ -142,7 +141,8 @@
 <script src="asset/admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
 <script src="asset/admin/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
 <script src="asset/admin/js/pages/form-advanced.init.js"></script>
-
+<script src="asset/admin/js/pages/toastr.init.js"></script>
+<script src="asset/admin/js/pages/datatables.init.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -157,7 +157,9 @@
                 url: url,
                 dataType: "html",
                 success: function(response) {
-                    if (response == 'true') {
+                    console.log(response);
+                    
+                    if (response == 'OK') {
                         $('#row_' + idPost).remove();
                         $.toast({
                             heading: 'Success',
@@ -172,7 +174,7 @@
                             icon: 'error',
                             position: 'top-right'
                         });
-                        return;
+                
                     }
                 }
             });

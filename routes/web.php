@@ -28,8 +28,8 @@ Route::post('/dang-nhap', 'Admin\LoginController@postLogin')->name('postLogin');
 Route::get('/dang-xuat', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/admin-temp', function () {
-    $a = App\User::where('id', 1)->first();
-    return $a->dienthoai;
+
+    return view('admin.pages.customer');
 });
 //Đăng ký End
 // Nguyễn Lê Minh End
