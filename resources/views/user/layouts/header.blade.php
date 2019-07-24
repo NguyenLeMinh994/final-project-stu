@@ -42,7 +42,6 @@
         </li>
         @endforeach
         @endif
-        <li class="nav-item"><a href="agents.html" class="nav-link">Thành Viên</a></li>
         <li class="nav-item"><a href="{{ route('about') }}" class="nav-link">Giới Thiệu</a></li>
         <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Liên Hệ</a></li>
 

@@ -31,7 +31,7 @@
                             @foreach($getDetail->getDanhSachHinhs as $hinh)
                             <div class="item">
                                 <div class="properties-img"
-                                    style="background-image: url(asset/user/images/{{$hinh->link}});">
+                                    style="background-image: url(upload/images/{{$hinh->link}});">
                                 </div>
                             </div>
                             @endforeach
@@ -76,7 +76,7 @@
             <div class="col-lg-4 sidebar ftco-animate">
                 <div class="sidebar-box ftco-animate">
                     <div class="categories">
-                        <h3>LOẠI BẤT ĐỘNG SẢN</h3>
+                        {{-- <h3>LOẠI BẤT ĐỘNG SẢN</h3> --}}
                         {{-- @if (count($loaiOfMenus)>0)
                         @foreach ($loaiOfMenus as $item)
                         <li>{{ $item->ten }}</li>
@@ -99,39 +99,36 @@
                 </div>
                 <div class="sidebar-box ftco-animate">
                     <h3>BÀI VIẾT LIÊN QUAN</h3>
-                    {{-- @foreach($sp_khac as $sp_k)
+                    @foreach($randomPost as $post)
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(upload/{{$sp_k->hinhdaidien}});"></a>
-                    <div class="text">
-                        <h3 class="ten4"><a href="#">
-                                <h6>{{catchuoi($sp_k->ten)}}</h6>
-                            </a></h3>
-                        <div class="meta">
-                            <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                            <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                        <a class="blog-img mr-4" style="background-image: url(upload/{{$post->hinhdaidien}});"></a>
+                        <div class="text">
+                            <h3 class="ten4"><a href="{{ route('detail', ['id'=>$post->id]) }}">
+                                    <h6>{{$post->ten}}</h6>
+                                </a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                {{-- <div><a href="#"><span class="icon-chat"></span> 19</a></div> --}}
+                            </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach --}}
-            </div>
 
-            <div class="sidebar-box ftco-animate">
-                <h3>Tag Cloud</h3>
-                <div class="tagcloud">
-                    <a href="#" class="tag-cloud-link">dish</a>
-                    <a href="#" class="tag-cloud-link">menu</a>
-                    <a href="#" class="tag-cloud-link">food</a>
-                    <a href="#" class="tag-cloud-link">sweet</a>
-                    <a href="#" class="tag-cloud-link">tasty</a>
-                    <a href="#" class="tag-cloud-link">delicious</a>
-                    <a href="#" class="tag-cloud-link">desserts</a>
-                    <a href="#" class="tag-cloud-link">drinks</a>
+                <div class="sidebar-box ftco-animate">
+                    <h3>Tag Cloud</h3>
+                    <div class="tagcloud">
+                        @foreach ($otherCategories as $categories)
+                        <a href="{{ route('list', ['id'=>$categories->id]) }}"
+                            class="tag-cloud-link">{{$categories->ten}}</a>
+                        @endforeach
+
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
     </div>
 </section>
 <!-- .section -->
@@ -142,13 +139,28 @@
 @section('js')
 <script>
     function initMap() {
-        var uluru = {lat: {{$getDetail->latitude}}, lng: {{$getDetail->longitude}}};
-        var map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 17, center: uluru});
-        var marker = new google.maps.Marker({position: uluru, map: map});
+       
+        const infoItem=`<div style='float:left'><img src='upload/{{$getDetail->hinhdaidien}}' width='100' height='100'></div>
+        <div style='float:right; padding: 10px;'><b>{{$getDetail->ten}}</b><br /> {{  $getDetail->diachi }}, {{ $getDetail->getQuan->ten }},{{$getDetail->getTinhThanhPho->ten}}</div>`;
+        const uluru = {lat: {{$getDetail->latitude}}, lng: {{$getDetail->longitude}} };
+        const map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 17, center: uluru
+        });
+
+        const marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+        });
+           
+        const infowindow = new google.maps.InfoWindow({
+            content:infoItem
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map,marker);
+        });
       }
 </script>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaSfNEU1ZIOydsCy1JtSSevejrbpHcAp4&callback=initMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_API_KEY') }}&callback=initMap">
 </script>
 @endsection

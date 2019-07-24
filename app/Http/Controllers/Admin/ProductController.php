@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -18,9 +19,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $posts = SanPham::where('id_user',Auth::user()->id)->get();
+        $posts = SanPham::where('id_user', Auth::user()->id)->get();
         return view('admin.pages.products', ['posts' => $posts]);
     }
 
@@ -52,7 +54,7 @@ class ProductController extends Controller
             'txtDienTich' => 'required|integer|numeric|min:0',
             'txtPhongNgu' => 'required|integer|numeric|min:0',
             'txtPhongTam' => 'required|integer|numeric|min:0',
-            'txtGia'      => 'required|integer|numeric|min:0',
+            'txtGia'      => 'required|regex:/^[0-9]{1,3}(,[0-9]{3})*(\.[0-9])*$/|min:0',
             'txtKinhDo'   => 'required|numeric',
             'txtViDo'     => 'required|numeric',
             'sltDanhMuc'  => 'required',
@@ -87,8 +89,7 @@ class ProductController extends Controller
             'txtPhongTam.min'      => 'Phòng tắm phải là số dương',
 
             'txtGia.required' => 'Vui lòng nhập giá',
-            'txtGia.integer'  => 'Giá nhập số nguyên',
-            'txtGia.numeric'  => 'Giá nhập số',
+            'txtGia.regex'  => 'Giá nhập số',
             'txtGia.min'      => 'Giá phải là số dương',
 
             'txtKinhDo.required' => 'Vui lòng nhập kinh độ',
@@ -116,7 +117,7 @@ class ProductController extends Controller
         $post->hinhdaidien = $imageName;
         $post->noidung = $request->txtNoiDung;
         $post->diachi = $request->txtDiaChi;
-        $post->gia = $request->txtGia;
+        $post->gia = $this->changeNumberToInteger($request->txtGia);
         $post->latitude = $request->txtViDo;
         $post->longitude = $request->txtKinhDo;
         $post->phongtam = $request->txtPhongTam;
@@ -175,7 +176,7 @@ class ProductController extends Controller
             'txtDienTich' => 'required|integer|numeric|min:0',
             'txtPhongNgu' => 'required|integer|numeric|min:0',
             'txtPhongTam' => 'required|integer|numeric|min:0',
-            'txtGia'      => 'required|integer|numeric|min:0',
+            'txtGia'      => 'required|regex:/^[0-9]{1,3}(,[0-9]{3})*(\.[0-9])*$/|min:0',
             'txtKinhDo'   => 'required|numeric',
             'txtViDo'     => 'required|numeric',
             'sltDanhMuc'  => 'required',
@@ -209,8 +210,7 @@ class ProductController extends Controller
             'txtPhongTam.min'      => 'Phòng tắm phải là số dương',
 
             'txtGia.required' => 'Vui lòng nhập giá',
-            'txtGia.integer'  => 'Giá nhập số nguyên',
-            'txtGia.numeric'  => 'Giá nhập số',
+            'txtGia.regex'  => 'Giá phải nhập số',
             'txtGia.min'      => 'Giá phải là số dương',
 
             'txtKinhDo.required' => 'Vui lòng nhập kinh độ',
@@ -224,12 +224,13 @@ class ProductController extends Controller
             'sltQuan.required'     => 'Vui lòng chọn quận',
         ];
         $checkUploadImage = false;
+
         if ($request->hasFile('fileHinh')) {
             $rules['fileHinh'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
             $messages['fileHinh.required'] = 'Vui lòng chọn file hình';
             $messages['fileHinh.image'] = 'Đây không phải là hình';
             $messages['fileHinh.mimes'] = 'Đuôi file hình là jpeg,png,jpg,gif,svg';
-            
+
             $checkUploadImage = true;
         }
         $request->validate($rules, $messages);
@@ -248,7 +249,7 @@ class ProductController extends Controller
         }
         $post->noidung = $request->txtNoiDung;
         $post->diachi = $request->txtDiaChi;
-        $post->gia = $request->txtGia;
+        $post->gia = $this->changeNumberToInteger($request->txtGia);
         $post->latitude = $request->txtViDo;
         $post->longitude = $request->txtKinhDo;
         $post->phongtam = $request->txtPhongTam;
@@ -277,8 +278,9 @@ class ProductController extends Controller
     }
 
 
-    public function getPostList(){
-        $posts = SanPham::all();
+    public function getPostList()
+    {
+        $posts = SanPham::orderBy('id', 'DESC')->get();
         return view('admin.pages.products', ['posts' => $posts]);
     }
 
@@ -290,15 +292,31 @@ class ProductController extends Controller
 
     public function deletePostByAjax($idPost)
     {
-        $checkDel = 'false';
+        $checkDel = 'Fail';
         $post = SanPham::findOrfail($idPost);
-        $file_path = public_path('upload/' . $post->hinhdaidien);
-        if (File::exists($file_path)) {
-            if (File::delete($file_path)) {
-                if ($post->delete()) {
-                    $checkDel = 'true';
-                }
+
+        $images = $post->getDanhSachHinhs();
+        if ($images->count() > 0) {
+            $pathImages = "upload/images/";
+            foreach ($images->get() as $image) {
+                File::delete($pathImages . $image->link);
             }
+            $images->delete();
+            $checkDel = 'image';
+        }
+        $postSlide= $post->getSlide();
+
+        if($postSlide)
+        {
+            $postSlide->delete();
+
+        }
+        $file_path = public_path("upload/" . $post->hinhdaidien);
+        if (File::exists($file_path)) {
+            File::delete($file_path);
+        }
+        if ($post->delete()) {
+            $checkDel = 'OK';
         }
         return $checkDel;
     }
@@ -307,10 +325,28 @@ class ProductController extends Controller
     {
         $checkDel = 'false';
         $post = SanPham::findOrfail($idPost);
-        $post->trangthai = $post->trangthai == 1 ? '0' : '1';
+        if(Auth::user()->quyen===0){
+            $post->trangthai = $post->trangthai == 3 ? '1' : '3';
+        }else{
+            if($post->trangthai!==3){
+                $post->trangthai = $post->trangthai == 1 ? '0' : '1';
+            }
+        }
+        $slide= $post->getSlide();
+        if($slide)
+        {
+            $slide->trangthai= $slide->trangthai==1?'0':'1';
+            $slide->save();
+        }
+
         if ($post->save()) {
             $checkDel = 'true';
         }
         return $checkDel;
+    }
+
+    public function changeNumberToInteger($number)
+    {
+        return intval(str_replace(",", "", $number));
     }
 }

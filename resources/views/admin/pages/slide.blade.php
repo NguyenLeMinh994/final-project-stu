@@ -115,7 +115,7 @@
 <script src="asset/admin/libs/pdfmake/vfs_fonts.js"></script>
 <script src="asset/admin/libs/jquery-toast/jquery.toast.min.js"></script>
 <script src="asset/admin/js/pages/toastr.init.js"></script>
-
+<script src="asset/admin/js/pages/datatables.init.js"></script>
 <script src="asset/admin/libs/jquery-nice-select/jquery.nice-select.min.js"></script>
 <script src="asset/admin/libs/switchery/switchery.min.js"></script>
 <script src="asset/admin/libs/select2/select2.min.js"></script>

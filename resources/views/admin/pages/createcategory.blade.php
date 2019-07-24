@@ -75,10 +75,10 @@
                                         @foreach ($danhMucChas as $danhMucCha)
                                         <option value={{ $danhMucCha->id }}>
                                             {{ $danhMucCha->ten }}</option>
-                                            @foreach ($danhMucCha->getChildren as $danhMucCon)
-                                            <option value={{ $danhMucCon->id }}>
-                                                --{{ $danhMucCon->ten }}</option>
-                                            @endforeach
+                                        @foreach ($danhMucCha->getChildren as $danhMucCon)
+                                        <option value={{ $danhMucCon->id }}>
+                                            --{{ $danhMucCon->ten }}</option>
+                                        @endforeach
                                         @endforeach
                                     </select>
                                 </div>
@@ -116,7 +116,7 @@
 <script src="asset/admin/libs/datatables/dataTables.select.min.js"></script>
 <script src="asset/admin/libs/pdfmake/pdfmake.min.js"></script>
 <script src="asset/admin/libs/pdfmake/vfs_fonts.js"></script>
-
+<script src="asset/admin/js/pages/datatables.init.js"></script>
 <script src="asset/admin/libs/jquery-nice-select/jquery.nice-select.min.js"></script>
 <script src="asset/admin/libs/switchery/switchery.min.js"></script>
 <script src="asset/admin/libs/select2/select2.min.js"></script>

@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->integer('quyen')->default('1');
             $table->integer('trangthai')->default('1');
             $table->string('provider')->nullable();
-            $table->string('provider_id')->nullable(); 
+            $table->string('provider_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

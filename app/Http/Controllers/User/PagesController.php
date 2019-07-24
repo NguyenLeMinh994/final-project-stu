@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\User;
-use App\Loai;
 use App\TinhThanhPho;
 use App\Quan;
 use App\Slide;
 use App\SanPham;
 use App\DanhSachHinh;
 use Carbon\Carbon;
+use DB, Mail;
+use App\Loai;
 
 class PagesController extends Controller
 {
@@ -49,16 +50,27 @@ class PagesController extends Controller
         // $countDate = Carbon::parse($getDetail->created_at)->diffInDays(Carbon::now());
         $getDetail->views = (int) ($getDetail->views + 1);
         $getDetail->save();
-        // $sp_khac = sanpham::where('id_loai', $getDetail->id_loai)->paginate(6);
-        return view('user.pages.detail', ['getDetail' => $getDetail]);
+        $otherCategories = DB::select(
+            'SELECT l2.*
+            FROM loai l1,loai l2
+            Where l1.parent_id=l2.parent_id and l1.id=?',
+            [$id]
+        );
+        $randomPost = SanPham::where('trangthai', 1)->inRandomOrder()->limit(4)->get();
+        // dd($randomPost);
+        return view('user.pages.detail', compact(['getDetail', 'otherCategories', 'randomPost']));
     }
-
-    //get danh sách //Trần Thanh Tuấn
+    //get danh sách
     public function getList($id)
     {
         $tinhThanhPhos = $this->getCityList();
-
-        $postList = Loai::find()->getSanPhams;
+        $parentIdList = Loai::where('parent_id', null)->pluck('id')->toArray();
+        $postList = Loai::find($id)->getSanPhams()->where('trangthai', 1)->paginate(9);
+        // dd($parentIdList);
+        if (in_array($id, $parentIdList)) {
+            $postList = Loai::find($id)->getPosts()->where('sanpham.trangthai', 1)->paginate(9);
+        }
+        // $postList = Loai::find($id)->getSanPhams;
         return view('user.pages.list', compact('postList', 'tinhThanhPhos'));
     }
 
@@ -122,10 +134,23 @@ class PagesController extends Controller
 
     // Nguyễn Lê Minh End
 
-    //get trang liên hệ 
+    //get trang liên hệ
     public function contact()
     {
         return view('user.pages.contact');
+    }
+
+    public function postContact(Request $request)
+    {
+        $data = ['hoten' => $request->input('name'), 'email' => $request->input('email'), 'tinnhan' => $request->input('message')];
+        Mail::send('user.emails.blaks', $data, function ($mess) {
+            $mess->from('rvbatdongsan@gmail.com', 'Thanh Tuấn');
+            $mess->to('rvbatdongsan@gmail.com', 'Tuan Thanh')->subject('đây là Mail BDS');
+        });
+        echo "<script>
+            alert('Cảm ơn bạn đã góp ý. Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất');
+            window.location =  '" . url('/') . "'
+        </script>";
     }
 
     public function about()
@@ -138,28 +163,25 @@ class PagesController extends Controller
         $tinhThanhPhos = $this->getCityList();
         $postList = null;
         if ($req->keyWord && $req->thanhPho && $req->quan) {
-            $postList = SanPham::where('ten', 'like', '%' . $req->keyWord . '%')
+            $postList = SanPham::where('trangthai', 1)->where('ten', 'like', '%' . $req->keyWord . '%')
                 ->orWhere('id', $req->keyWord)
                 ->where('id_tp', $req->thanhPho)
-                ->where('id_quan', $req->quan)
-                ->get();
+                ->where('id_quan', $req->quan);
         } elseif ($req->keyWord && $req->thanhPho) {
-            $postList = SanPham::where('ten', 'like', '%' . $req->keyWord . '%')
+            $postList = SanPham::where('trangthai', 1)->where('ten', 'like', '%' . $req->keyWord . '%')
                 ->orWhere('id', $req->keyWord)
-                ->where('id_tp', $req->thanhPho)
-                ->get();
+                ->where('id_tp', $req->thanhPho);
         } elseif ($req->keyWord) {
-            $postList = SanPham::where('ten', 'like', '%' . $req->keyWord . '%')
-                ->orWhere('id', $req->keyWord)
-                ->get();
+            $postList = SanPham::where('trangthai', 1)->where('ten', 'like', '%' . $req->keyWord . '%')
+                ->orWhere('id', $req->keyWord);
         } elseif ($req->thanhPho) {
-            $postList = SanPham::where('id_tp', $req->thanhPho)
-                ->orwhere('id_quan', $req->quan)
-                ->get();
+            $postList = SanPham::where('trangthai', 1)->where('id_tp', $req->thanhPho)
+                ->orwhere('id_quan', $req->quan);
         } else {
-            $postList = SanPham::orderBy('id', 'DESC')->get();
+            $postList = SanPham::where('trangthai', 1);
         }
         // dd($postList);
+        $postList = $postList->orderBy('id', 'DESC')->paginate(9);
 
         return view('user.pages.list', compact('postList', 'tinhThanhPhos'));
     }

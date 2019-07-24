@@ -29,10 +29,10 @@
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="javascript: void(0);">Xeria</a></li>
                             <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                            <li class="breadcrumb-item active">Basic Elements</li>
+                            <li class="breadcrumb-item active">Tạo bài viết mới</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Basic Elements</h4>
+                    <h4 class="page-title">Tạo bài viết mới</h4>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
                             <div class="form-group">
                                 <label for="inputAddress" class="col-form-label">Tên bài</label>
                                 <input type="text" class="form-control" id="inputAddress" name="txtTen"
-                                    placeholder="Nhập tên bài">
+                                    placeholder="Nhập tên bài" value="{{ old('txtTen') }}">
                             </div>
 
                             <div class="row">
@@ -78,12 +78,14 @@
                                     <div class="form-group">
                                         <label for="inputState" class="col-form-label">Danh mục</label>
                                         <select class="form-control" data-toggle="select2" name="sltDanhMuc">
-                                            <option value="">Select</option>
+                                            <option value="">Chọn danh mục</option>
                                             @foreach ($danhMucChas as $danhMucCha)
-                                            <option value={{ $danhMucCha->id }}>
+                                            <option value={{ $danhMucCha->id }}
+                                                {{ old('sltDanhMuc')==$danhMucCha->id?'selected':'' }}>
                                                 {{ $danhMucCha->ten }}</option>
                                             @foreach ($danhMucCha->getChildren as $danhMucCon)
-                                            <option value={{ $danhMucCon->id }}>
+                                            <option value={{ $danhMucCon->id }}
+                                                {{ old('sltDanhMuc')==$danhMucCon->id?'selected':'' }}>
                                                 --{{ $danhMucCon->ten }}</option>
                                             @endforeach
                                             @endforeach
@@ -97,7 +99,8 @@
                                             name="sltThanhPho">
                                             <option value="">Chọn thành phố</option>
                                             @foreach ($thanhPhos as $thanhPho)
-                                            <option value={{ $thanhPho->id }}>
+                                            <option value={{ $thanhPho->id }}
+                                                {{ old('sltThanhPho')==$thanhPho->id?'selected':'' }}>
                                                 {{ $thanhPho->ten }}</option>
                                             @endforeach
                                         </select>
@@ -107,53 +110,53 @@
                                     <div class="form-group">
                                         <label for="inputState" class="col-form-label">Quận</label>
                                         <select class="form-control" data-toggle="select2" name="sltQuan" id="idQuan">
-                                            <option value="">Select</option>
+                                            <option value="">Chọn quận</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Diện tích</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtDienTich"
-                                            placeholder="Nhập diện tích">
+                                            placeholder="Nhập diện tích" value="{{ old('txtDienTich') }}">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Số tầng</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtSoTang"
-                                            placeholder="Nhập số tầng">
+                                            placeholder="Nhập số tầng" value="{{ old('txtSoTang') ?? 0 }}">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Phòng ngủ</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtPhongNgu"
-                                            placeholder="Nhập phòng ngủ">
+                                            placeholder="Nhập phòng ngủ" value="{{ old('txtPhongNgu') ?? 0 }}">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Phòng tắm</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtPhongTam"
-                                            placeholder="Nhập phòng tắm">
+                                            placeholder="Nhập phòng tắm" value="{{ old('txtPhongTam') ?? 0 }}">
                                     </div>
                                     <div class="form-group ">
                                         <label for="inputAddress" class="col-form-label">Giá </label>
-                                        <input type="text" class="form-control" id="inputAddress" name="txtGia"
-                                            placeholder="Nhập giá">
+                                        <input type="text" class="form-control gia" id="inputAddress" name="txtGia"
+                                            placeholder="Nhập giá" value="{{ old('txtGia') }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Địa chỉ </label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtDiaChi"
-                                            placeholder="Nhập địa chỉ">
+                                            placeholder="Nhập địa chỉ" value="{{ old('txtDiaChi') }}">
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputEmail4" class="col-form-label">Vĩ độ</label>
                                             <input type="text" class="form-control" id="inputEmail4" name="txtViDo"
-                                                placeholder="Nhập vĩ độ">
+                                                placeholder="Nhập vĩ độ" value="{{ old('txtViDo') }}">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputPassword4" class="col-form-label">Kinh độ</label>
                                             <input type="text" class="form-control" id="inputPassword4" name="txtKinhDo"
-                                                placeholder="Nhập kinh độ">
+                                                placeholder="Nhập kinh độ" value="{{ old('txtKinhDo') }}">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -194,7 +197,7 @@
 <script src="asset/admin/libs/datatables/dataTables.select.min.js"></script>
 <script src="asset/admin/libs/pdfmake/pdfmake.min.js"></script>
 <script src="asset/admin/libs/pdfmake/vfs_fonts.js"></script>
-
+<script src="asset/admin/js/pages/datatables.init.js"></script>
 <script src="asset/admin/libs/jquery-nice-select/jquery.nice-select.min.js"></script>
 <script src="asset/admin/libs/switchery/switchery.min.js"></script>
 <script src="asset/admin/libs/select2/select2.min.js"></script>
@@ -216,12 +219,36 @@
             height: 840
         };
         CKEDITOR.replace('noidung',options);
+        
+        $("input[name='txtGia']").on('keyup', function () {
+            const thisPrice = $(this);
+            var input = thisPrice.val();
+            input = input.replace(/[\D\s\._\-]+/g, "");
+
+            input = input ? parseInt(input, 10) : 0;
+
+            thisPrice.val(function () {
+                return (input === 0) ? "" : input.toLocaleString();
+            });
+        });
+
+        $("input[name='txtGia']").on('focus', function () {
+            const thisPrice = $(this);
+            var input = thisPrice.val();
+            input = input.replace(/[\D\s\._\-]+/g, "");
+
+            input = input ? parseInt(input, 10) : 0;
+
+            thisPrice.val(function () {
+                return (input === 0) ? "" : input.toLocaleString();
+            });
+        });
 
         $('#idThanhPho').change(function (e) {
             e.preventDefault();
             var idThanhPho = $(this).val();
             var idQuan = $('#idQuan');
-            var url = "{{ url('/user/ajax/danh-sach-quan/') }}/" + idThanhPho;
+            var url = "{{ url('/ajax/danh-sach-quan/') }}/" + idThanhPho;
             var htmlQuan = `<option value="">Quận</option>`;
             if (idThanhPho == '') {
                 idQuan.html(htmlQuan);
