@@ -52,6 +52,8 @@
                                     <th>Hình</th>
                                     <th>Tên</th>
                                     <th>Ngày đăng</th>
+                                    <th>Ngày hết hạn</th>
+                                    <th>Views</th>
                                     <th>Trạng thái</th>
                                     <th>Chức năng</th>
                                 </tr>
@@ -72,10 +74,18 @@
                                         {{ date('d-m-Y', strtotime($post->created_at)) }}
                                     </td>
                                     <td>
-                                        @if ($post->trangthai===3)
-                                        Bài viết bị cấm
-                                        @elseif(!is_null($post->expired) &&$post->expired_at
-                                        < now()) Bài viết hết hạn @else <input type="checkbox" data-plugin="switchery"
+                                        {{ date('d-m-Y', strtotime($post->expired_at)) }}
+                                    </td>
+                                    <td>
+                                        {{ $post->views }}
+                                    </td>
+                                    <td>
+                                        @if ($post->trangthai===2)
+                                            Bài viết hết hạn
+                                        @elseif($post->trangthai===3) 
+                                            Bài viết bị cấm
+                                        @else 
+                                        <input type="checkbox" data-plugin="switchery"
                                             data-color="#1bb99a" {{ $post->trangthai==1?'checked':'' }}
                                             data-id={{ $post->id }} class="clsTrangThai" />
                                         @endif

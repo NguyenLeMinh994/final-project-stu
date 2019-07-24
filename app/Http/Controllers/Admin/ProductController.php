@@ -11,6 +11,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
+use App\Slide;
+
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -127,6 +130,7 @@ class ProductController extends Controller
         $post->id_tp = $request->sltThanhPho;
         $post->id_quan = $request->sltQuan;
         $post->id_loai = $request->sltDanhMuc;
+        $post->expired_at = Carbon::now()->addDays(30);
         $post->id_user = Auth::user()->id;
         if ($post->save()) {
             return redirect()->back()->with(['success' => 'Thêm thành công']);
@@ -306,7 +310,7 @@ class ProductController extends Controller
         }
         $postSlide= $post->getSlide();
 
-        if($postSlide)
+        if($postSlide->count() > 0)
         {
             $postSlide->delete();
 
@@ -324,18 +328,20 @@ class ProductController extends Controller
     public function updateStatusByAjax($idPost)
     {
         $checkDel = 'false';
-        $post = SanPham::findOrfail($idPost);
+        $post     = SanPham::findOrfail($idPost);
+
         if(Auth::user()->quyen===0){
-            $post->trangthai = $post->trangthai == 3 ? '1' : '3';
+            $post->trangthai = $post->trangthai === 3 ? '1' : '3';
         }else{
             if($post->trangthai!==3){
-                $post->trangthai = $post->trangthai == 1 ? '0' : '1';
+                $post->trangthai = $post->trangthai === 1 ? '0' : '1';
             }
         }
-        $slide= $post->getSlide();
-        if($slide)
+        $slide = Slide::where('id_sanpham', $idPost)->first();
+
+        if($slide->count()>0)
         {
-            $slide->trangthai= $slide->trangthai==1?'0':'1';
+            $slide->trangthai = $slide->trangthai === 1?'0':'1';
             $slide->save();
         }
 

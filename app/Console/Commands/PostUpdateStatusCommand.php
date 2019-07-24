@@ -40,9 +40,9 @@ class PostUpdateStatusCommand extends Command
     public function handle()
     {
         //
-        $dateNow = Carbon::now()->subDays(30);
-        DB::table('sanpham')->where('created_at', '>', $dateNow)->update([
-            'trangthai' => '3'
+        $dateNow = Carbon::now();
+        DB::table('sanpham')->where('expired_at', '<', $dateNow)->update([
+            'trangthai' => '2'
         ]);
     }
 }
