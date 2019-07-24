@@ -113,7 +113,7 @@
                         </a>
                     </li>
                     <li class="has-submenu">
-                        <a href="#">
+                        <a href="{{ route('admin.customer') }}">
                             <i class="la la-ship"></i>Danh sách thành viên
                         </a>
                     </li>

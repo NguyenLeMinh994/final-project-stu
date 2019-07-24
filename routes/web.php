@@ -96,8 +96,10 @@ Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
 
     Route::get('image/upload/{id}', 'Admin\ImagesController@uploadImage')->name('admin.image');
     Route::get('image/baidang/{id}', 'Admin\ImagesController@indexImage')->name('admin.indexImage');
+    
+    Route::get('danh-sach-thanh-vien', 'Admin\UserController@getUserList')->name('admin.customer');
 
-
+    //AJAX
     Route::get('/ajax/cap-nhat-trang-thai-danh-muc/{id}', 'Admin\CategoryController@ajaxCapNhatTrangThai')->name('admin.ajaxCapNhatTrangThai');
     Route::get('/ajax/xoa-danh-muc/{id}', 'Admin\CategoryController@ajaxDestroy')->name('admin.ajax.removeCategory');
     Route::get('/ajax/them-slide/{id}', 'Admin\SildeController@addSlideByAjax')->name('admin.ajax.addSlide');

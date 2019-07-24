@@ -304,6 +304,13 @@ class ProductController extends Controller
             $images->delete();
             $checkDel = 'image';
         }
+        $postSlide= $post->getSlide();
+
+        if($postSlide)
+        {
+            $postSlide->delete();
+
+        }
         $file_path = public_path("upload/" . $post->hinhdaidien);
         if (File::exists($file_path)) {
             File::delete($file_path);
@@ -318,7 +325,20 @@ class ProductController extends Controller
     {
         $checkDel = 'false';
         $post = SanPham::findOrfail($idPost);
-        $post->trangthai = $post->trangthai == 1 ? '0' : '1';
+        if(Auth::user()->quyen===0){
+            $post->trangthai = $post->trangthai == 3 ? '1' : '3';
+        }else{
+            if($post->trangthai!==3){
+                $post->trangthai = $post->trangthai == 1 ? '0' : '1';
+            }
+        }
+        $slide= $post->getSlide();
+        if($slide)
+        {
+            $slide->trangthai= $slide->trangthai==1?'0':'1';
+            $slide->save();
+        }
+
         if ($post->save()) {
             $checkDel = 'true';
         }

@@ -45,7 +45,7 @@
                         <a href={{ route('admin.createCategory') }}
                             class="mb-4 btn btn-primary btn-rounded waves-effect waves-light">Thêm</a>
 
-                        <table id="basic-datatable" class="table dt-responsive nowrap">
+                        <table id="scroll-vertical-datatable" class="table dt-responsive nowrap">
                             <thead>
                                 <tr>
                                     <th>ID</th>

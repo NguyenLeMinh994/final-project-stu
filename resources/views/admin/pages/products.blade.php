@@ -63,7 +63,7 @@
                                 <tr id="row_{{ $post->id }}">
                                     <td>{{ $post->id }}</td>
                                     <td>
-                                        <img src="upload/{{ $post->hinhdaidien }}" alt={{ $post->ten }} height="70">
+                                        <img src="upload/{{ $post->hinhdaidien }}" alt={{ $post->ten }} height="60">
                                     </td>
                                     <td>
                                         {{ str_limit($post->ten, $limit = 10, $end = ' ...') }}
@@ -72,9 +72,14 @@
                                         {{ date('d-m-Y', strtotime($post->created_at)) }}
                                     </td>
                                     <td>
-                                        <input type="checkbox" data-plugin="switchery" data-color="#1bb99a"
-                                            {{ $post->trangthai==1?'checked':'' }} data-id={{ $post->id }}
-                                            class="clsTrangThai" />
+                                        @if ($post->trangthai===3)
+                                        Bài viết bị cấm
+                                        @elseif(!is_null($post->expired) &&$post->expired_at
+                                        < now()) Bài viết hết hạn @else <input type="checkbox" data-plugin="switchery"
+                                            data-color="#1bb99a" {{ $post->trangthai==1?'checked':'' }}
+                                            data-id={{ $post->id }} class="clsTrangThai" />
+                                        @endif
+
                                     </td>
                                     <td>
                                         @if (Auth::user()->quyen!= 0)
@@ -144,129 +149,128 @@
 <script src="asset/admin/js/pages/toastr.init.js"></script>
 <script src="asset/admin/js/pages/datatables.init.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-    $('.clsXoaBaiDang').click(function(e) {
-        e.preventDefault();
-        var idPost = $(this).data('id');
-        if (confirm("Bạn có muốn xóa không?")) {
-            var url = "{{ url('/ajax/xoa-bai-dang/') }}/" + idPost;
+        $('.clsXoaBaiDang').click(function (e) {
+            e.preventDefault();
+            var idPost = $(this).data('id');
+            if (confirm("Bạn có muốn xóa không?")) {
+                var url = "{{ url('/ajax/xoa-bai-dang/') }}/" + idPost;
+
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    dataType: "html",
+                    success: function (response) {
+                        console.log(response);
+
+                        if (response == 'OK') {
+                            $('#row_' + idPost).remove();
+                            $.toast({
+                                heading: 'Success',
+                                text: 'Xóa thành công',
+                                icon: 'success',
+                                position: 'top-right'
+                            });
+                        } else {
+                            $.toast({
+                                heading: 'oh!',
+                                text: 'Lỗi không thể xóa được',
+                                icon: 'error',
+                                position: 'top-right'
+                            });
+
+                        }
+                    }
+                });
+            }
+
+        });
+
+        $('.clsTrangThai').change(function (e) {
+            e.preventDefault();
+
+            var thisTr = this;
+            var idPost = $(this).data('id');
+            var url = "{{ url('/ajax/cap-nhat-trang-thai-bai-dang/') }}/" + idPost;
 
             $.ajax({
                 type: "get",
                 url: url,
                 dataType: "html",
-                success: function(response) {
-                    console.log(response);
-                    
-                    if (response == 'OK') {
-                        $('#row_' + idPost).remove();
+                success: function (response) {
+                    if (response == 'true') {
                         $.toast({
                             heading: 'Success',
-                            text: 'Xóa thành công',
+                            text: 'Cập nhật trạng thái thành công',
                             icon: 'success',
                             position: 'top-right'
                         });
+                        return;
                     } else {
                         $.toast({
-                            heading: 'oh!',
-                            text: 'Lỗi không thể xóa được',
+                            heading: 'Oh!',
+                            text: 'Cập nhật trạng thái thất bại',
                             icon: 'error',
                             position: 'top-right'
                         });
-                
+                        $(thisTr).prop('checked', false);
+                        return;
                     }
                 }
             });
-        }
+        });
 
-    });
+        $('.clsSlide').click(function (e) {
+            const postId = $(this).data('id');
+            const thisSlide = this;
 
-    $('.clsTrangThai').change(function(e) {
-        e.preventDefault();
+            const url = "{{ url('admin/ajax/them-slide') }}/" + postId;
+            if (window.confirm(`Bạn có muốn chọn bài ${postId} này làm slide ko?`)) {
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "html",
+                    success: function (response) {
+                        console.log('Show', response);
 
-        var thisTr = this;
-        var idPost = $(this).data('id');
-        var url = "{{ url('/ajax/cap-nhat-trang-thai-bai-dang/') }}/" + idPost;
+                        if (response == 'false') {
+                            $.toast({
+                                heading: 'Oh!',
+                                text: 'Thêm thất bại',
+                                icon: 'error',
+                                position: 'top-right'
+                            });
+                            return;
 
-        $.ajax({
-            type: "get",
-            url: url,
-            dataType: "html",
-            success: function(response) {
-                if (response == 'true') {
-                    $.toast({
-                        heading: 'Success',
-                        text: 'Cập nhật trạng thái thành công',
-                        icon: 'success',
-                        position: 'top-right'
-                    });
-                    return;
-                } else {
-                    $.toast({
-                        heading: 'Oh!',
-                        text: 'Cập nhật trạng thái thất bại',
-                        icon: 'error',
-                        position: 'top-right'
-                    });
-                    $(thisTr).prop('checked', false);
-                    return;
-                }
+                        } else
+                        if (response == -1) {
+                            $.toast({
+                                heading: 'Oh!',
+                                text: `Bài ${postId} tồn tại`,
+                                icon: 'warning',
+                                position: 'top-right'
+                            });
+                        } else {
+                            console.log(response);
+
+                            $.toast({
+                                heading: 'Success',
+                                text: 'Thêm thành công',
+                                icon: 'success',
+                                position: 'top-right'
+                            });
+                            $(thisSlide).remove();
+                        }
+
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+
+                });
             }
         });
     });
-
-    $('.clsSlide').click(function(e) {
-        const postId = $(this).data('id');
-        const thisSlide = this;
-
-        const url = "{{ url('admin/ajax/them-slide') }}/" + postId;
-        if(window.confirm(`Bạn có muốn chọn bài ${postId} này làm slide ko?`))
-        {
-            $.ajax({
-            type: "GET",
-            url: url,
-            dataType: "html",
-            success: function(response) {
-                console.log('Show', response);
-
-                if (response == 'false') {
-                    $.toast({
-                        heading: 'Oh!',
-                        text: 'Thêm thất bại',
-                        icon: 'error',
-                        position: 'top-right'
-                    });
-                    return;
-
-                }else
-                if(response==-1) {
-                    $.toast({
-                        heading: 'Oh!',
-                        text: `Bài ${postId} tồn tại`,
-                        icon: 'warning',
-                        position: 'top-right'
-                    });
-                }else {
-                    console.log(response);
-                    
-                    $.toast({
-                        heading: 'Success',
-                        text: 'Thêm thành công',
-                        icon: 'success',
-                        position: 'top-right'
-                    });
-                    $(thisSlide).remove();
-                }
-
-            },
-            error:function(err){
-                console.log(err);
-            }
-            
-        });
-        }
-    });
-});
 </script>
 @endsection

@@ -123,19 +123,19 @@
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Số tầng</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtSoTang"
-                                            placeholder="Nhập số tầng" value="{{ old('txtSoTang') }}">
+                                            placeholder="Nhập số tầng" value="{{ old('txtSoTang') ?? 0 }}">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Phòng ngủ</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtPhongNgu"
-                                            placeholder="Nhập phòng ngủ" value="{{ old('txtPhongNgu') }}">
+                                            placeholder="Nhập phòng ngủ" value="{{ old('txtPhongNgu') ?? 0 }}">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Phòng tắm</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtPhongTam"
-                                            placeholder="Nhập phòng tắm" value="{{ old('txtPhongTam') }}">
+                                            placeholder="Nhập phòng tắm" value="{{ old('txtPhongTam') ?? 0 }}">
                                     </div>
                                     <div class="form-group ">
                                         <label for="inputAddress" class="col-form-label">Giá </label>
