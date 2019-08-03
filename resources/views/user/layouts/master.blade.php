@@ -66,11 +66,13 @@
 
 
   @include('user.layouts.footer')
+  
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
       <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
       <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-        stroke="#F96D00" /></svg></div>
+        stroke="#F96D00" /></svg>
+      </div>
 
 
   <script src="asset/user/js/jquery.min.js"></script>
@@ -92,6 +94,32 @@
   <script src="asset/user/js/main.js"></script>
 
   @yield('js')
+  <!-- Load Facebook SDK for JavaScript -->
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+          FB.init({
+          xfbml            : true,
+          version          : 'v4.0'
+          });
+      };
+
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+  <!-- Your customer chat code -->
+  <div class="fb-customerchat" attribution=setup_tool page_id="101845817826617"
+    logged_in_greeting="Chào! chúng tôi có thể giúp gì cho bạn?"
+    logged_out_greeting="Chào! chúng tôi có thể giúp gì cho bạn?">
+  </div>
+
+  {{-- chat FaceBook --}}
 
 </body>
 

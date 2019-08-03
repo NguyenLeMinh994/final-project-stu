@@ -174,10 +174,12 @@ class PagesController extends Controller
         } elseif ($req->keyWord) {
             $postList = SanPham::where('trangthai', 1)->where('ten', 'like', '%' . $req->keyWord . '%')
                 ->orWhere('id', $req->keyWord);
-        } elseif ($req->thanhPho) {
+        } elseif ($req->thanhPho && $req->quan) {
             $postList = SanPham::where('trangthai', 1)->where('id_tp', $req->thanhPho)
-                ->orwhere('id_quan', $req->quan);
-        } else {
+                ->where('id_quan', $req->quan);
+        } elseif($req->thanhPho){
+            $postList = SanPham::where('trangthai', 1)->where('id_tp', $req->thanhPho);
+        }else {
             $postList = SanPham::where('trangthai', 1);
         }
         // dd($postList);

@@ -15,10 +15,51 @@
 <link href="asset/admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css" />
 <link href="asset/admin/libs/summernote/summernote-bs4.css" rel="stylesheet" type="text/css" />
 
+<!-- Styles -->
+<style type="text/css">
+.pac-container {
+    z-index: 9999;
+}
+
+</style>
 @endsection
 
 @section('container')
 <div class="wrapper">
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-group ">
+                        <input type="text" id="address-input" name="address_address" class="form-control map-input"
+                            placeholder="Nhập địa chỉ">
+                            <input type="hidden" name="address_latitude"  value="0" />
+                            <input type="hidden" name="address_longitude"  value="0" />
+                    </div>
+                    <div id="address-map-container" style="width:100%;height:400px; ">
+                        <div style="width: 100%; height: 100%" id="address-map"></div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveModal">Lưu</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid">
 
         <!-- start page title -->
@@ -117,7 +158,7 @@
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Diện tích</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtDienTich"
-                                            placeholder="Nhập diện tích" value="{{ old('txtDienTich') }}">
+                                            placeholder="Nhập diện tích" value="{{ old('txtDienTich') ?? 0 }}">
                                     </div>
 
                                     <div class="form-group">
@@ -147,18 +188,20 @@
                                         <input type="text" class="form-control" id="inputAddress" name="txtDiaChi"
                                             placeholder="Nhập địa chỉ" value="{{ old('txtDiaChi') }}">
                                     </div>
-                                    <div class="form-row">
+
+                                    <div class="form-row" data-toggle="modal" data-target="#myModal">
                                         <div class="form-group col-md-6">
-                                            <label for="inputEmail4" class="col-form-label">Vĩ độ</label>
-                                            <input type="text" class="form-control" id="inputEmail4" name="txtViDo"
-                                                placeholder="Nhập vĩ độ" value="{{ old('txtViDo') }}">
+                                            <label for="inputEmail4" class="col-form-label">Vĩ độ (Latitude)</label>
+                                            <input type="text" class="form-control" id="address-latitude" name="txtViDo"
+                                                placeholder="Nhập vĩ độ" value="{{ old('txtViDo') }}" readonly>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="inputPassword4" class="col-form-label">Kinh độ</label>
-                                            <input type="text" class="form-control" id="inputPassword4" name="txtKinhDo"
-                                                placeholder="Nhập kinh độ" value="{{ old('txtKinhDo') }}">
+                                            <label for="inputPassword4" class="col-form-label">Kinh độ (Longitude)</label>
+                                            <input type="text" class="form-control" id="address-longitude" name="txtKinhDo"
+                                                placeholder="Nhập kinh độ" value="{{ old('txtKinhDo') }}" readonly>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Hình </label>
                                         <input type="file" class="filestyle" data-text="Choose image"
@@ -208,6 +251,120 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-filestyle/2.1.0/bootstrap-filestyle.min.js"></script>
 <script src="{{ asset('/vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_API_KEY') }}&libraries=places&callback=initialize"
+    async defer>
+</script>
+<script>
+        function initialize() {
+
+            $('form').on('keyup keypress', function (e) {
+                var keyCode = e.keyCode || e.which;
+                if (keyCode === 13) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+            const locationInputs = document.getElementsByClassName("map-input");
+
+            const autocompletes = [];
+            const geocoder = new google.maps.Geocoder;
+            for (let i = 0; i < locationInputs.length; i++) {
+                const input = locationInputs[i];
+                const
+                    fieldKey = input.id.replace("-input", "");
+                // const isEdit = document.getElementById(fieldKey + "-latitude").value != '' && document.getElementById(fieldKey + "-longitude").value != '';
+                const
+                    latitude = 10.774590;
+                const
+                    longitude = 106.698050;
+                
+                const map = new
+                google.maps.Map(document.getElementById(fieldKey + '-map'), {
+                    center: {
+                        lat: latitude,
+                        lng: longitude
+                    },
+                    zoom: 13
+                });
+                const marker = new google.maps.Marker({
+                    map: map,
+                    position: {
+                        lat: latitude,
+                        lng: longitude
+                    },
+                });
+                
+                // marker.setVisible(isEdit);
+                
+                marker.setVisible(true);
+                const autocomplete = new google.maps.places.Autocomplete(input);
+                autocomplete.key = fieldKey;
+                autocompletes.push({
+                    input: input,
+                    map: map,
+                    marker: marker,
+                    autocomplete: autocomplete
+                });
+
+                console.log('iput',autocomplete);
+            }
+            for (let i = 0; i < autocompletes.length; i++) {
+                const input = autocompletes[i].input;
+                const autocomplete = autocompletes[i].autocomplete;
+                const map = autocompletes[i].map;
+                const marker = autocompletes[i].marker;
+                google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                    marker.setVisible(false);
+                    const
+                        place = autocomplete.getPlace();
+                    geocoder.geocode({
+                        'placeId': place.place_id
+                    }, function (results, status) {
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            const lat = results[0].geometry.location.lat();
+                            const
+                                lng = results[0].geometry.location.lng();
+                            setLocationCoordinates(autocomplete.key, lat, lng);
+                        }
+                    });
+                    if (!place.geometry) {
+                        window.alert("No details available for input: '" + place.name + "'");
+                        input.value = "";
+                        return;
+                    }
+
+                    if (place.geometry.viewport) {
+                        map.fitBounds(place.geometry.viewport);
+                    } else {
+                        map.setCenter(place.geometry.location);
+                        map.setZoom(17);
+                    }
+                    marker.setPosition(place.geometry.location);
+                    marker.setVisible(true);
+
+                });
+            }
+        }
+
+        function setLocationCoordinates(key, lat, lng) {
+            $("#saveModal").click(function(e) {
+                // console.log('lat (vĩ độ):', lat);
+                // console.log('lng (kinh độ):', lng);
+                // console.log('====================================');
+                // console.log('lat (vĩ độ):', lat.toFixed(6));
+              
+                // console.log('lng (kinh độ):', lng.toFixed(6));
+
+                $("#"+key + "-" + "latitude").val(lat.toFixed(6));
+                $("#"+key + "-" + "longitude").val(lng.toFixed(6));
+                $('#myModal').modal('hide');
+            });
+           
+        }
+
+</script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $(":file").filestyle();
@@ -218,8 +375,8 @@
             filebrowserUploadUrl: "{{ asset('/laravel-filemanager/upload?type=Files&_token=') }}",
             height: 840
         };
-        CKEDITOR.replace('noidung',options);
-        
+        CKEDITOR.replace('noidung', options);
+
         $("input[name='txtGia']").on('keyup', function () {
             const thisPrice = $(this);
             var input = thisPrice.val();
@@ -259,7 +416,8 @@
                     success: function (response) {
 
                         $.each(response, function (key, value) {
-                            htmlQuan += `<option value=${value.id}> ${value.ten} </option>`;
+                            htmlQuan +=
+                                `<option value=${value.id}> ${value.ten} </option>`;
                         });
                         idQuan.html(htmlQuan);
 
@@ -268,6 +426,8 @@
             }
 
         });
+
+       
     });
 </script>
 @endsection

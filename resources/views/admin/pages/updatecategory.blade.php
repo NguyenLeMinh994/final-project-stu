@@ -13,10 +13,12 @@
 <link href="asset/admin/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
 <link href="asset/admin/libs/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 <link href="asset/admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css" />
+
 @endsection
 
 @section('container')
 <div class="wrapper">
+    
     <div class="container-fluid">
 
         <!-- start page title -->
