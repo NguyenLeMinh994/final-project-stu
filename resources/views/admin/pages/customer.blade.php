@@ -18,6 +18,30 @@
 
 @section('container')
 <div class="wrapper">
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+    
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Thông tin thành viên</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+    
+                <!-- Modal body -->
+                <div class="modal-body">
+                    
+                </div>
+    
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+    
+            </div>
+        </div>
+    </div>
     <div class="container-fluid">
 
 
@@ -54,7 +78,11 @@
                                             <td>{{ $user->hoten }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->dienthoai ?? "Không có" }}</td>
-                                            <td></td>
+                                            <td>
+                                                <button type="button" class="btnMyModal btn btn-primary" data-toggle="modal" data-id="{{ $user->id }}">
+                                                    Xem chi tiết 
+                                                </button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -118,6 +146,26 @@
 
 <script src="asset/admin/js/pages/datatables.init.js"></script>
 <script type="text/javascript">
+$(document).ready(function () {
+    $('.btnMyModal').click(function (e) {
+        e.preventDefault();
+        const idUser = $(this).data('id');
+        // console.log('id',idUser);
+        
+        const url = "{{ url('/admin/ajax/thong-tin') }}/" + idUser;
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (response) {
+                console.log(response);
+
+                $('.modal-body').html(response);
+                $('#myModal').modal('show');
+            }
+        });
+
+    });
+});
 
 </script>
 @endsection

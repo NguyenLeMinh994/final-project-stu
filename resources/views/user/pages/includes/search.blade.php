@@ -5,6 +5,7 @@
         <h2 class="heading h5 d-flex align-items-center pr-4"><span class="ion-ios-search mr-3"></span> Tìm Kiếm
         </h2>
         <form action="{{route('search')}}" method="GET" class="search-property">
+          
           <div class="row">
 
             <div class="col-md align-items-end">
@@ -18,6 +19,7 @@
                 </div>
               </div>
             </div>
+
             <div class="col-md align-items-end">
               <div class="form-group">
                 <label for="#">Tỉnh/Thành Phố</label>
@@ -34,6 +36,7 @@
                 </div>
               </div>
             </div>
+
             <div class="col-md align-items-end">
               <div class="form-group">
                 <label for="#">Quận/Huyện</label>
@@ -57,6 +60,36 @@
               </div>
             </div>
           </div>
+          <div class="row">
+
+            <div class="col-md-3 align-items-end">
+              <div class="form-group">
+                <label for="#">Giá khởi điểm</label>
+                <div class="form-field">
+                  <div class="select-wrap">
+                    <div class="icon"></div>
+                    <input type="search" class="form-control" id="usr" name="keyFrom">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 align-items-end">
+              <div class="form-group">
+                <label for="#">Giá cuối cùng</label>
+                <div class="form-field">
+                  <div class="select-wrap">
+                    <div class="icon"></div>
+                    <input type="search" class="form-control" id="usr" name="keyTo">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+
+         
+
         </form>
       </div>
     </div>

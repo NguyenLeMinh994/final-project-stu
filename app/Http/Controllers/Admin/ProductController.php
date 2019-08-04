@@ -339,7 +339,7 @@ class ProductController extends Controller
         }
         $slide = Slide::where('id_sanpham', $idPost)->first();
 
-        if($slide->count()>0)
+        if($slide)
         {
             $slide->trangthai = $slide->trangthai === 1?'0':'1';
             $slide->save();

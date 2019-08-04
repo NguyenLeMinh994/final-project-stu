@@ -1,53 +1,36 @@
 <footer class="ftco-footer ftco-bg-dark ftco-section">
     <div class="container">
         <div class="row mb-5">
-            <div class="col-md">
+
+            <div class="col-sm">
                 <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Royalestate</h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-                        live the blind texts.</p>
-                    <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="ftco-footer-widget mb-4 ml-md-5">
-                    <h2 class="ftco-heading-2">NHÀ BÁN</h2>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="py-2 d-block">Home For Sale</a></li>
-                        <li><a href="#" class="py-2 d-block">Open Houses</a></li>
-                        <li><a href="#" class="py-2 d-block">New Listing</a></li>
-                        <li><a href="#" class="py-2 d-block">Recently Reduce</a></li>
-                        <li><a href="#" class="py-2 d-block">Off-Market Homes</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">NHÀ CHO THUÊ</h2>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="py-2 d-block">Sell Your Home</a></li>
-                        <li><a href="#" class="py-2 d-block">Get A Home Valuation</a></li>
-                        <li><a href="#" class="py-2 d-block">Local Home Prices</a></li>
-                        <li><a href="#" class="py-2 d-block">Guides &amp; Rules</a></li>
-                        <li><a href="#" class="py-2 d-block">Others</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">LIÊN HỆ</h2>
+                    <h2 class="ftco-heading-2">ĐỊA CHỈ</h2>
                     <div class="block-23 mb-3">
                         <ul>
                             <li><span class="icon icon-map-marker"></span><span class="text">180 Cao Lổ, Phường 4, Quận
                                     8, TP.HCM</span></li>
-                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">084.786.000.286
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">ĐIỆN THOẠI</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">084.786.000.286 -
                                         084.909.331.312</span></a></li>
-                            <li><a href="#"><span class="icon icon-envelope"></span><span
-                                        class="text">stranthanhtuans@gmail.com</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">EMAIL</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li><a href="https://www.google.com/gmail/"><span class="icon icon-envelope"></span><span
+                                        class="text">rvbatdongsan@gmail.com</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -62,7 +45,8 @@
                         document.write(new Date().getFullYear());
 
                     </script> All rights reserved | This template is made with <i class="icon-heart color-danger"
-                        aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Trần Thanh Tuấn -
+                        Nguyễn Lê Minh</a>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </p>
             </div>

@@ -106,6 +106,8 @@ Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
 
     Route::get('/ajax/xoa-slide/{id}', 'Admin\SildeController@removeSlideByAjax')->name('admin.ajax.removeSlide');
     Route::get('/ajax/cap-nhat-trang-thai-slide/{id}', 'Admin\SildeController@updateStatusSlideByAjax')->name('admin.ajax.updateStatusSlide');
+    
+    Route::get('/ajax/thong-tin/{id}', 'Admin\UserController@getInfoUser')->name('admin.ajax.getInfoUser');
 });
 // image
 Route::post('image/upload/store', 'Admin\ImagesController@fileStore')->name('user.uploadImage');

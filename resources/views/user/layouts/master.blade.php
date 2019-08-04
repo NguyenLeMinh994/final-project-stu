@@ -97,6 +97,17 @@
   <!-- Load Facebook SDK for JavaScript -->
   <div id="fb-root"></div>
   <script>
+    $("input[name='keyFrom'], input[name='keyTo']").on('keyup focus', function () {
+        const thisPrice = $(this);
+        let input = thisPrice.val();
+        input = input.replace(/[\D\s\._\-]+/g, "");
+
+        input = input ? parseInt(input, 10) : 0;
+
+        thisPrice.val(function () {
+            return (input === 0) ? "" : input;
+        });
+    });
     window.fbAsyncInit = function() {
           FB.init({
           xfbml            : true,

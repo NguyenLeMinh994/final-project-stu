@@ -17,6 +17,13 @@ class UserController extends Controller
     public function getUserList()
     {
         $userList=User::where('quyen', 1)->get();
-        return view('admin.pages.customer',compact(['userList']));
+        return view('admin.pages.customer', compact(['userList']));
+    }
+
+    public function getInfoUser($id)
+    {
+        $user = User::findOrfail($id);
+        return view('admin.pages.ajax.infouser',compact('user'));
+        
     }
 }

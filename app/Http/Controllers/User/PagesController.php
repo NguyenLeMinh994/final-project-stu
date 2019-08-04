@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 use App\User;
 use App\TinhThanhPho;
@@ -14,6 +15,7 @@ use App\DanhSachHinh;
 use Carbon\Carbon;
 use DB, Mail;
 use App\Loai;
+
 
 class PagesController extends Controller
 {
@@ -162,7 +164,20 @@ class PagesController extends Controller
     {
         $tinhThanhPhos = $this->getCityList();
         $postList = null;
-        if ($req->keyWord && $req->thanhPho && $req->quan) {
+        if($req->keyFrom < $req->keyTo && $req->thanhPho && $req->quan){
+            $postList = SanPham::where('trangthai', 1)->whereBetween('gia',[$req->keyFrom, $req->keyTo])
+                ->where('id_tp', $req->thanhPho)
+                ->where('id_quan', $req->quan);
+            Log::info('1');
+        }elseif($req->keyFrom < $req->keyTo && $req->thanhPho){
+            $postList = SanPham::where('trangthai', 1)->whereBetween('gia',[$req->keyFrom, $req->keyTo])
+                ->where('id_tp', $req->thanhPho);
+            Log::info('2');
+        }elseif ($req->keyFrom < $req->keyTo) {
+            $postList = SanPham::where('trangthai', 1)->whereBetween('gia',[$req->keyFrom, $req->keyTo]);
+            Log::info('3');
+
+        }elseif ($req->keyWord && $req->thanhPho && $req->quan) {
             $postList = SanPham::where('trangthai', 1)->where('ten', 'like', '%' . $req->keyWord . '%')
                 ->orWhere('id', $req->keyWord)
                 ->where('id_tp', $req->thanhPho)
@@ -174,6 +189,8 @@ class PagesController extends Controller
         } elseif ($req->keyWord) {
             $postList = SanPham::where('trangthai', 1)->where('ten', 'like', '%' . $req->keyWord . '%')
                 ->orWhere('id', $req->keyWord);
+            Log::info('keyWord');
+
         } elseif ($req->thanhPho && $req->quan) {
             $postList = SanPham::where('trangthai', 1)->where('id_tp', $req->thanhPho)
                 ->where('id_quan', $req->quan);

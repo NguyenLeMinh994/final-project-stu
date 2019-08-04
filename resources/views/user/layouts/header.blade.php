@@ -34,13 +34,14 @@
           <a href={{ route("list",["id"=>$item->id]) }} class="nav-link">{{ $item->ten }}</a>
           <div class="dropdown-menu">
             @if (count($item->getChildren)>0)
-            @foreach ($item->getChildren as $child)
-            <a href={{ route("list",["id"=>$child->id]) }} class="dropdown-item">{{ $item->ten }} {{ $child->ten }}</a>
-            @endforeach
+              @foreach ($item->getChildren as $child)
+              <a href={{ route("list",["id"=>$child->id]) }} class="dropdown-item">{{ $child->ten }}</a>
+              @endforeach
             @endif
           </div>
         </li>
         @endforeach
+
         @endif
         <li class="nav-item"><a href="{{ route('about') }}" class="nav-link">Giới Thiệu</a></li>
         <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Liên Hệ</a></li>

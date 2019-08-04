@@ -53,10 +53,18 @@
     </div>
     <div class="row">
       <div class="col-3 mx-auto text-center">
-        @if (Request::get('keyWord') || Request::get('thanhPho') || Request::get('quan'))
+        {{-- @if (Request::get('keyWord') || (Request::get('thanhPho') || Request::get('quan')))
         {{ $postList->appends(['keyWord'=>Request::get('keyWord'),'thanhPho'=>Request::get('thanhPho'),'quan'=>Request::get('quan')])->links() }}
+        @elseif((Request::get('keyFrom') || Request::get('keyTo')) || (Request::get('thanhPho') || Request::get('quan')))
+        {{ $postList->appends(['keyFrom'=>Request::get('keyFrom'),'keyTo'=>Request::get('keyTo'),'thanhPho'=>Request::get('thanhPho'),'quan'=>Request::get('quan')])->links() }}
         @else
         {{ $postList->links() }}
+        @endif --}}
+
+        @if (request()->input())
+        {{ $postList->appends(request()->input())->links() }}
+        @else
+        {!! $postList->links() !!}
         @endif
       </div>
     </div>
