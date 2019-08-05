@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 use App\Slide;
 
 use Carbon\Carbon;
+use App\User;
 
 class ProductController extends Controller
 {
@@ -132,6 +133,7 @@ class ProductController extends Controller
         $post->id_loai = $request->sltDanhMuc;
         $post->expired_at = Carbon::now()->addDays(30);
         $post->id_user = Auth::user()->id;
+        $post->trangthai = '0';
         if ($post->save()) {
             return redirect()->back()->with(['success' => 'Thêm thành công']);
         }
@@ -281,11 +283,13 @@ class ProductController extends Controller
         //
     }
 
-
     public function getPostList()
     {
-        $posts = SanPham::orderBy('id', 'DESC')->get();
-        return view('admin.pages.products', ['posts' => $posts]);
+
+        $posts = SanPham::where('trangthai','<>', 0)->get();
+        $postHideList = SanPham::where('trangthai',0)->get();
+
+        return view('admin.pages.postlist', ['posts' => $posts, 'postHideList'=> $postHideList]);
     }
 
     public function getQuansByAjax($idThanhPho)
@@ -351,6 +355,24 @@ class ProductController extends Controller
         return $checkDel;
     }
 
+    public function confirmPost($idPost)
+    {
+        $post = SanPham::findOrfail($idPost);
+        $post->trangthai='1';
+        if($post->save()){
+            return redirect()->back();
+        }
+        return redirect()->back();
+
+    }
+
+    public function getInfoPost($idPost)
+    {
+        $post = SanPham::findOrfail($idPost);
+        $user = User::where('id',$post->id_user)->first();
+
+        return view('admin.pages.ajax.infopost',compact('post', 'user'));
+    }
     public function changeNumberToInteger($number)
     {
         return intval(str_replace(",", "", $number));

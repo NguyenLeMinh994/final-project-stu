@@ -97,8 +97,9 @@ Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
     Route::get('image/upload/{id}', 'Admin\ImagesController@uploadImage')->name('admin.image');
     Route::get('image/baidang/{id}', 'Admin\ImagesController@indexImage')->name('admin.indexImage');
     
-    Route::get('danh-sach-thanh-vien', 'Admin\UserController@getUserList')->name('admin.customer');
+    Route::get('/danh-sach-thanh-vien', 'Admin\UserController@getUserList')->name('admin.customer');
 
+    Route::get('/xac-nhan-post/{idPost}', 'Admin\ProductController@confirmPost')->name('admin.confirmPost');
     //AJAX
     Route::get('/ajax/cap-nhat-trang-thai-danh-muc/{id}', 'Admin\CategoryController@ajaxCapNhatTrangThai')->name('admin.ajaxCapNhatTrangThai');
     Route::get('/ajax/xoa-danh-muc/{id}', 'Admin\CategoryController@ajaxDestroy')->name('admin.ajax.removeCategory');
@@ -107,7 +108,8 @@ Route::prefix('admin')->middleware('checkLoginForAdmin')->group(function () {
     Route::get('/ajax/xoa-slide/{id}', 'Admin\SildeController@removeSlideByAjax')->name('admin.ajax.removeSlide');
     Route::get('/ajax/cap-nhat-trang-thai-slide/{id}', 'Admin\SildeController@updateStatusSlideByAjax')->name('admin.ajax.updateStatusSlide');
     
-    Route::get('/ajax/thong-tin/{id}', 'Admin\UserController@getInfoUser')->name('admin.ajax.getInfoUser');
+    Route::get('/ajax/thong-tin-user/{id}', 'Admin\UserController@getInfoUser')->name('admin.ajax.getInfoUser');
+    Route::get('/ajax/thong-tin-post/{id}', 'Admin\ProductController@getInfoPost')->name('admin.ajax.getInfoPost');
 });
 // image
 Route::post('image/upload/store', 'Admin\ImagesController@fileStore')->name('user.uploadImage');
