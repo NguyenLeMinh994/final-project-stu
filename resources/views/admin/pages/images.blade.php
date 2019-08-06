@@ -123,18 +123,26 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.clsXoaHinh').click(function(){
-            const thisImage=this;
-            const idImage=$(thisImage).data('id');
-            if(window.confirm(`Bạn có muốn xóa hình ${idImage} không?`)){
+
+        $('.clsXoaHinh').click(function () {
+            const thisImage = this;
+            const idImage = $(thisImage).data('id');
+            if (window.confirm(`Bạn có muốn xóa hình ${idImage} không?`)) {
                 $.ajax({
                     type: "GET",
-                    url: "{{ url('image/remove/') }}/"+idImage,
+                    url: "{{ url('image/remove/') }}/" + idImage,
                     success: function (response) {
-                     console.log(response);
-                     
+                        if (response.success) {
+                            $('#row_' + idImage).remove();
+                            $.toast({
+                                heading: 'Success',
+                                text: 'Xóa thành công',
+                                icon: 'success',
+                                position: 'top-right'
+                            });
+                        }
                     },
-                    error: function( error){
+                    error: function (error) {
                         console.log(error);
                     }
                 });

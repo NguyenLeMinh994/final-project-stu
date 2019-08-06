@@ -102,7 +102,7 @@
                                             class="btn btn-info btn-xs waves-effect" data-id="{{ $post->id }}">
                                             Xác nhận
                                         </a>
-                                        <button type="button" class="clsInfoPost btn btn-primary btn-xs waves-effect waves-light"
+                                        <button type="button" class="clsInfoPost btn btn-primary btn-xs"
                                             data-id="{{ $post->id }}">
                                             Xem
                                         </button>
@@ -110,6 +110,12 @@
                                             <a href="{{ route('admin.updatePost', ['id'=>$post->id]) }}" class="btn btn-primary btn-xs" data-id="{{ $post->id }}">
                                                 <i class="la la-pencil-square"></i>
                                             </a>
+                                            <a href={{ route('admin.indexImage', ['id'=>$post->id]) }} class="btn btn-purple btn-xs"><i
+                                                    class="fe-image"></i>
+                                            </a>
+                                            <button type="button" data-id="{{ $post->id }}" class="clsXoaBaiDang btn btn-danger btn-xs">
+                                                <i class="la la-trash-o"></i>
+                                            </button>
                                         @endif
                                     </td>
                                 </tr>
@@ -171,18 +177,25 @@
                                     </td>
                                     <td>
 
-
-                                        <button type="button" class="clsSlide btn btn-light btn-xs"
-                                            data-id="{{ $post->id }}">
-                                            Add Slide
-                                        </button>
-                                        <button type="button" class="clsInfoPost btn btn-primary btn-xs" data-id="{{ $post->id }}">
-                                            Xem
-                                        </button>
+                                        @if(!$post->getSlide)
+                                            <button type="button" class="clsSlide btn btn-light btn-xs"
+                                                data-id="{{ $post->id }}">
+                                                Add Slide
+                                            </button>
+                                        @endif
+                                            <button type="button" class="clsInfoPost btn btn-primary btn-xs" data-id="{{ $post->id }}">
+                                                Xem
+                                            </button>
                                         @if($post->id_user===Auth::user()->id)
                                             <a href="{{ route('admin.updatePost', ['id'=>$post->id]) }}" class="btn btn-primary btn-xs" data-id="{{ $post->id }}">
                                                 <i class="la la-pencil-square"></i>
                                             </a>
+                                            <a href={{ route('admin.indexImage', ['id'=>$post->id]) }}
+                                                class="btn btn-purple btn-xs"><i class="fe-image"></i>
+                                            </a>
+                                            <button type="button" data-id="{{ $post->id }}" class="clsXoaBaiDang btn btn-danger btn-xs">
+                                                <i class="la la-trash-o"></i>
+                                            </button>
                                         @endif
                                     </td>
                                 </tr>
@@ -232,6 +245,41 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
+        $('.clsXoaBaiDang').click(function (e) {
+            e.preventDefault();
+            var idPost = $(this).data('id');
+            if (confirm("Bạn có muốn xóa không?")) {
+                var url = "{{ url('/ajax/xoa-bai-dang/') }}/" + idPost;
+
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    dataType: "html",
+                    success: function (response) {
+                        console.log(response);
+
+                        if (response == 'OK') {
+                            $('#row_' + idPost).remove();
+                            $.toast({
+                                heading: 'Success',
+                                text: 'Xóa thành công',
+                                icon: 'success',
+                                position: 'top-right'
+                            });
+                        } else {
+                            $.toast({
+                                heading: 'oh!',
+                                text: 'Lỗi không thể xóa được',
+                                icon: 'error',
+                                position: 'top-right'
+                            });
+
+                        }
+                    }
+                });
+            }
+
+        });
 
         $('.clsTrangThai').change(function (e) {
             e.preventDefault();
@@ -279,7 +327,6 @@
                 $.ajax({
                     type: "GET",
                     url: url,
-                    dataType: "html",
                     success: function (response) {
                         console.log('Show', response);
 

@@ -110,9 +110,10 @@
 
                             <div class="row">
                                 <div class="col-md-8">
-                                    <textarea id="noidung" name="txtNoiDung"></textarea>
+                                    <textarea id="noidung" name="txtNoiDung">
+                                        {!! old('txtNoiDung') !!}
+                                    </textarea>
 
-                                    <!-- end summernote-editor-->
                                 </div>
                                 <div class="col-md-4">
 

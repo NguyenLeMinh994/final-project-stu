@@ -166,15 +166,13 @@
             e.preventDefault();
             var thisTr = this;
             var id = $(thisTr).data('id');
-            console.log('trang thai', id);
 
             if (window.confirm(`Bạn có muốn thay đổi trạng thái ${id}`)) {
-                var url = "{{ url('admin/ajax/cap-nhat-trang-thai-slide') }}/" + id;
+                var url = "{{ url('/admin/ajax/cap-nhat-trang-thai-slide/') }}/" + id;
 
                 $.ajax({
                     type: "get",
                     url: url,
-                    dataType: "html",
                     success: function (response) {
                         if (response == '-1' || response == 'false') {
                             $.toast({
@@ -185,13 +183,14 @@
                             });
                             $(thisTr).prop('checked', false);
                         } else {
-
                             $.toast({
                                 heading: 'Success',
                                 text: 'Cập nhật trạng thái thành công',
                                 icon: 'success',
                                 position: 'top-right'
                             });
+
+                            $("#row_"+id).remove();
                         }
                     }
                 });

@@ -38,7 +38,7 @@ class SildeController extends Controller
         if (!$slide) {
             return -1;
         } else {
-            $slide->status = $slide->status == 1 ? 0 : 1;
+            $slide->trangthai = $slide->trangthai == 1 ? 0 : 1;
             if ($slide->save()) {
                 return $slideId;
             }

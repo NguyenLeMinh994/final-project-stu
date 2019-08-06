@@ -144,10 +144,26 @@ class PagesController extends Controller
 
     public function postContact(Request $request)
     {
-        $data = ['hoten' => $request->input('name'), 'email' => $request->input('email'), 'tinnhan' => $request->input('message')];
-        Mail::send('user.emails.blaks', $data, function ($mess) {
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email',
+            'title' => 'required',
+        ];
+        $messages = [
+            'name.required' => 'Vui lòng nhập họ và tên',
+
+            'email.required' => 'Vui lòng nhập email',
+            'email.email' => 'Nhập email không đúng',
+            'title.required' => 'Vui lòng nhập tiêu đề',
+        ];
+
+        $request->validate($rules, $messages);
+
+        $emailTitle = $request->input('title');
+        $data = ['hoten' => $request->input('name'), 'email' => $request->input('email'), 'tinnhan' => $request->input('message'),'title' => $emailTitle];
+        Mail::send('user.emails.blaks', $data, function ($mess)  use ($data) {
             $mess->from('rvbatdongsan@gmail.com', 'Thanh Tuấn');
-            $mess->to('rvbatdongsan@gmail.com', 'Tuan Thanh')->subject('đây là Mail BDS');
+            $mess->to('rvbatdongsan@gmail.com', 'Tuan Thanh')->subject($data['title']);
         });
         echo "<script>
             alert('Cảm ơn bạn đã góp ý. Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất');

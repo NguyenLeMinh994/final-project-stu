@@ -52,6 +52,14 @@
     </div>
     <div class="row block-9">
       <div class="col-md-6 order-md-last d-flex">
+        @if (count($errors)>0)
+          <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            @foreach ($errors->all() as $err)
+            {{ $err}} <br>
+            @endforeach
+          </div>
+        @endif
         <form action="{!! url('contact') !!}" class="bg-white p-5" method="post" style="width: 600px;">
           <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
           <div class="form-group">
@@ -60,6 +68,10 @@
           <div class="form-group">
             <input type="text" class="form-control" id="email" name="email"
               placeholder="Vui lòng nhập Email của bạn ...">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="title" name="title"
+              placeholder="Vui lòng nhập tiêu đề của bạn ...">
           </div>
           <div class="form-group">
             <textarea class="form-control" name="message" id="message" cols="30" rows="7"

@@ -340,9 +340,7 @@ class ProductController extends Controller
         if(Auth::user()->quyen===0){
             $post->trangthai = $post->trangthai === 3 ? '1' : '3';
         }else{
-            if($post->trangthai!==3){
-                $post->trangthai = $post->trangthai === 1 ? '0' : '1';
-            }
+            $post->trangthai = $post->trangthai === 1 ? '0' : '1';
         }
         $slide = Slide::where('id_sanpham', $idPost)->first();
 
