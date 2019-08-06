@@ -99,7 +99,7 @@
                             {{ session('success') }}
                         </div>
                         @endif
-                        <form action={{ route('user.postCreatePost') }} method="POST" enctype="multipart/form-data">
+                        <form action={{ route(Auth::user()->quyen===1?'user.postCreatePost':'admin.postCreatePost') }} method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
@@ -156,7 +156,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputAddress" class="col-form-label">Diện tích</label>
+                                        <label for="inputAddress" class="col-form-label">Diện tích xây dựng</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtDienTich"
                                             placeholder="Nhập diện tích" value="{{ old('txtDienTich') ?? 0 }}">
                                     </div>
@@ -177,6 +177,11 @@
                                         <label for="inputAddress" class="col-form-label">Phòng tắm</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtPhongTam"
                                             placeholder="Nhập phòng tắm" value="{{ old('txtPhongTam') ?? 0 }}">
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="inputAddress" class="col-form-label">Tình trạng pháp lý </label>
+                                        <input type="text" class="form-control gia" id="inputAddress" name="txtTinhTrangPhapLy" placeholder="Nhập tình trạng pháp lý "
+                                            value="{{ old('txtTinhTrangPhapLy') }}">
                                     </div>
                                     <div class="form-group ">
                                         <label for="inputAddress" class="col-form-label">Giá </label>
@@ -373,7 +378,7 @@
             filebrowserImageUploadUrl: "{{ asset('/laravel-filemanager/upload?type=Images&_token=') }}",
             filebrowserBrowseUrl: "{{ asset('/laravel-filemanager?type=Files') }}",
             filebrowserUploadUrl: "{{ asset('/laravel-filemanager/upload?type=Files&_token=') }}",
-            height: 840
+            height: 930
         };
         CKEDITOR.replace('noidung', options);
 

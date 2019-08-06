@@ -39,28 +39,79 @@
                     </div>
                     <div class="col-md-12 Properties-single mt-4 mb-5 ftco-animate">
                         <h2>{{ $getDetail->ten }}</h2>
-                        <p>{{ $getDetail->getLoai->ten}}</p>
+                        <p>Mã bài viết: {{ $getDetail->id }}</p>
                         <p class="gia">Giá: {{number_format($getDetail->gia)}} VNĐ</p>
                         <p class="rate mb-4">
-                            <span class="loc"><a href="#"><i class="icon-map"></i> {{$getDetail->diachi}} -
-                                    {{$getDetail->getQuan->ten}} - {{$getDetail->getTinhThanhPho->ten}}</a></span>
+                            <span class="loc">
+                                <i class="icon-map"></i> {{$getDetail->diachi}} -
+                                {{$getDetail->getQuan->loai}} {{$getDetail->getQuan->ten}} -
+                                {{$getDetail->getTinhThanhPho->loai}} {{$getDetail->getTinhThanhPho->ten}}
+                            </span>
 
                         </p>
-                        <div class="d-md-flex mt-5 mb-5">
-                            <ul>
-                                <li><span>Số Tầng: </span> {{$getDetail->sotang}} Tầng</li>
-                                <li><span>Phòng Ngủ: </span> {{$getDetail->phongngu}} <i class="flaticon-bed"></i></li>
-                                <li><span>Phòng Tắm: </span> {{$getDetail->phongtam}} <i class="flaticon-bathtub"></i>
-                                </li>
-                                <li><span>Diện Tích: </span> {{$getDetail->dientich}} <sup>m2</sup></li>
-                            </ul>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-left">
+                                    <h5>Đặc điểm chính</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr class="row m-0">
+                                            <th class="d-inline-block col-5">Tình trạng pháp lý</th>
+                                            <td class="d-inline-block col-7">
+                                                <span> {{$getDetail->tinhtrangphaply}} </span>
+                                            </td>
+                                        </tr>
+                                        <tr class="row m-0">
+                                            <th class="d-inline-block col-5">Diện tích</th>
+                                            <td class="d-inline-block col-7">
+                                                <span>{{$getDetail->dientich}} <sup>m2</sup></span>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="row m-0">
+                                            <th class="d-inline-block col-5">Số tầng</th>
+                                            <td class="d-inline-block col-7">
+                                                <span>{{$getDetail->sotang}} Tầng </span>
+                                            </td>
+                                        </tr>
+                                        <tr class="row m-0">
+                                            <th class="d-inline-block col-5">Phòng ngủ</th>
+                                            <td class="d-inline-block col-7">
+                                                <span>
+                                                    {{$getDetail->phongngu}} <i class="flaticon-bed"></i>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr class="row m-0">
+                                            <th class="d-inline-block col-5">Phòng ngủ</th>
+                                            <td class="d-inline-block col-7">
+                                                <span>
+                                                    {{$getDetail->phongtam}} <i class="flaticon-bathtub"></i>
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <p>{!!$getDetail->noidung!!}</p>
+
+                        <div class="row">
+                            <div class="col-12 col-md-12 col-sm-12">
+                                <h5>Mô tả chi tiết</h5>
+                            </div>
+                            <div class="col-12 col-md-12 col-sm-12">
+                                {!!$getDetail->noidung!!}
+                            </div>
+                        </div>
+
                     </div>
-
-
                     <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
-                        <h4 class="mb-4">VỊ TRÍ - TIỆN ÍCH XUNG QUANH</h4>
+                        <h4 class="mb-4">VỊ TRÍ</h4>
                         <div class="row">
                             <div class="col-md-6">
                                 <div id="map" style="height:500px;width:700px"></div>
@@ -68,33 +119,35 @@
                         </div>
                     </div>
 
-
-
                 </div>
             </div>
             <!-- .col-md-8 -->
             <div class="col-lg-4 sidebar ftco-animate">
                 <div class="sidebar-box ftco-animate">
                     <div class="categories">
-                        {{-- <h3>LOẠI BẤT ĐỘNG SẢN</h3> --}}
-                        {{-- @if (count($loaiOfMenus)>0)
-                        @foreach ($loaiOfMenus as $item)
-                        <li>{{ $item->ten }}</li>
-                        @if (count($item->getChildren)>0)
-                        @foreach ($item->getChildren as $child)
-                        <li>
-                            <a href="#">{{ $child->ten }}
-                                @foreach($child->getSanPhams as $dem)
-                                <span>
-                                    {{count($child->getSanPhams)}}
-                                </span>
-                                @endforeach
-                            </a>
-                        </li>
-                        @endforeach
-                        @endif
-                        @endforeach
-                        @endif --}}
+                        <h3>THÔNG TIN CHỦ BIÊN</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <label for="">Mã thành viên:</label>
+                                        <span>{{$getDetail->getUser->id}}</span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <label for="">Họ tên:</label>
+                                        <span>{{$getDetail->getUser->hoten}}</span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <label for="">Email:</label>
+                                        <span>{{$getDetail->getUser->email}}</span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <label for="">Số điện thoại:</label>
+                                        <span>{{$getDetail->getUser->dienthoai}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="sidebar-box ftco-animate">

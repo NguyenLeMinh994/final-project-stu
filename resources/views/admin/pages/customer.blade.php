@@ -152,7 +152,7 @@ $(document).ready(function () {
         const idUser = $(this).data('id');
         // console.log('id',idUser);
         
-        const url = "{{ url('/admin/ajax/thong-tin') }}/" + idUser;
+        const url = "{{ url('/admin/ajax/thong-tin-user/') }}/" + idUser;
         $.ajax({
             type: "GET",
             url: url,

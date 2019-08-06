@@ -96,7 +96,7 @@
                             {{ session('success') }}
                         </div>
                         @endif
-                        <form action={{ route('user.postUpdatePost',['id'=>$post->id]) }} method="POST"
+                        <form action={{ route(Auth::user()->quyen===1?'user.postUpdatePost':"admin.postUpdatePost",['id'=>$post->id]) }} method="POST"
                             enctype="multipart/form-data">
                             @csrf
 
@@ -159,7 +159,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputAddress" class="col-form-label">Diện tích</label>
+                                        <label for="inputAddress" class="col-form-label">Diện tích xây dựng</label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtDienTich"
                                             placeholder="Nhập diện tích" value={{ $post->dientich}}>
                                     </div>
@@ -182,9 +182,14 @@
                                             placeholder="Nhập phòng tắm" value={{ $post->phongtam}}>
                                     </div>
                                     <div class="form-group ">
+                                        <label for="inputAddress" class="col-form-label">Tình trạng pháp lý </label>
+                                        <input type="text" class="form-control" id="inputAddress" name="txtTinhTrangPhapLy"
+                                            placeholder="Nhập tình trạng pháp lý " value="{{ $post->tinhtrangphaply}}">
+                                    </div>
+                                    <div class="form-group ">
                                         <label for="inputAddress" class="col-form-label">Giá </label>
                                         <input type="text" class="form-control" id="inputAddress" name="txtGia"
-                                            placeholder="Nhập giá" value={{ $post->gia}}>
+                                            placeholder="Nhập giá" value="{{ $post->gia}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress" class="col-form-label">Địa chỉ </label>
@@ -374,7 +379,7 @@
             filebrowserImageUploadUrl: "{{ asset('/laravel-filemanager/upload?type=Images&_token=') }}",
             filebrowserBrowseUrl: "{{ asset('/laravel-filemanager?type=Files') }}",
             filebrowserUploadUrl: "{{ asset('/laravel-filemanager/upload?type=Files&_token=') }}",
-            height: 840
+            height: 930
         };
         CKEDITOR.replace('noidung',options);
         

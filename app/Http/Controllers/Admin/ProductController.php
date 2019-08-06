@@ -131,6 +131,7 @@ class ProductController extends Controller
         $post->id_tp = $request->sltThanhPho;
         $post->id_quan = $request->sltQuan;
         $post->id_loai = $request->sltDanhMuc;
+        $post->tinhtrangphaply = $request->txtTinhTrangPhapLy;
         $post->expired_at = Carbon::now()->addDays(30);
         $post->id_user = Auth::user()->id;
         $post->trangthai = '0';
@@ -265,7 +266,9 @@ class ProductController extends Controller
         $post->id_tp = $request->sltThanhPho;
         $post->id_quan = $request->sltQuan;
         $post->id_loai = $request->sltDanhMuc;
+        $post->tinhtrangphaply = $request->txtTinhTrangPhapLy;
         $post->id_user = Auth::user()->id;
+
         if ($post->save()) {
             return redirect()->back()->with(['success' => 'Cập nhật thành công']);
         }

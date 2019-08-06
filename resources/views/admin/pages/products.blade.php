@@ -106,12 +106,7 @@
                                         </button>
                                         @endif
 
-                                        @if (Auth::user()->quyen==0 && empty($post->getSlide))
-                                        <button type="button" class="clsSlide btn btn-light waves-effect"
-                                            data-id="{{ $post->id }}">
-                                            Add Slide
-                                        </button>
-                                        @endif
+                                     
 
                                     </td>
                                 </tr>

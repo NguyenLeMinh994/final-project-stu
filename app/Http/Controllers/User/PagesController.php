@@ -56,7 +56,7 @@ class PagesController extends Controller
             'SELECT l2.*
             FROM loai l1,loai l2
             Where l1.parent_id=l2.parent_id and l1.id=?',
-            [$id]
+            [$getDetail->id_loai]
         );
         $randomPost = SanPham::where('trangthai', 1)->inRandomOrder()->limit(4)->get();
         // dd($randomPost);
@@ -168,14 +168,14 @@ class PagesController extends Controller
             $postList = SanPham::where('trangthai', 1)->whereBetween('gia',[$req->keyFrom, $req->keyTo])
                 ->where('id_tp', $req->thanhPho)
                 ->where('id_quan', $req->quan);
-            Log::info('1');
+            // Log::info('1');
         }elseif($req->keyFrom < $req->keyTo && $req->thanhPho){
             $postList = SanPham::where('trangthai', 1)->whereBetween('gia',[$req->keyFrom, $req->keyTo])
                 ->where('id_tp', $req->thanhPho);
-            Log::info('2');
+            // Log::info('2');
         }elseif ($req->keyFrom < $req->keyTo) {
             $postList = SanPham::where('trangthai', 1)->whereBetween('gia',[$req->keyFrom, $req->keyTo]);
-            Log::info('3');
+            // Log::info('3');
 
         }elseif ($req->keyWord && $req->thanhPho && $req->quan) {
             $postList = SanPham::where('trangthai', 1)->where('ten', 'like', '%' . $req->keyWord . '%')
@@ -189,7 +189,7 @@ class PagesController extends Controller
         } elseif ($req->keyWord) {
             $postList = SanPham::where('trangthai', 1)->where('ten', 'like', '%' . $req->keyWord . '%')
                 ->orWhere('id', $req->keyWord);
-            Log::info('keyWord');
+            // Log::info('keyWord');
 
         } elseif ($req->thanhPho && $req->quan) {
             $postList = SanPham::where('trangthai', 1)->where('id_tp', $req->thanhPho)

@@ -65,7 +65,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">Bài đăng chưa duyệt</h4>
-
+<a href={{ route(Auth::user()->quyen==1?'user.createPost':'admin.createPost') }}
+    class="mb-4 btn btn-primary btn-rounded waves-effect waves-light">Thêm</a>
                         <table id="scroll-horizontal-datatable" class="table w-100 nowrap">
                             <thead>
                                 <tr>
@@ -105,6 +106,11 @@
                                             data-id="{{ $post->id }}">
                                             Xem
                                         </button>
+                                        @if($post->id_user===Auth::user()->id)
+                                            <a href="{{ route('admin.updatePost', ['id'=>$post->id]) }}" class="btn btn-primary btn-xs" data-id="{{ $post->id }}">
+                                                <i class="la la-pencil-square"></i>
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
@@ -121,9 +127,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Bảng bài đăng</h4>
-                        <a href={{ route(Auth::user()->quyen==1?'user.createPost':'admin.createPost') }}
-                            class="mb-4 btn btn-primary btn-rounded waves-effect waves-light">Thêm</a>
+                        <h4 class="header-title">Bài đăng</h4>
+                      
 
                         <table id="scroll-vertical-datatable" class="table dt-responsive nowrap">
                             <thead>
@@ -174,7 +179,11 @@
                                         <button type="button" class="clsInfoPost btn btn-primary btn-xs" data-id="{{ $post->id }}">
                                             Xem
                                         </button>
-
+                                        @if($post->id_user===Auth::user()->id)
+                                            <a href="{{ route('admin.updatePost', ['id'=>$post->id]) }}" class="btn btn-primary btn-xs" data-id="{{ $post->id }}">
+                                                <i class="la la-pencil-square"></i>
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
